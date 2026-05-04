@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Fase 3 · Estrategia de Contenido 30 Días</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Instrument+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1A1612;--ink2:#2E2820;--paper:#F5F0E8;--paper2:#EDE7D9;--paper3:#E4DCCC;--sage:#6B8F6E;--sage-light:#A8C5AA;--sage-pale:#D4E5D5;--terra:#B8714A;--terra-light:#D4956E;--terra-pale:#EDD5C3;--gold:#B8963C;--gold-pale:#EBD89A;--plum:#7A5C6E;--plum-pale:#D5C5CE;--border:rgba(26,22,18,0.1);--border-strong:rgba(26,22,18,0.22);--white:#FDFAF5}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;overflow-x:hidden}
+.masthead{background:var(--ink);color:var(--paper);padding:0 3rem;display:flex;align-items:center;justify-content:space-between;min-height:65px;border-bottom:2px solid var(--terra)}
+.masthead-logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:var(--paper)}
+.masthead-phase{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--terra-light);margin-left:2rem}
+.masthead-badges{display:flex;gap:0.6rem}
+.badge{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.5);padding:0.25rem 0.7rem;border:1px solid rgba(245,240,232,0.15)}
+.badge.on{color:var(--sage-light);border-color:var(--sage)}
+.hero{background:var(--ink2);display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.hero-item{padding:2.5rem 3rem;border:1px solid rgba(245,240,232,0.05)}
+.hi-label{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage-light);margin-bottom:0.7rem}
+.hi-val{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--paper);line-height:1;margin-bottom:0.3rem}
+.hi-val em{color:var(--terra-light);font-style:italic}
+.hi-desc{font-size:0.76rem;color:rgba(245,240,232,0.4);line-height:1.6}
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 65px)}
+.sidebar{background:var(--paper2);border-right:1px solid var(--border-strong);padding:1.5rem 0;position:sticky;top:0;height:calc(100vh - 65px);overflow-y:auto}
+.sl{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--terra);padding:0.8rem 1.4rem 0.3rem}
+.nl{display:flex;align-items:center;gap:0.7rem;padding:0.6rem 1.4rem;font-size:0.78rem;color:rgba(26,22,18,0.55);text-decoration:none;border-left:2px solid transparent;transition:all 0.2s;cursor:pointer}
+.nl:hover{color:var(--ink);background:rgba(26,22,18,0.04)}
+.nl.active{color:var(--sage);border-left-color:var(--sage);background:rgba(107,143,110,0.06);font-weight:500}
+.nl-badge{margin-left:auto;font-size:0.58rem;background:var(--paper3);padding:0.1rem 0.45rem;border-radius:8px;color:var(--ink)}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.content{padding:3rem}
+.sec{margin-bottom:4rem}
+.eyebrow{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--terra);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--terra)}
+.sec-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:400;line-height:1.1;margin-bottom:0.7rem}
+.sec-title em{font-style:italic;color:var(--sage)}
+.sec-intro{font-size:0.86rem;line-height:1.8;color:rgba(26,22,18,0.6);max-width:560px}
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-top:1.8rem}
+.pc{background:var(--white);padding:1.6rem 1.2rem;position:relative;overflow:hidden;cursor:default}
+.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transition:transform 0.3s}
+.pc:hover::after{transform:scaleX(1)}
+.pc.p1::after{background:var(--sage)}
+.pc.p2::after{background:var(--terra)}
+.pc.p3::after{background:var(--gold)}
+.pc.p4::after{background:var(--plum)}
+.pc.p5::after{background:var(--ink)}
+.pc-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:0.7rem}
+.p1 .pc-n{color:var(--sage)}.p2 .pc-n{color:var(--terra)}.p3 .pc-n{color:var(--gold)}.p4 .pc-n{color:var(--plum)}.p5 .pc-n{color:rgba(26,22,18,0.2)}
+.pc-name{font-size:0.76rem;font-weight:600;margin-bottom:0.4rem;line-height:1.3}
+.pc-desc{font-size:0.68rem;color:rgba(26,22,18,0.52);line-height:1.5}
+.pc-fmts{margin-top:0.8rem}
+.pc-fmt{font-size:0.6rem;color:rgba(26,22,18,0.38);padding:0.15rem 0;display:flex;align-items:center;gap:0.3rem}
+.pc-fmt::before{content:'·'}
+/* METRICS */
+.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-strong);margin-top:1.8rem}
+.mc{background:var(--white);padding:1.4rem}
+.ml{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(26,22,18,0.38);margin-bottom:0.4rem}
+.mv{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:0.25rem}
+.mv.g{color:var(--sage)}.mv.t{color:var(--terra)}
+.ms{font-size:0.68rem;color:rgba(26,22,18,0.4)}
+.mbar{height:2px;background:var(--paper3);margin-top:0.7rem}
+.mfill{height:100%}
+.mfill.g{background:var(--sage)}.mfill.t{background:var(--terra)}.mfill.go{background:var(--gold)}
+/* CALENDAR */
+.cal-ctrl{display:flex;align-items:center;justify-content:space-between;margin:1.5rem 0}
+.cal-ctrl h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:400}
+.cal-filters{display:flex;gap:0.4rem;flex-wrap:wrap}
+.cf{font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;padding:0.35rem 0.85rem;border:1px solid var(--border-strong);background:transparent;cursor:pointer;color:rgba(26,22,18,0.55);transition:all 0.2s}
+.cf:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cf.active{background:var(--sage);color:white;border-color:var(--sage)}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border-strong)}
+.cdh{background:var(--ink);color:var(--paper);padding:0.55rem;text-align:center;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase}
+.cd{background:var(--white);min-height:105px;padding:0.6rem;cursor:pointer;transition:background 0.2s;position:relative}
+.cd:hover{background:var(--paper)}
+.cd.empty{background:var(--paper2);cursor:default}
+.dn{font-size:0.68rem;font-weight:600;color:rgba(26,22,18,0.32);margin-bottom:0.35rem}
+.cp{padding:0.2rem 0.35rem;margin-bottom:0.18rem;font-size:0.56rem;line-height:1.3;color:white;cursor:pointer}
+.cp.p1{background:var(--sage)}.cp.p2{background:var(--terra)}.cp.p3{background:var(--gold);color:var(--ink)}.cp.p4{background:var(--plum)}.cp.p5{background:var(--ink2)}
+.cp-pl{font-size:0.48rem;opacity:0.75;display:block;margin-bottom:1px}
+.cp-t{display:block;font-weight:500}
+.dcnt{position:absolute;bottom:3px;right:5px;font-size:0.52rem;color:rgba(26,22,18,0.28)}
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(26,22,18,0.72);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal.open{display:flex}
+.mbox{background:var(--white);width:100%;max-width:700px;max-height:88vh;overflow-y:auto}
+.mhdr{background:var(--ink);padding:1.4rem 1.8rem;display:flex;justify-content:space-between;align-items:flex-start}
+.mhdr h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;color:var(--paper);line-height:1.3;max-width:85%}
+.mclose{background:none;border:none;color:rgba(245,240,232,0.45);font-size:1.5rem;cursor:pointer;line-height:1;padding:0;transition:color 0.2s}
+.mclose:hover{color:var(--paper)}
+.mbody{padding:1.8rem}
+.mmeta{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:1.3rem}
+.mtag{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.7rem;border:1px solid var(--border-strong)}
+.mtag.p1{border-color:var(--sage);color:var(--sage)}.mtag.p2{border-color:var(--terra);color:var(--terra)}.mtag.p3{border-color:var(--gold);color:var(--gold)}.mtag.p4{border-color:var(--plum);color:var(--plum)}
+.msec{margin-bottom:1.3rem}
+.msl{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(26,22,18,0.38);margin-bottom:0.5rem;padding-bottom:0.35rem;border-bottom:1px solid var(--border)}
+.hook-b{background:var(--paper);border-left:3px solid var(--terra);padding:0.9rem 1.1rem;font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;line-height:1.5}
+.script-b{background:var(--paper2);padding:1.1rem;font-size:0.79rem;line-height:1.8;white-space:pre-line;border:1px solid var(--border)}
+.caption-b{background:var(--sage-pale);padding:0.9rem 1.1rem;font-size:0.8rem;line-height:1.75;border-left:3px solid var(--sage)}
+.htags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.6rem}
+.ht{font-size:0.62rem;color:var(--sage);background:var(--sage-pale);padding:0.15rem 0.5rem}
+.mactions{display:flex;gap:0.7rem;margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+.mbtn{padding:0.65rem 1.3rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:none}
+.mbtn.pri{background:var(--sage);color:white}.mbtn.pri:hover{background:var(--ink)}
+.mbtn.sec{background:transparent;color:var(--ink);border:1px solid var(--border-strong)}.mbtn.sec:hover{background:var(--paper2)}
+/* SCRIPTS GRID */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:1.8rem}
+.scard{background:var(--white);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,22,18,0.07)}
+.scard-hdr{padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center}
+.scard-hdr.p1{background:var(--sage-pale)}.scard-hdr.p2{background:var(--terra-pale)}.scard-hdr.p3{background:var(--gold-pale)}.scard-hdr.p4{background:var(--plum-pale)}
+.scard-type{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(26,22,18,0.45)}
+.scard-body{padding:1.1rem 1.3rem}
+.scard-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;margin-bottom:0.4rem;line-height:1.3}
+.scard-hook{font-size:0.75rem;font-style:italic;color:var(--terra);margin-bottom:0.7rem;line-height:1.5}
+.scard-prev{font-size:0.72rem;line-height:1.6;color:rgba(26,22,18,0.55);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.scard-foot{padding:0.7rem 1.3rem;border-top:1px solid var(--border);display:flex;gap:0.4rem}
+.stag{font-size:0.56rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(26,22,18,0.38);border:1px solid var(--border);padding:0.12rem 0.45rem}
+/* HOOKS */
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;margin-top:1.8rem}
+.hcard{padding:1.3rem;background:var(--white);border:1px solid var(--border);cursor:pointer;transition:border-color 0.2s;position:relative}
+.hcard:hover{border-color:var(--terra-light)}
+.hcard::before{content:'"';font-family:'Playfair Display',serif;font-size:3.5rem;line-height:1;position:absolute;top:-0.2rem;left:0.9rem;color:var(--border-strong);pointer-events:none}
+.hk-pl{font-size:0.56rem;letter-spacing:0.13em;text-transform:uppercase;color:rgba(26,22,18,0.38);margin-bottom:0.5rem}
+.hk-txt{font-family:'Playfair Display',serif;font-size:0.88rem;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:0.55rem}
+.hk-tag{font-size:0.58rem;letter-spacing:0.09em;text-transform:uppercase;padding:0.12rem 0.45rem}
+.hk-tag.p1{color:var(--sage);background:var(--sage-pale)}.hk-tag.p2{color:var(--terra);background:var(--terra-pale)}.hk-tag.p3{color:var(--gold);background:var(--gold-pale)}.hk-tag.p4{color:var(--plum);background:var(--plum-pale)}
+/* TABLE */
+.stbl{width:100%;border-collapse:collapse;margin-top:1.8rem;font-size:0.78rem}
+.stbl th{background:var(--ink);color:var(--paper);padding:0.75rem 0.9rem;text-align:left;font-size:0.6rem;letter-spacing:0.13em;text-transform:uppercase;font-weight:500}
+.stbl td{padding:0.85rem 0.9rem;border-bottom:1px solid var(--border);color:rgba(26,22,18,0.72);vertical-align:top;line-height:1.6}
+.stbl tr:hover td{background:rgba(107,143,110,0.03)}
+.stbl td:first-child{color:var(--ink);font-weight:500}
+.fbadge{display:inline-block;font-size:0.58rem;padding:0.18rem 0.55rem;letter-spacing:0.08em;text-transform:uppercase;margin-right:0.2rem}
+.fbadge.d{background:var(--sage-pale);color:var(--sage)}
+.fbadge.w{background:var(--terra-pale);color:var(--terra)}
+.fbadge.b{background:var(--gold-pale);color:var(--gold)}
+/* CAPTIONS */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:1.8rem}
+.ccard{background:var(--white);border:1px solid var(--border)}
+.ccard-hdr{padding:0.9rem 1.3rem;background:var(--paper2);border-bottom:1px solid var(--border)}
+.ccard-nicho{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--terra);margin-bottom:0.2rem}
+.ccard-tit{font-size:0.85rem;font-weight:500}
+.ccard-body{padding:1.1rem 1.3rem}
+.ccard-txt{font-size:0.79rem;line-height:1.75;white-space:pre-line;margin-bottom:0.9rem}
+.ctags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.9rem}
+.ctag{font-size:0.6rem;color:var(--sage);background:var(--sage-pale);padding:0.12rem 0.45rem}
+.cbtn{background:transparent;border:1px solid var(--border-strong);padding:0.38rem 0.9rem;font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;cursor:pointer;color:var(--ink);transition:all 0.2s}
+.cbtn:hover{background:var(--ink);color:white;border-color:var(--ink)}
+/* VOZ */
+.voz-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-strong);margin-top:1.8rem}
+.voz-card{background:var(--white);padding:1.4rem}
+.voz-attr{font-size:0.88rem;font-weight:600;color:var(--ink);margin-bottom:0.5rem}
+.voz-how{font-size:0.78rem;color:rgba(26,22,18,0.6);line-height:1.6;margin-bottom:0.6rem}
+.voz-ex{background:var(--paper);padding:0.7rem 0.9rem;font-size:0.75rem;font-style:italic;color:var(--ink);border-left:2px solid var(--sage);line-height:1.6}
+/* SYSTEM */
+.sys-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border-strong);margin-top:1.8rem}
+.sys-card{background:var(--white);padding:1.4rem}
+.sys-day{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--terra);margin-bottom:0.6rem}
+.sys-act{font-size:0.82rem;font-weight:600;color:var(--ink);margin-bottom:0.5rem}
+.sys-desc{font-size:0.72rem;color:rgba(26,22,18,0.55);line-height:1.6;margin-bottom:0.6rem}
+.sys-tool{font-size:0.65rem;color:var(--sage);background:var(--sage-pale);padding:0.2rem 0.6rem;display:inline-block}
+.sys-time{font-size:0.62rem;color:rgba(26,22,18,0.38);margin-top:0.5rem;font-family:'DM Mono',monospace}
+/* HASHTAGS */
+.hset{background:var(--white);border:1px solid var(--border);padding:1.4rem;margin-bottom:1rem}
+.hset-tit{font-size:0.72rem;font-weight:600;margin-bottom:0.3rem}
+.hset-sub{font-size:0.68rem;color:rgba(26,22,18,0.45);margin-bottom:0.8rem}
+.hset-tags{display:flex;flex-wrap:wrap;gap:0.35rem}
+.hset-tag{font-size:0.65rem;color:var(--sage);background:var(--sage-pale);padding:0.18rem 0.55rem;cursor:pointer;transition:all 0.2s}
+.hset-tag:hover{background:var(--sage);color:white}
+.hset-tag.terra{color:var(--terra);background:var(--terra-pale)}.hset-tag.terra:hover{background:var(--terra);color:white}
+.hset-tag.gold{color:var(--gold);background:var(--gold-pale)}.hset-tag.gold:hover{background:var(--gold);color:white}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(18px);transition:all 0.6s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem}.pillars{grid-template-columns:repeat(2,1fr)}.sgrid{grid-template-columns:1fr}.hgrid{grid-template-columns:1fr}.cgrid{grid-template-columns:1fr}.mrow{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.sys-grid{grid-template-columns:1fr 1fr}.voz-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div style="display:flex;align-items:center">
+    <div class="masthead-logo">Karen Guarin</div>
+    <div class="masthead-phase">Fase 3 — Contenido 30 Días</div>
+  </div>
+  <div class="masthead-badges">
+    <div class="badge on">📸 Instagram</div>
+    <div class="badge on">🎵 TikTok</div>
+    <div class="badge on">👥 Facebook</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-item"><div class="hi-label">Días planificados</div><div class="hi-val"><em>30</em></div><div class="hi-desc">Calendario editorial completo con guión, hook y caption por cada día</div></div>
+  <div class="hero-item"><div class="hi-label">Pilares de contenido</div><div class="hi-val">5</div><div class="hi-desc">Educativo · Tóxicos · Testimonial · Behind the scenes · Producto natural</div></div>
+  <div class="hero-item"><div class="hi-label">Hooks virales listos</div><div class="hi-val">24</div><div class="hi-desc">Para detener el scroll en los primeros 3 segundos — por pilar y plataforma</div></div>
+</div>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="sl">Estrategia</div>
+  <a class="nl active" href="#pilares">🎯 5 Pilares <span class="nl-badge">5</span></a>
+  <a class="nl" href="#metricas">📊 Métricas Meta</a>
+  <a class="nl" href="#plataformas">📱 Por Plataforma</a>
+  <div class="sl">Contenido</div>
+  <a class="nl" href="#calendario">📅 Calendario 30d <span class="nl-badge">30</span></a>
+  <a class="nl" href="#guiones">🎬 Guiones <span class="nl-badge">8</span></a>
+  <a class="nl" href="#hooks">🪝 Hooks Virales <span class="nl-badge">24</span></a>
+  <a class="nl" href="#captions">✍️ Captions</a>
+  <a class="nl" href="#hashtags"># Hashtags</a>
+  <div class="sl">Nichos</div>
+  <a class="nl" href="#calendario"><span class="pdot" style="background:var(--sage)"></span>Postquirúrgico</a>
+  <a class="nl" href="#calendario"><span class="pdot" style="background:var(--terra)"></span>Anti-tóxicos</a>
+  <a class="nl" href="#calendario"><span class="pdot" style="background:var(--gold)"></span>Facial & Antiedad</a>
+  <div class="sl">Sistema</div>
+  <a class="nl" href="#sistema">⚙️ Publicación Auto</a>
+  <a class="nl" href="#voz">🗣️ Voz de Marca</a>
+</aside>
+
+<main class="content">
+
+<div id="pilares" class="sec rev">
+  <div class="eyebrow">Fundación Editorial</div>
+  <h2 class="sec-title">5 Pilares de <em>Contenido</em></h2>
+  <p class="sec-intro">Todo el contenido de Karen gira en 5 pilares que se alternan estratégicamente. Cada pilar tiene un rol claro en el embudo: atraer, educar, convencer, humanizar o vender.</p>
+  <div class="pillars">
+    <div class="pc p1"><div class="pc-n">01</div><div class="pc-name">Educación Clínica</div><div class="pc-desc">Karen como experta. Drenaje, cicatrización, recuperación. Genera autoridad y confianza profunda.</div><div class="pc-fmts"><div class="pc-fmt">Carrusel informativo</div><div class="pc-fmt">Reel explicativo</div><div class="pc-fmt">Story con encuesta</div></div></div>
+    <div class="pc p2"><div class="pc-n">02</div><div class="pc-name">Denuncia Tóxicos</div><div class="pc-desc">El nicho diferenciador único. Ingredientes peligrosos y alternativas naturales. Viralidad y comunidad consciente.</div><div class="pc-fmts"><div class="pc-fmt">Reel de denuncia</div><div class="pc-fmt">Carrusel "Lee la etiqueta"</div><div class="pc-fmt">TikTok comparativo</div></div></div>
+    <div class="pc p3"><div class="pc-n">03</div><div class="pc-name">Transformación Real</div><div class="pc-desc">Testimonios, antes/después, casos reales. Genera deseo y prueba social. El motor directo de conversión.</div><div class="pc-fmts"><div class="pc-fmt">Testimonio en video</div><div class="pc-fmt">Antes/después carrusel</div><div class="pc-fmt">Historia de paciente</div></div></div>
+    <div class="pc p4"><div class="pc-n">04</div><div class="pc-name">Detrás de Cámara</div><div class="pc-desc">Humaniza a Karen. El consultorio, el proceso, su historia. Genera conexión emocional real.</div><div class="pc-fmts"><div class="pc-fmt">Day in my life</div><div class="pc-fmt">Preparando sesión</div><div class="pc-fmt">Reflexión personal</div></div></div>
+    <div class="pc p5"><div class="pc-n">05</div><div class="pc-name">Producto Natural</div><div class="pc-desc">Reviews, recomendaciones, unboxings. Venta cruzada directa y generación de ingresos pasivos de tienda.</div><div class="pc-fmts"><div class="pc-fmt">Review de producto</div><div class="pc-fmt">Comparativa ingredientes</div><div class="pc-fmt">Kit recomendado</div></div></div>
+  </div>
+</div>
+
+<div id="metricas" class="sec rev">
+  <div class="eyebrow">Objetivos Mes 1</div>
+  <h2 class="sec-title">Métricas <em>Meta</em></h2>
+  <div class="mrow">
+    <div class="mc"><div class="ml">Publicaciones / Mes</div><div class="mv g">30</div><div class="ms">1 por día entre plataformas</div><div class="mbar"><div class="mfill g" style="width:100%"></div></div></div>
+    <div class="mc"><div class="ml">Seguidores Nuevos</div><div class="mv t">+500</div><div class="ms">Meta conservadora mes 1</div><div class="mbar"><div class="mfill t" style="width:60%"></div></div></div>
+    <div class="mc"><div class="ml">Tasa de Engagement</div><div class="mv g">5%+</div><div class="ms">Industria belleza promedio: 3.2%</div><div class="mbar"><div class="mfill go" style="width:75%"></div></div></div>
+    <div class="mc"><div class="ml">Leads desde Redes</div><div class="mv t">15+</div><div class="ms">Consultas directas por DM/mes</div><div class="mbar"><div class="mfill g" style="width:50%"></div></div></div>
+  </div>
+</div>
+
+<div id="plataformas" class="sec rev">
+  <div class="eyebrow">Estrategia por Canal</div>
+  <h2 class="sec-title">Qué publicar <em>dónde</em></h2>
+  <table class="stbl">
+    <thead><tr><th>Plataforma</th><th>Formato principal</th><th>Frecuencia</th><th>Objetivo</th><th>Mejor horario</th></tr></thead>
+    <tbody>
+      <tr><td>📸 Instagram</td><td>Reels + Carruseles + Stories diarias</td><td><span class="fbadge d">Diario</span></td><td>Autoridad, comunidad, ventas directas</td><td>Mar–Vie 7am o 7pm</td></tr>
+      <tr><td>🎵 TikTok</td><td>Videos 15–60s, tendencias del nicho</td><td><span class="fbadge w">3–4x/sem</span></td><td>Viralidad, nuevo público, tóxicos</td><td>Lun–Mié 8–10pm</td></tr>
+      <tr><td>👥 Facebook</td><td>Repost Instagram + artículos blog</td><td><span class="fbadge b">3x/sem</span></td><td>Público 35–55, referidos, grupos</td><td>Mié–Sáb 12pm o 8pm</td></tr>
+      <tr><td>💬 WhatsApp Status</td><td>Tips, promos, recordatorio citas</td><td><span class="fbadge d">Diario</span></td><td>Retención clientas actuales, upsell</td><td>8–10am</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="calendario" class="sec rev">
+  <div class="eyebrow">Planificación Editorial</div>
+  <h2 class="sec-title">Calendario <em>30 Días</em></h2>
+  <p class="sec-intro">Haz clic en cualquier publicación para ver guión completo, hook, caption y hashtags listos para copiar.</p>
+  <div class="cal-ctrl">
+    <h3>Mayo 2025</h3>
+    <div class="cal-filters">
+      <button class="cf active" onclick="filterCal('all',this)">Todos</button>
+      <button class="cf" onclick="filterCal('p1',this)">🌿 Educativo</button>
+      <button class="cf" onclick="filterCal('p2',this)">🚫 Tóxicos</button>
+      <button class="cf" onclick="filterCal('p3',this)">⭐ Testimonio</button>
+      <button class="cf" onclick="filterCal('p4',this)">🎬 BTS</button>
+      <button class="cf" onclick="filterCal('p5',this)">🛍️ Producto</button>
+    </div>
+  </div>
+  <div class="calgrid" id="calGrid">
+    <div class="cdh">Lun</div><div class="cdh">Mar</div><div class="cdh">Mié</div><div class="cdh">Jue</div><div class="cdh">Vie</div><div class="cdh">Sáb</div><div class="cdh">Dom</div>
+  </div>
+</div>
+
+<div id="guiones" class="sec rev">
+  <div class="eyebrow">Listos para Grabar</div>
+  <h2 class="sec-title">Guiones de <em>Reels & TikTok</em></h2>
+  <p class="sec-intro">8 guiones completos. Abre la cámara y sigue el texto. Cada uno con hook, desarrollo, datos y llamado a la acción.</p>
+  <div class="sgrid" id="sgrid"></div>
+</div>
+
+<div id="hooks" class="sec rev">
+  <div class="eyebrow">Primeros 3 Segundos</div>
+  <h2 class="sec-title">Hooks <em>Virales</em></h2>
+  <p class="sec-intro">Haz clic en cualquier hook para copiarlo. Diseñados para detener el scroll y crear curiosidad inmediata.</p>
+  <div class="hgrid" id="hgrid"></div>
+</div>
+
+<div id="captions" class="sec rev">
+  <div class="eyebrow">Textos de Publicación</div>
+  <h2 class="sec-title">Captions <em>por Nicho</em></h2>
+  <div class="cgrid" id="cgrid"></div>
+</div>
+
+<div id="hashtags" class="sec rev">
+  <div class="eyebrow">Estrategia de Descubrimiento</div>
+  <h2 class="sec-title"><em>Hashtags</em> por Categoría</h2>
+  <p class="sec-intro">Haz clic en cualquier hashtag para copiarlo. Combina 5–7 de nicho + 2–3 generales + 1–2 de marca.</p>
+  <div id="hsets"></div>
+</div>
+
+<div id="sistema" class="sec rev">
+  <div class="eyebrow">Operación sin Estrés</div>
+  <h2 class="sec-title">Sistema de <em>Publicación</em></h2>
+  <p class="sec-intro">Un día a la semana Karen graba todo. El resto se publica solo. Menos de 3 horas de trabajo semanal de contenido.</p>
+  <div class="sys-grid">
+    <div class="sys-card"><div class="sys-day">Domingo tarde</div><div class="sys-act">Grabar contenido</div><div class="sys-desc">3–4 videos de la semana siguiente + fotos del consultorio y productos</div><div class="sys-tool">Teléfono + Ring Light</div><div class="sys-time">~2h</div></div>
+    <div class="sys-card"><div class="sys-day">Domingo noche</div><div class="sys-act">Editar</div><div class="sys-desc">Editar con CapCut usando los guiones del plan. Subtítulos automáticos.</div><div class="sys-tool">CapCut (gratis)</div><div class="sys-time">~1.5h</div></div>
+    <div class="sys-card"><div class="sys-day">Domingo noche</div><div class="sys-act">Programar</div><div class="sys-desc">Toda la semana programada en Later o Meta Business Suite con captions y hashtags.</div><div class="sys-tool">Later.com</div><div class="sys-time">~30min</div></div>
+    <div class="sys-card"><div class="sys-day">Lun – Sáb</div><div class="sys-act">Publicación automática</div><div class="sys-desc">Las publicaciones se ejecutan solas. Karen solo responde comentarios y DMs relevantes.</div><div class="sys-tool">Auto + n8n Bot</div><div class="sys-time">~15min/día</div></div>
+    <div class="sys-card"><div class="sys-day">Viernes</div><div class="sys-act">Revisar métricas</div><div class="sys-desc">¿Qué tuvo más alcance? Repetir ese formato la semana siguiente. Evolución constante.</div><div class="sys-tool">Meta Insights / TikTok Analytics</div><div class="sys-time">~20min</div></div>
+  </div>
+</div>
+
+<div id="voz" class="sec rev">
+  <div class="eyebrow">Identidad Comunicacional</div>
+  <h2 class="sec-title">La Voz de <em>Karen</em></h2>
+  <div class="voz-grid">
+    <div class="voz-card"><div class="voz-attr">🌿 Empática</div><div class="voz-how">Habla desde la experiencia del paciente, no del servicio. Conecta antes de explicar.</div><div class="voz-ex">"Sé lo difícil que son esos primeros días después de la cirugía. Yo lo he visto muchas veces..."</div></div>
+    <div class="voz-card"><div class="voz-attr">🔬 Clínica con alma</div><div class="voz-how">Información técnica pero en lenguaje cotidiano. Nunca condescendiente, siempre accesible.</div><div class="voz-ex">"El sistema linfático es como el sistema de drenaje de tu cuerpo. Cuando se bloquea..."</div></div>
+    <div class="voz-card"><div class="voz-attr">🚨 Directa en lo tóxico</div><div class="voz-how">Sin miedo a nombrar ingredientes problemáticos. La honestidad es parte de la marca.</div><div class="voz-ex">"Este ingrediente que está en tu desodorante favorito — necesito que lo veas."</div></div>
+    <div class="voz-card"><div class="voz-attr">💚 Vocacional</div><div class="voz-how">Comparte el porqué detrás de su trabajo. No solo el qué. La historia mueve más que el servicio.</div><div class="voz-ex">"Escogí este camino porque vi a mi paciente llorar de alivio. Eso no tiene precio."</div></div>
+    <div class="voz-card"><div class="voz-attr">❌ Nunca</div><div class="voz-how">Lenguaje de ventas agresivo, promesas exageradas, filtros excesivos o perfección irreal.</div><div class="voz-ex">Nada de "¡Resultados garantizados!", ni fotos sobre-editadas, ni lenguaje de infomercial.</div></div>
+    <div class="voz-card"><div class="voz-attr">📏 Formato de respuesta</div><div class="voz-how">Párrafos cortos. Emojis con moderación. Siempre termina con pregunta o llamado a la acción.</div><div class="voz-ex">Máximo 5 líneas por párrafo. Un emoji por párrafo. Siempre: "¿Tienes dudas? Escríbeme."</div></div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="mbox">
+    <div class="mhdr"><h3 id="mTitle"></h3><button class="mclose" onclick="closeM()">×</button></div>
+    <div class="mbody" id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const posts=[
+  {day:1,p:'p2',pl:'IG+TK',title:'El ingrediente en tu desodorante que afecta tus hormonas',hook:'Lo que nadie te dice sobre el desodorante que llevas usando 10 años...',script:`[0–3s] Muestra el desodorante más común del mercado. Texto en pantalla: "Este ingrediente está en tu desodorante y nadie te avisa"\n\n[3–15s] "El cloruro de aluminio, presente en la mayoría de antitranspirantes, bloquea los poros físicamente. Estudios lo asocian con disrupción hormonal, especialmente en mujeres. Tu axila es una de las zonas más absorbentes de tu cuerpo."\n\n[15–30s] "Yo lo eliminé hace 7 años. Primero de mi vida. Después de mis pacientes. Hoy lo recomiendo sin excepción antes de cualquier tratamiento."\n\n[30–45s] Muestra alternativa natural. "Existen opciones igual de efectivas sin ninguno de estos riesgos. Las encuentras en mi tienda — link en bio."`,caption:`¿Sabes exactamente qué contiene el desodorante que pones en tu axila cada mañana?\n\nEl aluminio no solo bloquea el sudor — bloquea tu sistema de eliminación y puede interferir con tus hormonas.\n\nYo lo cambié y no volvería atrás. 🌿\n\n¿Quieres ver qué alternativas uso y recomiendo? Guarda este post y escríbeme.\n\n👇 ¿Ya conocías esto?`,tags:['#desodorantenatural','#sinAluminio','#saludhormonalmujer','#ingredientestoxicos','#cosmeticanatural','#karenguarin','#pielsana']},
+  {day:2,p:'p1',pl:'IG',title:'Qué pasa en tu cuerpo las primeras 72h post cirugía',hook:'Si te vas a operar o ya lo hiciste, NECESITAS ver esto antes...',script:`[0–3s] Hook directo a cámara: "Si te operaste o vas a hacerlo, esto es lo más importante que puedes saber."\n\n[3–20s] "Las primeras 72 horas son críticas. Tu sistema linfático está al máximo. La inflamación no es el enemigo — es la respuesta natural del cuerpo. Pero si no la manejas bien, puede volverse fibrosis."\n\n[20–35s] "Lo que SÍ debes hacer: hidratarte mucho, dormir en posición indicada por tu cirujano, no aplicar calor.\nLo que NO: fajas muy apretadas sin control, masajes sin profesional, medicamentos no recetados."\n\n[35–50s] "Yo acompaño a mis pacientes desde el día 1. Porque esas 72 horas marcan toda la recuperación."\n\n[50–60s] "¿Tienes una cirugía próxima? Escríbeme antes — te digo exactamente qué preparar."`,caption:`Las primeras 72 horas post-cirugía son las que definen toda tu recuperación.\n\nNo es exageración. Es fisiología.\n\nGuarda este video si te vas a operar o ya lo hiciste. Y si tienes dudas, escríbeme — te acompaño. 💚`,tags:['#recuperacionpostquirurgica','#postoperatorio','#drenajelinfatico','#cirugiaplastica','#cuidadospostoperatorios','#karenguarin']},
+  {day:3,p:'p4',pl:'TK+IG',title:'Un día en mi consultorio — la verdad detrás de mi trabajo',hook:'Nadie te muestra esto. La parte que no ves de ser cosmetóloga...',script:`[0–3s] Toma del consultorio temprano. Texto: "6:30am. Antes de que llegue mi primera paciente."\n\n[3–12s] Preparación: camilla, productos, materiales. "Cada sesión empieza aquí. No en la técnica — en la intención."\n\n[12–25s] Narración en voz: "Hace 13 años elegí esto. No como trabajo. Como vocación. La diferencia es que cuando tu vocación llora de alivio encima de tu camilla, entiendes que elegiste bien."\n\n[25–40s] Corte de sesión (con consentimiento). "Esto es lo que hago. Pero lo que importa es el porqué."\n\n[40–50s] Cierre a cámara: "Si buscas a alguien que te cuide de verdad — aquí estoy."`,caption:`13 años haciendo esto y cada mañana sigo llegando con el mismo compromiso.\n\nMi trabajo no es solo técnica. Es escuchar, acompañar, cuidar.\n\nSi alguna vez sientes que necesitas eso — alguien que te cuide de verdad — ya sabes dónde encontrarme. 🌿`,tags:['#cosmetologa','#vocacion','#cuidadodelapiel','#detrasdelacamara','#karenguarin','#recuperacionpostoperatoria']},
+  {day:4,p:'p3',pl:'IG',title:'Historia real: De 6 semanas de recuperación a 3 semanas',hook:'Mi paciente llegó a los 5 días post-lipo con esto. Lo que pasó después...',script:`[Slide 1] "5 días post-liposucción. Inflamación severa. Dificultad para caminar."\n\n[Slide 2] "María llegó sin saber qué esperar. Su cirujano le había dicho '6 semanas de recuperación'. Empezamos drenaje linfático manual desde el día 5."\n\n[Slide 3] "Sesión 1: reducción visible de edema en 24h. Sesión 3: ya caminaba sin ayuda. Sesión 6: estaba de vuelta al trabajo."\n\n[Slide 4] "Tiempo total de recuperación: 3 semanas. No 6. La diferencia: empezar a tiempo con el protocolo correcto."\n\n[Slide 5] CTA: "Si estás en proceso de recuperación o vas a operarte, escríbeme. Quiero acompañarte."`,caption:`María llegó a los 5 días post-lipo sin poder caminar bien.\n\nHoy, 3 semanas después, está al 100%.\n\nEl drenaje linfático postquirúrgico no es un lujo — es parte del protocolo de recuperación.\n\n(Historia compartida con autorización de la paciente) 💚`,tags:['#drenajelinfatico','#recuperacionpostquirurgica','#liposuccion','#resultadosreales','#cosmetologa','#karenguarin']},
+  {day:5,p:'p5',pl:'IG+TK',title:'3 productos de mi rutina que nunca reemplazaría',hook:'Me preguntaron qué uso en mi piel. Aquí va la respuesta honesta...',script:`[0–3s] "Me preguntan todos los días qué uso en mi piel. Hoy se los cuento todo."\n\n[3–15s] Producto 1 — Sérum Vitamina C natural: "Mi antienvejecimiento #1. Sin silicones, sin parabenos. Lo que ves es lo que obtienes."\n\n[15–28s] Producto 2 — Desodorante de piedra de alumbre: "Sí, tiene aluminio, PERO en forma de sulfato de potasio que no penetra el poro. Completamente diferente al cloruro de aluminio."\n\n[28–42s] Producto 3 — Aceite de argán puro: "Hidratación profunda. Un ingrediente. Sin mezclas raras."\n\n[42–55s] "Todo esto lo encuentras en mi tienda. Con mi explicación de por qué y cómo usarlo. Link en bio."`,caption:`Mi rutina de piel tiene una regla: si no puedo leer el ingrediente o no sé qué hace, no va en mi cuerpo.\n\nEstos 3 productos los uso yo. Los recomiendo a mis pacientes. Los tienes en mi tienda. 🌿\n\n¿Cuál te genera más curiosidad? Cuéntame en comentarios.`,tags:['#rutinadelapiel','#cosmeticanatural','#sinparabenos','#productosnativos','#skincaresano','#karenguarin','#bellezanatural']},
+  {day:6,p:'p2',pl:'IG+TK',title:'Los parabenos están en tu crema facial — el riesgo real',hook:'Lee el ingrediente #3 de tu crema favorita. Apuesto a que dice esto...',script:`[0–3s] "Mira el ingrediente número 3 o 4 de tu crema. Te espero."\n\n[3–18s] "Si termina en '-parabeno' — methylparaben, propylparaben, butylparaben — estás aplicando un conservante que imita al estrógeno en tu cuerpo cada vez que lo usas."\n\n[18–30s] "El riesgo no es inmediato. Es acumulativo. Años de uso diario de múltiples productos con parabenos = carga tóxica que tu sistema endocrino tiene que procesar."\n\n[30–45s] "Cambiar tu crema es el cambio más fácil que puedes hacer HOY. Hay opciones igual de efectivas — muchas veces más baratas."\n\n[45–60s] "Guarda este video para acordarte de revisar tus productos."`,caption:`Haz este ejercicio ahora mismo:\n\n1. Toma tu crema facial favorita\n2. Lee la lista de ingredientes\n3. Busca cualquier palabra terminada en -paraben\n\nSi la encuentras, escríbeme. Te recomiendo una alternativa que funciona igual — sin el riesgo. 🌿`,tags:['#parabenos','#ingredientestoxicos','#skincaresano','#leelaetiqueta','#cosmeticaconsciente','#karenguarin','#pielsaludable']},
+  {day:7,p:'p1',pl:'IG',title:'7 señales de buena recuperación (y 3 de alerta)',hook:'¿Cómo saber si tu cicatriz está sanando como debe? Aquí las señales...',script:`[Slide 1] Título: "7 señales de que tu recuperación va BIEN — y 3 de ALERTA"\n\n[Slides 2–8] Señales positivas:\n✅ Inflamación que baja progresivamente\n✅ Cicatriz que pasa de roja a rosada\n✅ Temperatura normal en la zona\n✅ Sin olor inusual en la herida\n✅ Picazón leve (señal de regeneración)\n✅ Retorno gradual de sensibilidad\n✅ Mejoría constante semana a semana\n\n[Slides 9–11] Señales de ALERTA:\n🔴 Fiebre sobre 38°C\n🔴 Enrojecimiento que se extiende\n🔴 Líquido amarillo o verde en la cicatriz\n→ En estos casos: llama a tu cirujano YA\n\n[Slide 12] "Guarda esto. Compártelo. Y si tienes dudas sobre tu caso — escríbeme directamente."`,caption:`Post para guardar si te operaste o vas a hacerlo 📌\n\nSaber qué es normal vs qué es alerta puede cambiar el resultado de tu recuperación.\n\nGuarda este carrusel. Si tienes dudas sobre TU caso — escríbeme directamente. 💚`,tags:['#recuperacionpostquirurgica','#cicatrizacion','#postoperatorio','#drenajelinfatico','#karenguarin','#saludpostoperatoria']},
+  {day:8,p:'p4',pl:'TK',title:'Me formé con cirujanos — lo que aprendí que los libros no enseñan',hook:'Pasé meses en quirófanos y esto cambió todo lo que creía saber...',script:`[0–3s] "Pasé meses entrando a quirófanos para entender lo que los cirujanos ven. Y cambió todo."\n\n[3–20s] "Aprendí que la recuperación no empieza cuando sales del quirófano. Empieza 2 semanas antes. El estado del sistema linfático, los niveles de inflamación basal — todo determina cómo vas a cicatrizar."\n\n[20–35s] "Aprendí que el primer drenaje NO debería ser doloroso si se hace bien. Que la técnica importa más que la fuerza. Que escuchar al paciente es parte del protocolo."\n\n[35–50s] "Hoy aplico todo eso. No soy cirujana. Soy la persona que hace que la cirugía de tu cirujano dé los mejores resultados posibles."\n\n[50–60s] "¿Tienes una cirugía próxima? Hablemos antes."`,caption:`Mi formación junto a cirujanos y enfermeras cambió mi perspectiva completamente.\n\nNo es lo mismo estudiar recuperación en un libro que ver exactamente lo que pasa adentro.\n\nEsa experiencia está en cada sesión que hago. 💚`,tags:['#cosmetologa','#formacionclinica','#drenajelinfatico','#recuperacionpostquirurgica','#karenguarin','#expertaenpiel']},
+  {day:9,p:'p2',pl:'IG+TK',title:'Tu perfume puede estar causando problemas hormonales',hook:'El olor que amas puede estar afectando tu sistema endocrino sin saberlo...',script:`[0–3s] "¿Tu perfume favorito huele increíble? Bien. Pero ¿sabes qué hay dentro?"\n\n[3–18s] "Los ftalatos son los estabilizadores de fragancia más usados. Hacen que el olor dure más. El problema: son disruptores endocrinos confirmados."\n\n[18–30s] "No aparecen como 'ftalato' en la etiqueta. Aparecen como 'fragrance' o 'parfum' — una sola palabra que puede esconder cientos de químicos sin declarar."\n\n[30–45s] "Existen perfumes de base botánica, con ingredientes 100% declarados, que huelen igual de bien. Sin el riesgo."\n\n[45–60s] "Los tengo disponibles. Te cuento cuáles uso yo."`,caption:`La palabra "fragrance" en la etiqueta de tu perfume es una de las más engañosas de la industria cosmética.\n\nDetrás puede haber hasta 3.000 químicos sin declarar — incluyendo ftalatos que afectan tu sistema hormonal.\n\n¿La solución? Fragancias botánicas. Las tengo en mi tienda. 🌿`,tags:['#ftalatos','#perfumenatural','#ingredientestoxicos','#fraganciasegura','#saludhormonal','#karenguarin']},
+  {day:10,p:'p3',pl:'IG',title:'Acné quístico a piel limpia en 8 sesiones — caso real',hook:'8 sesiones. Esta es la diferencia. El acné que nadie podía resolver...',script:`[Slide 1] "8 sesiones de tratamiento. Este es el resultado."\n\n[Slide 2] "Valentina llegó con acné quístico activo de 3 años. Había probado antibióticos, retinol, peeling — nada funcionaba de forma sostenida."\n\n[Slide 3] "Protocolo: Limpieza profunda + drenaje linfático facial + eliminación de productos con ingredientes comedogénicos + plan nutricional antiinflamatorio."\n\n[Slide 4] "Semana 4: brotes reducidos 60%. Semana 8: piel sin actividad quística activa."\n\n[Slide 5] "No fue magia. Fue protocolo integral."\n\n[Slide 6] CTA: "¿Llevas tiempo con acné que no cede? Diagnóstico gratuito — escríbeme."`,caption:`El acné quístico no se resuelve solo con cremas.\n\nValentina llevaba 3 años buscando solución. En 8 sesiones con protocolo integral, su piel cambió completamente.\n\nSi llevas tiempo luchando sin encontrar solución real — hablemos. El diagnóstico inicial es gratuito. 💚\n\n(Resultado con autorización de la paciente)`,tags:['#acnequístico','#tratamientoacne','#resultadosreales','#pielsana','#cosmetologa','#karenguarin','#limpiezafacial']},
+  {day:11,p:'p1',pl:'TK+IG',title:'La diferencia entre drenaje linfático y masaje normal',hook:'No es lo mismo. Y confundirlos puede hacerte daño post-cirugía...',script:`[0–3s] "No es lo mismo un masaje relajante y un drenaje linfático. Y después de una cirugía, confundirlos puede causarte fibrosis."\n\n[3–20s] "El masaje convencional trabaja sobre el músculo con presión profunda. El drenaje linfático trabaja sobre el sistema linfático — justo debajo de la piel — con presiones muy suaves y direccionadas."\n\n[20–35s] "La técnica importa más que la fuerza. Más presión NO es mejor. Un drenaje bien hecho se siente casi como una caricia — pero está moviendo literalmente el exceso de líquido hacia los ganglios."\n\n[35–50s] "Después de una cirugía, necesitas alguien entrenado específicamente en drenaje postquirúrgico. No cualquier masajista."\n\n[50–60s] "¿Tienes dudas de si lo que recibes está bien hecho? Escríbeme."`,caption:`Esta confusión la veo constantemente y puede tener consecuencias reales.\n\nEl drenaje linfático postquirúrgico es una técnica clínica específica. No es un masaje con aceite.\n\nSi estás buscando a alguien para tu recuperación — asegúrate de que sepa la diferencia. 🌿`,tags:['#drenajelinfatico','#recuperacionpostquirurgica','#tecnicamanual','#karenguarin','#postoperatorio']},
+  {day:12,p:'p5',pl:'IG',title:'Kit de recuperación post-cirugía: qué necesitas en casa',hook:'Lo que debes tener en casa ANTES de tu cirugía — lista completa...',script:`[Slide 1] "Lista completa: qué tener en casa para tu recuperación post-cirugía"\n\n[Slide 2] "ANTES de la cirugía:\n• Faja de compresión del número de tu cirujano\n• Almohadas extra para posición\n• Ropa holgada y cómoda\n• Comida preparada — no tendrás energía para cocinar"\n\n[Slide 3] "Para la piel:\n• Ampollas cicatrizantes homeopáticas\n• Aloe vera puro — sin alcoholes ni fragancias\n• Protector solar mineral"\n\n[Slide 4] "Para nutrición interna:\n• Vitamina C natural 1000mg/día\n• Zinc 30mg/día\n• Colágeno hidrolizado sin azúcar\n• Caldo de hueso casero"\n\n[Slide 5] "Tengo kit completo en mi tienda. Link en bio."`,caption:`La recuperación post-cirugía empieza antes de entrar al quirófano.\n\nTener todo preparado en casa marca la diferencia entre una recuperación cómoda y una semana de caos.\n\nGuarda este carrusel 📌 y si quieres el kit que recomiendo — lo tienes en mi tienda. 🌿`,tags:['#recuperacionpostquirurgica','#kitpostoperatorio','#preparacioncirugia','#suplementosnaturales','#karenguarin']},
+  {day:13,p:'p2',pl:'TK+IG',title:'El silicón en tu crema no hidrata. Te explico qué hace realmente',hook:'Tu crema hidratante probablemente no está hidratando tu piel...',script:`[0–3s] "Tu crema hidratante probablemente no está hidratando tu piel. Te explico por qué."\n\n[3–18s] "Las siliconas — dimethicone, cyclomethicone, cualquier '-cone' — crean una película sobre la piel que se SIENTE hidratada. Pero es solo una ilusión. Esa película también bloquea la capacidad de la piel de respirar y de absorber ingredientes reales."\n\n[18–30s] "La verdadera hidratación viene del ácido hialurónico, del aloe vera, de aceites vegetales que penetran la piel. No de películas plásticas."\n\n[30–45s] "Revisa tu crema: si tiene cualquier '-cone' en los primeros 5 ingredientes, no está hidratando — está haciendo trampa."\n\n[45–55s] "Te recomiendo alternativas reales. Sin trucos de marketing."`,caption:`El ingrediente más engañoso en cosmética no es un tóxico — es un ilusionista.\n\nLas siliconas hacen que tu piel se sienta bien. Pero no la están nutriendo.\n\n¿Quieres saber qué ingredientes SÍ hidratan de verdad? Guarda esto y escríbeme. 🌿`,tags:['#siliconasenpiel','#ingredientescosmeticos','#skincareeducation','#hidratacionreal','#cosmeticaconsciente','#karenguarin']},
+  {day:14,p:'p4',pl:'IG',title:'Por qué elegí la cosmetología — mi historia personal',hook:'La historia que pocas personas saben sobre por qué hago esto...',script:`[0–3s] A cámara, tono íntimo: "Hoy quiero contarles algo que pocas personas saben."\n\n[3–20s] "Llevo 13 años haciendo esto. La primera vez que vi a una paciente mejorar visiblemente después de su primera sesión de drenaje... entendí que había encontrado mi lugar."\n\n[20–35s] "No es solo la técnica. Es el acompañamiento. Los primeros días después de una cirugía son solitarios y dolorosos. Estar ahí, escuchar, dar calma — eso cambió mi forma de entender la salud."\n\n[35–50s] "Hoy mi trabajo transforma piel. Pero lo que más me mueve es cuando transforma seguridad, autoestima, calidad de vida. Eso no lo aprendes en ningún libro."\n\n[50–60s] "Gracias por estar aquí y dejarme acompañarlas en este camino."`,caption:`13 años después sigo llegando al consultorio con la misma emoción del primer día.\n\nPorque esto no es lo que hago — es quién soy.\n\nGracias por confiarme su piel, su recuperación, su proceso. Es un privilegio. 💚`,tags:['#cosmetologa','#vocacion','#13años','#karenguarin','#cuidadodelapiel']},
+  {day:15,p:'p1',pl:'IG+TK',title:'¿Qué es el PRP y para qué sirve realmente?',hook:'El tratamiento que todo el mundo menciona pero nadie explica bien...',script:`[0–3s] "PRP. Todo el mundo lo menciona. Pero ¿sabes exactamente qué es y si es para ti?"\n\n[3–20s] "El plasma rico en plaquetas usa la sangre del propio paciente. Se extrae, se centrifuga para concentrar las plaquetas, y se reaplica. Las plaquetas liberan factores de crecimiento que estimulan la regeneración celular."\n\n[20–35s] "Para qué sirve: manchas post-acné, ojeras, pérdida de luminosidad, piel envejecida. No es para todo — pero donde funciona, los resultados son notables."\n\n[35–50s] "Lo que NO es: milagro instantáneo. Son mínimo 3–4 sesiones para resultados visibles."\n\n[50–60s] "¿Tienes dudas de si es para ti? Valoración gratuita — link en bio."`,caption:`El PRP es uno de los tratamientos más poderosos de regeneración facial — y también uno de los más malentendidos.\n\nUsa los recursos del PROPIO cuerpo. Nada sintético. Nada externo.\n\n¿Tienes manchas del acné, pérdida de luminosidad o te preocupa el envejecimiento? Puede ser para ti. Escríbeme. 💚`,tags:['#PRP','#plasmaricoplacuetas','#tratamientofacial','#regeneracionfacial','#antiedad','#karenguarin']},
+  {day:16,p:'p2',pl:'TK',title:'5 ingredientes más que eliminar de tu rutina — Parte 2',hook:'La parte 2 que me pidieron. Más ingredientes que no deberían estar en tu baño...',script:`[0–3s] "Me pidieron la parte 2. Aquí van 5 ingredientes más que probablemente tienes en tu baño."\n\n[3–12s] "1. SLS — Lauril Sulfato de Sodio: espumante en shampoos. Irrita la barrera cutánea."\n[12–20s] "2. Triclosán — antibacterial. Resistencia bacteriana y disrupción hormonal."\n[20–28s] "3. PEG — texturizante. Puede contener contaminantes como el 1,4-dioxano."\n[28–36s] "4. Formaldehído — en alisadores y esmaltes. Carcinógeno conocido."\n[36–44s] "5. Oxibenzona — filtro solar químico. Disruptor endocrino."\n\n[44–60s] "¿Quieres la lista de alternativas para cada uno? Guarda este video."`,caption:`Parte 2 llegó 🌿\n\n5 ingredientes más que probablemente están en productos que usas todos los días.\n\nNo es para crear miedo — es para darte información y poder elegir mejor.\n\n¿Cuál te sorprendió más? 👇`,tags:['#ingredientestoxicos','#cosmeticanatural','#leelaetiqueta','#skincareseguro','#karenguarin']},
+  {day:17,p:'p3',pl:'IG',title:'Recuperación de abdominoplastia — semana a semana',hook:'Cada semana de su recuperación documentada. El resultado que nadie esperaba...',script:`[Slide 1] "Recuperación de abdominoplastia: semana a semana con protocolo integral"\n\n[Slide 2] "Semana 1: Inflamación severa. Inicio de drenaje linfático suave. Recomendaciones nutricionales. Acompañamiento emocional diario."\n\n[Slide 3] "Semana 2: Reducción del 40% de edema. Primera caminata libre. Suplementos: vitamina C + zinc + colágeno."\n\n[Slide 4] "Semana 3: Piel adaptándose. Cicatriz en evolución positiva. Sin signos de fibrosis."\n\n[Slide 5] "Semana 4: Alta del protocolo intensivo. Resultado final visible. Paciente retomó vida normal."\n\n[Slide 6] "El protocolo hace la diferencia. No el tiempo."`,caption:`La cirugía es el primer paso. La recuperación es donde se construye el resultado.\n\n4 semanas de protocolo integral cambiaron completamente la experiencia de esta paciente.\n\n¿Tienes una cirugía próxima? Escríbeme. 💚\n\n(Historia con autorización)`,tags:['#abdominoplastia','#recuperacionpostquirurgica','#drenajelinfatico','#resultadosreales','#karenguarin']},
+  {day:18,p:'p5',pl:'IG+TK',title:'Review honesta: el desodorante natural que realmente funciona',hook:'Probé 12 desodorantes naturales en 2 años. Este es el único que pasó la prueba...',script:`[0–3s] "Probé 12 desodorantes naturales en los últimos 2 años. La mayoría fallaron. Este no."\n\n[3–15s] Mostrar producto. "Ingredientes: bicarbonato, aceite de coco, manteca de karité, lavanda. Eso es todo. Sin aluminio, sin parabenos, sin fragancias sintéticas."\n\n[15–28s] "Prueba de estrés: un día completo de trabajo + sesión de fisioterapia 45 min. Resultado: sin olor, sin manchas, sin irritación."\n\n[28–40s] "La única advertencia: si llevas años con antitranspirante con aluminio, tu axila necesita 2–3 semanas de adaptación. Es normal."\n\n[40–55s] "Lo tengo en mi tienda con mis instrucciones de transición para que no pases las primeras semanas sola."`,caption:`La transición al desodorante natural es difícil.\n\nLas primeras 3 semanas fueron complicadas. Semana 4 en adelante: LIBERTAD.\n\n¿Quieres intentarlo? El que uso yo está en mi tienda con mi guía de transición. 🌿`,tags:['#desodorantenatural','#sinAluminio','#transicionnatural','#cosmeticaconsciente','#karenguarin']},
+  {day:19,p:'p1',pl:'IG',title:'La nutrición que acelera la cicatrización — guía práctica',hook:'Lo que comes después de tu cirugía determina la velocidad de tu recuperación...',script:`[Slide 1] "Lo que comes después de tu cirugía determina en un 40% la velocidad de tu cicatrización"\n\n[Slide 2] "COME MUCHO DE ESTO:\n🥝 Vitamina C — kiwi, pimentón, fresas\n🎃 Zinc — semillas de calabaza, garbanzos\n🐟 Proteína — pollo, pescado, huevos"\n\n[Slide 3] "EVITA ESTO:\n❌ Azúcar refinada — pro-inflamatoria\n❌ Ultraprocesados — bloquean nutrientes\n❌ Alcohol — dilata vasos, aumenta edema\n❌ Sal en exceso — retención de líquidos"\n\n[Slide 4] "SUPLEMENTOS:\n• Vitamina C 1000mg/día\n• Zinc 30mg/día\n• Colágeno hidrolizado\n• Omega-3"\n\n[Slide 5] "Los tengo en mi tienda. También hago plan nutricional personalizado post-quirúrgico."`,caption:`La cirugía te operó. La comida te recupera.\n\nGuarda este carrusel si te vas a operar o ya lo hiciste 📌\n\nY si quieres un plan nutricional personalizado para tu recuperación — escríbeme. Lo hacemos virtual. 💚`,tags:['#nutricionpostoperatoria','#cicatrizacion','#recuperacionpostquirurgica','#alimentacionsaludable','#karenguarin','#suplementosnaturales']},
+  {day:20,p:'p4',pl:'TK+IG',title:'Lo que me dijo una paciente que nunca olvidaré',hook:'Una paciente me dijo algo que me hizo llorar en el consultorio...',script:`[0–3s] Personal, íntimo: "Una paciente me dijo algo la semana pasada que me quedó muy dentro."\n\n[3–15s] "Había pasado por una cirugía difícil. Me dijo: 'Karen, lo más importante no fue el drenaje. Fue saber que tenía a alguien que se preocupaba por mí.'"\n\n[15–30s] "Eso me recuerda por qué hago esto. El acompañamiento humano. Saber que hay alguien del otro lado que realmente le importa cómo estás."\n\n[30–45s] "Mis pacientes no son números. Son personas en un momento vulnerable. Y eso requiere más que conocimiento — requiere presencia."\n\n[45–60s] "Si estás pasando por una recuperación difícil y sientes que estás sola — escríbeme."`,caption:`A veces los recordatorios más importantes vienen de donde menos los esperas.\n\nMi trabajo es técnica + ciencia + vocación. Pero sobre todo, es presencia humana.\n\nSi estás en un proceso difícil y necesitas a alguien — aquí estoy. 💚`,tags:['#acompañamientoemocional','#recuperacionpostquirurgica','#cosmetologa','#vocacion','#karenguarin']},
+  {day:21,p:'p2',pl:'IG+TK',title:'Tu protector solar puede dañar tu piel y los océanos',hook:'El protector solar que crees que te protege puede estar causando más daño...',script:`[0–3s] "El protector solar es obligatorio. Pero el tipo que uses importa más de lo que crees."\n\n[3–18s] "Los filtros solares químicos — oxibenzona, octinoxato — penetran la piel y actúan como disruptores endocrinos. La FDA los tiene en revisión."\n\n[18–30s] "Además: estos mismos filtros son los principales responsables del blanqueamiento de los arrecifes de coral en el mundo."\n\n[30–42s] "La alternativa: filtros minerales — dióxido de titanio y óxido de zinc. Actúan como espejo, reflejando los rayos UV sin penetrar la piel."\n\n[42–55s] "¿Tu protector dice SPF50 pero contiene oxibenzona? Cámbialo. Te recomiendo opciones minerales en mi tienda."`,caption:`Dos tipos de protector solar:\n🧪 Químico: penetra la piel, posibles disruptores endocrinos\n🪨 Mineral: actúa como espejo, seguro post-procedimiento\n\n¿Cuál usas tú? Cuéntame 👇\n\nYo solo uso y recomiendo mineral. 🌿`,tags:['#protectorsolarmineral','#filtromineral','#skincareseguro','#oxibenzona','#karenguarin','#cosmeticaconsciente']},
+  {day:22,p:'p3',pl:'IG',title:'3 casos reales de piel transformada en 60 días',hook:'60 días. 3 tipos de piel. Resultados con protocolo limpio...',script:`[Slide 1] "3 tipos de piel. 3 protocolos. 60 días. Resultados reales."\n[Slide 2] "CASO 1 — Acné quístico: Protocolo limpieza + drenaje linfático facial + suplementación. Resultado: 80% reducción de brotes."\n[Slide 3] "CASO 2 — Manchas post-cirugía: PRP + mesoterapia + protección mineral. Resultado: hiperpigmentación reducida 65%."\n[Slide 4] "CASO 3 — Piel envejecida: PRP + rutina sin silicones + colágeno interno. Resultado: textura y luminosidad recuperadas."\n[Slide 5] "¿Cuál se parece al tuyo? Escríbeme."`,caption:`60 días con el protocolo correcto pueden cambiar completamente tu piel.\n\nNo es magia. Es método.\n\n¿Cuál de estos casos te resuena? Cuéntame y te digo si tengo algo específico para ti. 💚`,tags:['#resultadosreales','#transformaciondelapiel','#tratamientofacial','#PRP','#karenguarin','#pielsana']},
+  {day:23,p:'p1',pl:'TK+IG',title:'¿Cómo funciona el sistema linfático? La explicación más simple',hook:'Tu cuerpo tiene un segundo sistema circulatorio que casi nadie conoce...',script:`[0–3s] "Tu cuerpo tiene un segundo sistema circulatorio que la mayoría no conoce. Es el que maneja tu recuperación post-cirugía."\n\n[3–20s] "El sistema linfático es como el sistema de alcantarillado del cuerpo. Recoge residuos del metabolismo, toxinas, exceso de líquidos — y los conduce hacia los ganglios linfáticos donde se filtran."\n\n[20–35s] "Cuando hay una cirugía, este sistema se satura. Los vasos linfáticos en la zona operada necesitan tiempo y estímulo para recuperar su flujo. Si no lo reciben — el líquido se acumula. Eso es el edema."\n\n[35–50s] "El drenaje linfático manual imita y acelera el movimiento natural de este sistema. Por eso funciona."\n\n[50–60s] "¿Ahora tiene más sentido para ti?"`,caption:`El sistema linfático es el gran desconocido de la anatomía humana.\n\nEntender cómo funciona cambia completamente cómo ves la recuperación post-cirugía.\n\n¿Tenías idea de cómo funcionaba? 👇`,tags:['#sistemalinfatico','#drenajelinfatico','#anatomia','#recuperacionpostquirurgica','#karenguarin']},
+  {day:24,p:'p5',pl:'IG',title:'Rutina de skincare natural completa por menos de $50',hook:'Skincare natural NO tiene que ser caro. Esta rutina completa vale menos de $50...',script:`[Slide 1] "Rutina de skincare natural completa por menos de $50 USD."\n[Slide 2] "LIMPIEZA — $8: Aceite de jojoba puro. Un ingrediente. Limpia sin alterar el pH."\n[Slide 3] "HIDRATACIÓN — $12: Aloe vera gel puro sin aditivos. El humectante natural más efectivo."\n[Slide 4] "SUERO — $15: Vitamina C en polvo + agua. Más fresco y potente que los embotellados."\n[Slide 5] "PROTECCIÓN — $14: Filtro solar mineral SPF50. El más importante."\n[Slide 6] "Total: ~$49. Sin fragancias sintéticas, parabenos ni silicones."`,caption:`El skincare efectivo no tiene que vaciar tu billetera.\n\nEsta rutina de 4 pasos es lo que le recomendaría a cualquier persona como base.\n\n¿Quieres saber dónde conseguir cada uno? Escríbeme. 🌿`,tags:['#skincareminimalista','#rutinanatural','#cosmeticaasequible','#ingredientesnaturales','#karenguarin']},
+  {day:25,p:'p4',pl:'TK+IG',title:'Lo que me gusta y lo que no de mi profesión — reflexión honesta',hook:'Te cuento lo que nadie dice sobre ser cosmetóloga. La parte difícil también...',script:`[0–3s] "Hoy voy a ser completamente honesta sobre mi profesión. Lo que amo — y lo que no."\n\n[3–20s] "Lo que amo: ver a una paciente que llega con dolor e inflamación, y 10 días después me escribe diciendo que ya puede caminar sola."\n\n[20–35s] "Lo que no es fácil: cargar emocionalmente con los casos difíciles. Ser el apoyo 24/7 de pacientes asustadas es agotador — pero necesario."\n\n[35–48s] "Lo más retador: que en Colombia la cosmiatría no siempre recibe el reconocimiento clínico que merece. Hay mucho intrusismo y desinformación."\n\n[48–60s] "Pero sigo aquí. 13 años después. Con más convicción que nunca."`,caption:`La honestidad también es parte de la marca que quiero construir.\n\nNo todo es fácil. No todo es glamour. Pero TODO vale la pena.\n\n¿Tienes alguna pregunta sobre mi profesión o mi día a día? 💚`,tags:['#cosmetologa','#vidaprofesional','#reflexionhonesta','#vocacion','#karenguarin','#cosmiatria']},
+  {day:26,p:'p2',pl:'IG+TK',title:'Bloquear tu transpiración puede estar bloqueando más de lo que crees',hook:'El cuerpo transpira por una razón. Bloquear eso tiene consecuencias...',script:`[0–3s] "El cuerpo transpira por una razón. Cuando lo bloqueas artificialmente, esa razón no desaparece."\n\n[3–18s] "La transpiración es uno de los mecanismos de eliminación del cuerpo. La axila, con sus ganglios linfáticos cercanos, es una zona especialmente activa de eliminación."\n\n[18–30s] "El cloruro de aluminio en los antitranspirantes no solo bloquea el olor — bloquea físicamente el folículo. Ese líquido que no puede salir, tiene que ir a algún lado."\n\n[30–45s] "La alternativa: desodorantes — no antitranspirantes. Permiten la transpiración pero neutralizan el olor bacteriano. Existen opciones naturales efectivas."\n\n[45–60s] "¿Te animas a hacer el cambio? Te guío en la transición."`,caption:`Transpirar no es el problema. El olor es el problema.\n\nY hay formas de resolver el olor SIN bloquear la eliminación natural del cuerpo.\n\nEl cambio puede ser difícil las primeras semanas. Con guía, es completamente manejable. 🌿\n\n¿Ya hiciste el cambio? 👇`,tags:['#antitranspirante','#desodorantenatural','#sinAluminio','#transicion','#karenguarin']},
+  {day:27,p:'p3',pl:'IG',title:'La paciente más difícil que he tenido — y lo que aprendí',hook:'Me tomó 6 meses. El caso más difícil de mi carrera. Esto es lo que pasó...',script:`[Slide 1] "El caso más difícil de mis 13 años. Y lo que me dejó."\n[Slide 2] "Patricia llegó 4 meses post-abdominoplastia con fibrosis severa y dolor crónico. Había estado con otra terapeuta que trabajó con técnicas incorrectas en el postoperatorio inmediato."\n[Slide 3] "Meses 1–2: manejo del dolor e inflamación. Técnicas suaves. Mucha paciencia. Patricia lloraba en cada sesión."\n[Slide 4] "Meses 3–4: trabajo específico sobre tejido fibrótico. Lentamente, el tejido comenzó a ceder."\n[Slide 5] "Mes 6: Patricia llegó sin dolor por primera vez desde su cirugía. 'Karen, siento que me devolviste mi cuerpo.'"\n[Slide 6] "Aprendí que no todos los casos tienen una línea de tiempo. La constancia vale más que la velocidad."`,caption:`No todos los casos son fáciles. No todos tienen una recuperación de manual.\n\nPero todos merecen el mismo nivel de dedicación.\n\nPatricia me enseñó más sobre mi profesión que cualquier libro. 💚\n\n(Historia con autorización)`,tags:['#fibrosis','#recuperacionpostquirurgica','#drenajelinfatico','#karenguarin','#cosmetologa']},
+  {day:28,p:'p1',pl:'TK+IG',title:'Mesoterapia: qué es, para qué sirve y quién debería hacérsela',hook:'La inyección que no inyecta lo que crees — aclarando la mesoterapia...',script:`[0–3s] "Mesoterapia. Mucho marketing. Mucha confusión. Te lo explico como es."\n\n[3–18s] "Consiste en micro-inyecciones de sustancias activas directamente en la dermis. En mi caso, con ampollas homeopáticas: sin químicos sintéticos, sin conservantes artificiales."\n\n[18–30s] "¿Para qué sirve? Hidratación profunda, estimulación de colágeno, manchas, recuperación post-cirugía, caída del cabello."\n\n[30–42s] "¿Para quién NO es? Queloides, embarazo, lactancia, anticoagulantes."\n\n[42–55s] "¿Tienes dudas de si es para ti? Consulta gratuita — link en bio."`,caption:`La mesoterapia homeopática es uno de mis tratamientos favoritos.\n\nLos resultados son reales, los ingredientes son seguros y el cuerpo los reconoce.\n\n¿Tienes preguntas específicas? Las respondo en comentarios. 💚`,tags:['#mesoterapia','#mesoterapiahomeopatica','#tratamientofacial','#colagenonatural','#karenguarin']},
+  {day:29,p:'p5',pl:'IG+TK',title:'Unboxing: el nuevo kit de suplementos para recuperación',hook:'Armé el kit que me hubiera gustado tener disponible cuando empecé...',script:`[0–3s] "Armé el kit que hubiera querido que existiera cuando atendí mi primer paciente post-cirugía."\n\n[3–15s] Mostrar kit. "Vitamina C natural 1000mg, Zinc orgánico 30mg, Colágeno hidrolizado sin azúcar, Omega-3. Todo en un kit de 30 días."\n\n[15–28s] "¿Por qué estos ingredientes? Porque son exactamente los que la evidencia muestra como necesarios para la cicatrización óptima. Sin relleno."\n\n[28–40s] "Son los mismos que uso con mis pacientes en consultorio. Ahora disponibles para quienes no pueden venir presencialmente."\n\n[40–55s] "Link en bio. Con mi guía de uso incluida."`,caption:`Este kit existe porque muchas de mis pacientes me preguntaban qué tomar después de sus sesiones.\n\nAhora lo tienen todo junto, en las dosis correctas, con mi guía de uso. 🌿\n\nDisponible en mi tienda — link en bio.`,tags:['#suplementosnaturales','#kitpostoperatorio','#recuperacionnatural','#vitaminac','#colageno','#karenguarin']},
+  {day:30,p:'p4',pl:'IG',title:'30 días de contenido — lo que aprendí y hacia dónde vamos',hook:'El cierre de nuestro primer mes juntos. Gracias y lo que viene...',script:`[0–3s] "30 días compartiendo lo que sé, lo que creo y lo que hago. Cierro con gratitud."\n\n[3–18s] "Aprendí que hay mucha hambre de información real. Sin marketing. Sin promesas vacías. Solo ciencia, experiencia y honestidad."\n\n[18–30s] "Los temas que más resonaron: ingredientes tóxicos, recuperación post-cirugía, casos reales. Me queda claro hacia dónde seguir."\n\n[30–45s] "Lo que viene: más educación, más casos reales, más recomendaciones limpias. Y si están listas para dar el siguiente paso — aquí estoy."\n\n[45–60s] "Gracias por confiar en lo que comparto. Nos vemos el mes que viene. 💚"`,caption:`30 días. Muchos aprendizajes. Muchísimas gracias.\n\nEste espacio existe porque ustedes están aquí.\n\nSi hay un tema que quieran que cubra el mes que viene — díganme en comentarios 👇\n\nCon cariño, Karen 🌿`,tags:['#30diasdecontenido','#comunidad','#karenguarin','#cosmetologa','#gracias']}
+];
+
+const hooks=[
+  {pl:'Instagram Reel',txt:'Lo que nadie te dice sobre el ingrediente más común en tu rutina...',p:'p2'},
+  {pl:'TikTok',txt:'Vine a decirte algo que tu médico probablemente no mencionó después de tu cirugía.',p:'p1'},
+  {pl:'Instagram Reel',txt:'Este ingrediente aparece con 47 nombres diferentes en las etiquetas. Uno está en tu crema.',p:'p2'},
+  {pl:'TikTok',txt:'Para en lo que estás haciendo. Si tienes una cirugía próxima, escucha esto.',p:'p1'},
+  {pl:'Instagram Reel',txt:'Me formé con cirujanos durante meses. Esto es lo que aprendí que los libros no enseñan.',p:'p4'},
+  {pl:'TikTok',txt:'Mi paciente llegó a la segunda sesión llorando. No de dolor. De alivio.',p:'p3'},
+  {pl:'Instagram Carrusel',txt:'7 señales de que tu piel está mejorando. Y 3 de alarma que no debes ignorar.',p:'p1'},
+  {pl:'TikTok',txt:'Dos tipos de protector solar. Uno te cuida. El otro solo pretende.',p:'p2'},
+  {pl:'Instagram Reel',txt:'El error más común en los primeros días post-cirugía. Lo veo todos los días.',p:'p1'},
+  {pl:'TikTok',txt:'Lee el ingrediente número 3 de tu crema hidratante. Te espero.',p:'p2'},
+  {pl:'Instagram Story',txt:'Adivina cuántos ingredientes tiene mi rutina de noche. Solo 3.',p:'p5'},
+  {pl:'TikTok',txt:'La recuperación post-lipo que pasó de 6 semanas a 3. Esto marcó la diferencia.',p:'p3'},
+  {pl:'Instagram Reel',txt:'13 años después todavía me emociono cuando una paciente dice que ya no siente dolor.',p:'p4'},
+  {pl:'TikTok',txt:'¿Sabes la diferencia entre drenaje linfático y masaje normal? Después de esto, sí.',p:'p1'},
+  {pl:'Instagram Carrusel',txt:'Antes de tu cirugía, haz esto. Tu recuperación va a ser completamente diferente.',p:'p1'},
+  {pl:'TikTok',txt:'El PRP. Qué es, para qué sirve, quién puede hacérselo — sin lenguaje médico difícil.',p:'p1'},
+  {pl:'Instagram Reel',txt:'Mi fragancia favorita olía increíble. Hasta que leí los ingredientes.',p:'p2'},
+  {pl:'TikTok',txt:'Rutina de skincare natural por menos de $50. Completa. Que funciona.',p:'p5'},
+  {pl:'Instagram Story',txt:'¿Tu crema hidrata o solo finge hacerlo? La respuesta está en 3 ingredientes.',p:'p2'},
+  {pl:'TikTok',txt:'Esta paciente tardó 6 meses en recuperarse. Le devolvimos la vida en partes.',p:'p3'},
+  {pl:'Instagram Reel',txt:'Lo que realmente pasa en tu sistema linfático cuando te operas.',p:'p1'},
+  {pl:'TikTok',txt:'No vengo a vender. Vengo a mostrarles lo que uso yo. Que es muy diferente.',p:'p5'},
+  {pl:'Instagram Carrusel',txt:'Acné quístico que no cedió en 3 años. Lo que funcionó después de 8 sesiones.',p:'p3'},
+  {pl:'TikTok',txt:'¿Cuánto tiempo deberías esperar para empezar el drenaje linfático? La respuesta no es la que crees.',p:'p1'}
+];
+
+const captions=[
+  {n:'Postquirúrgico',t:'Caption — Drenaje Linfático',txt:`La inflamación después de una cirugía no es tu enemiga.\n\nEs la respuesta de tu cuerpo.\n\nLo que importa es manejarla bien desde el principio.\n\nEl drenaje linfático manual no es un extra — es parte del protocolo. Y empieza cuanto antes, mejor.\n\n¿Tienes una cirugía próxima o ya pasaste por ella? Escríbeme. Primera consulta: gratis.\n\n💚 Karen`,tags:['#drenajelinfatico','#recuperacionpostquirurgica','#postoperatorio','#cosmetologa','#karenguarin']},
+  {n:'Anti-tóxicos',t:'Caption — Ingredientes',txt:`Empezar a leer etiquetas cambió mi vida.\n\nNo de un día para el otro. Producto por producto.\n\nNo tienes que tirarlo todo mañana. Solo empieza por uno.\n\n¿Cuál cambiarías primero? Cuéntame en comentarios y te digo si la alternativa que tienes en mente es realmente mejor.\n\n🌿 Karen`,tags:['#ingredientestoxicos','#cosmeticaconsciente','#leelaetiqueta','#naturalbeauty','#karenguarin']},
+  {n:'Facial & Antiedad',t:'Caption — Tratamientos Faciales',txt:`Tu piel tiene memoria.\n\nRecuerda cada ingrediente agresivo.\nCada exposición al sol sin protección.\n\nPero también recuerda cada tratamiento que la cuidó.\nCada suplemento que la nutrió.\nCada protocolo que la regeneró.\n\nEs un proceso. No una cirugía.\n\n¿Empezamos? 💚`,tags:['#tratamientofacial','#PRP','#regeneracionfacial','#antiedad','#karenguarin','#pielsana']},
+  {n:'Producto Natural',t:'Caption — Tienda',txt:`Una sola regla para todo lo que vendo:\n\nSi yo no lo usaría en mi piel o en la de mis pacientes — no está en mi tienda.\n\nAsí de simple.\n\nCada producto tiene mis notas de uso y por qué lo elijo.\n\nLink en bio. 🌿`,tags:['#productosnatural','#tiendanatural','#sinparabenos','#sinAluminio','#karenguarin']}
+];
+
+const hashsets=[
+  {t:'Drenaje & Postquirúrgico',s:'Para posts de recuperación y drenaje linfático',tags:['#drenajelinfatico','#recuperacionpostquirurgica','#postoperatorio','#drenajelinfaticomanual','#postop','#cirugiaplastica','#liposuccion','#abdominoplastia','#recuperacionpostop'],cls:''},
+  {t:'Ingredientes Tóxicos',s:'Para el nicho consciente y denuncia de cosméticos',tags:['#ingredientestoxicos','#cosmeticaconsciente','#leelaetiqueta','#sinparabenos','#sinAluminio','#cosmeticanatural','#bellezaconsciente','#cleanbeauty','#naturalbeauty'],cls:'terra'},
+  {t:'Tratamientos Faciales',s:'Para PRP, mesoterapia, limpieza facial',tags:['#PRP','#plasmaricoplacuetas','#mesoterapia','#limpiezafacial','#tratamientofacial','#regeneracionfacial','#acne','#antiedad','#manchas'],cls:'gold'},
+  {t:'Marca Personal Karen',s:'Siempre incluir 1-2 en cada post',tags:['#karenguarin','#cosmetologa','#cosmiatra','#expertaenpiel','#saludintegral','#pielsana','#cuidadodelapiel','#Colombia'],cls:''}
+];
+
+function buildCal(){
+  const g=document.getElementById('calGrid');
+  const offset=3;
+  for(let i=0;i<offset;i++){const e=document.createElement('div');e.className='cd empty';g.appendChild(e);}
+  for(let d=1;d<=30;d++){
+    const dp=posts.filter(x=>x.day===d);
+    const cell=document.createElement('div');
+    cell.className='cd';
+    let h=`<div class="dn">${d}</div>`;
+    dp.forEach(p=>{
+      h+=`<div class="cp ${p.p}" onclick="openM(${p.day})" data-p="${p.p}"><span class="cp-pl">${p.pl}</span><span class="cp-t">${p.title.substring(0,28)}...</span></div>`;
+    });
+    if(dp.length) h+=`<div class="dcnt">${dp.length}p</div>`;
+    cell.innerHTML=h;
+    g.appendChild(cell);
+  }
+  // Empty days to complete grid
+  const total=offset+30;
+  const rem=(7-total%7)%7;
+  for(let i=0;i<rem;i++){const e=document.createElement('div');e.className='cd empty';g.appendChild(e);}
+}
+
+function filterCal(p,btn){
+  document.querySelectorAll('.cf').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cp').forEach(el=>{el.style.display=(p==='all'||el.dataset.p===p)?'block':'none';});
+}
+
+function openM(day){
+  const post=posts.find(p=>p.day===day);
+  if(!post)return;
+  document.getElementById('mTitle').textContent=post.title;
+  document.getElementById('mBody').innerHTML=`
+    <div class="mmeta">
+      <span class="mtag ${post.p}">Pilar ${post.p.replace('p','')}</span>
+      <span class="mtag">📅 Día ${post.day}</span>
+      <span class="mtag">${post.pl}</span>
+    </div>
+    <div class="msec"><div class="msl">Hook — Primeros 3 segundos</div><div class="hook-b">${post.hook}</div></div>
+    <div class="msec"><div class="msl">Guión completo</div><div class="script-b">${post.script}</div></div>
+    <div class="msec"><div class="msl">Caption para publicación</div><div class="caption-b">${post.caption.replace(/\n/g,'<br>')}</div></div>
+    <div class="msec"><div class="msl">Hashtags</div><div class="htags">${post.tags.map(t=>`<span class="ht">${t}</span>`).join('')}</div></div>
+    <div class="mactions">
+      <button class="mbtn pri" onclick="copyM(${day})">📋 Copiar Todo</button>
+      <button class="mbtn sec" onclick="closeM()">Cerrar</button>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeM(){document.getElementById('modal').classList.remove('open');}
+
+function copyM(day){
+  const p=posts.find(x=>x.day===day);
+  if(!p)return;
+  const txt=`DÍA ${p.day} — ${p.title}\n\nHOOK: ${p.hook}\n\nGUIÓN:\n${p.script}\n\nCAPTION:\n${p.caption}\n\nHASHTAGS: ${p.tags.join(' ')}`;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b=document.querySelector('.mbtn.pri');
+    b.textContent='✓ Copiado!';
+    setTimeout(()=>b.textContent='📋 Copiar Todo',2000);
+  });
+}
+
+function buildScripts(){
+  const g=document.getElementById('sgrid');
+  [1,2,4,5,8,11,15,23].forEach(d=>{
+    const p=posts.find(x=>x.day===d);
+    if(!p)return;
+    g.innerHTML+=`<div class="scard" onclick="openM(${p.day})">
+      <div class="scard-hdr ${p.p}"><div><div class="scard-type">Día ${p.day} · Guión completo</div></div><div style="font-size:1.2rem">${p.pl.includes('TK')?'🎵':'📸'}</div></div>
+      <div class="scard-body"><div class="scard-title">${p.title}</div><div class="scard-hook">"${p.hook}"</div><div class="scard-prev">${p.script.substring(0,140)}...</div></div>
+      <div class="scard-foot"><span class="stag">${p.pl}</span><span class="stag">Ver guión →</span></div>
+    </div>`;
+  });
+}
+
+function buildHooks(){
+  const g=document.getElementById('hgrid');
+  hooks.forEach(h=>{
+    g.innerHTML+=`<div class="hcard" onclick="navigator.clipboard.writeText('${h.txt.replace(/'/g,"\\'")}').then(()=>{this.style.borderColor='var(--terra-light)';this.style.background='var(--terra-pale)';setTimeout(()=>{this.style.borderColor='';this.style.background=''},1500)})">
+      <div class="hk-pl">${h.pl}</div>
+      <div class="hk-txt">${h.txt}</div>
+      <span class="hk-tag ${h.p}">Pilar ${h.p.replace('p','')}</span>
+    </div>`;
+  });
+}
+
+function buildCaptions(){
+  const g=document.getElementById('cgrid');
+  captions.forEach(c=>{
+    g.innerHTML+=`<div class="ccard">
+      <div class="ccard-hdr"><div class="ccard-nicho">${c.n}</div><div class="ccard-tit">${c.t}</div></div>
+      <div class="ccard-body">
+        <div class="ccard-txt">${c.txt}</div>
+        <div class="ctags">${c.tags.map(t=>`<span class="ctag">${t}</span>`).join('')}</div>
+        <button class="cbtn" onclick="navigator.clipboard.writeText(\`${c.txt}\n\n${c.tags.join(' ')}\`).then(()=>{this.textContent='✓ Copiado';setTimeout(()=>this.textContent='Copiar caption',2000)})">Copiar caption</button>
+      </div>
+    </div>`;
+  });
+}
+
+function buildHashsets(){
+  const g=document.getElementById('hsets');
+  hashsets.forEach(hs=>{
+    g.innerHTML+=`<div class="hset">
+      <div class="hset-tit">${hs.t}</div>
+      <div class="hset-sub">${hs.s}</div>
+      <div class="hset-tags">${hs.tags.map(t=>`<span class="hset-tag ${hs.cls}" onclick="navigator.clipboard.writeText('${t}').then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='${t}',1500)})">${t}</span>`).join('')}</div>
+    </div>`;
+  });
+}
+
+document.querySelectorAll('.nl').forEach(l=>{
+  l.addEventListener('click',()=>{
+    document.querySelectorAll('.nl').forEach(x=>x.classList.remove('active'));
+    l.classList.add('active');
+  });
+});
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeM();});
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.07});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+buildCal();buildScripts();buildHooks();buildCaptions();buildHashsets();
+</script>
+</body>
+</html>
