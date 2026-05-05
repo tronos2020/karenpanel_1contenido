@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Tienda Natural</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,400;1,9..144,200;1,9..144,400&family=Epilogue:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#F2EDE4;--bone2:#EAE3D8;--bone3:#DDD5C6;--forest:#2D4A35;--forest2:#3D6147;--forest-light:#5A8A62;--forest-pale:#C8DEC9;--forest-ghost:rgba(45,74,53,0.06);--clay:#C17B52;--clay-light:#D9A07A;--clay-pale:#F0D8C5;--night:#1C1C19;--night2:#2A2A25;--night3:#3A3A33;--ink:rgba(28,28,25,0.85);--ink2:rgba(28,28,25,0.5);--ink3:rgba(28,28,25,0.25);--white:#FDFAF5;--gold:#B09240;--gold-pale:#E8D99A;--red:#C45252;--red-pale:#F5DADA;--border:rgba(28,28,25,0.1);--border2:rgba(28,28,25,0.18)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Epilogue',sans-serif;background:var(--bone);color:var(--night);overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
+.announce{background:var(--forest);color:var(--bone);text-align:center;padding:0.55rem 2rem;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:2rem}
+.announce strong{color:var(--forest-pale)}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;height:68px;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:200;font-style:italic;color:var(--forest);cursor:pointer}
+.nav-logo span{color:var(--night);font-style:normal;font-weight:400}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--forest)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;position:relative;font-size:1.1rem;color:var(--ink2)}
+.nav-icon:hover{color:var(--forest)}
+.cart-count{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--clay);color:white;border-radius:50%;font-size:0.55rem;display:flex;align-items:center;justify-content:center;font-weight:600}
+/* HERO */
+.hero{min-height:80vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;background:var(--night)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:7rem 5rem;z-index:2}
+.hero-eyebrow{font-size:0.62rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--forest-light);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--forest-light)}
+.hero-h1{font-family:'Fraunces',serif;font-size:clamp(3rem,4.5vw,5.5rem);font-weight:200;line-height:1.02;color:var(--bone);margin-bottom:1.2rem}
+.hero-h1 em{font-style:italic;color:var(--forest-light)}
+.hero-sub{font-size:0.95rem;line-height:1.8;color:rgba(242,237,228,0.55);max-width:400px;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem}
+.btn-primary{background:var(--forest);color:var(--bone);padding:0.95rem 2.2rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;font-family:'Epilogue',sans-serif}
+.btn-primary:hover{background:var(--forest2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--bone);border:1px solid rgba(242,237,228,0.3);padding:0.95rem 2.2rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Epilogue',sans-serif}
+.btn-ghost:hover{border-color:var(--forest-light);color:var(--forest-light)}
+.hero-trust{margin-top:3rem;display:flex;gap:2rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.65rem;letter-spacing:0.08em;color:rgba(242,237,228,0.45)}
+.trust-item::before{content:'✓';color:var(--forest-light)}
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(45,74,53,0.4) 0%,transparent 70%),radial-gradient(ellipse at 30% 80%,rgba(193,123,82,0.2) 0%,transparent 60%)}
+.hero-showcase{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:4rem}
+.hsc{background:rgba(242,237,228,0.08);border:1px solid rgba(242,237,228,0.12);padding:1.8rem;backdrop-filter:blur(8px);transition:all 0.3s;cursor:pointer}
+.hsc:hover{background:rgba(242,237,228,0.13);transform:translateY(-4px)}
+.hsc-emoji{font-size:2.5rem;margin-bottom:0.8rem;display:block}
+.hsc-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:400;color:var(--bone);margin-bottom:0.3rem}
+.hsc-price{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--forest-light)}
+.hsc-badge{display:inline-block;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--forest);color:var(--forest-pale);padding:0.18rem 0.5rem;margin-top:0.5rem}
+/* GARANTIA */
+.garantia{background:var(--forest);padding:4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.g-item{padding:2rem;background:var(--forest);text-align:center;border:1px solid rgba(200,222,201,0.1)}
+.g-icon{font-size:2rem;margin-bottom:0.8rem;display:block}
+.g-title{font-size:0.8rem;font-weight:600;color:var(--bone);margin-bottom:0.4rem}
+.g-desc{font-size:0.7rem;color:rgba(200,222,201,0.65);line-height:1.6}
+/* SECTION */
+.section{padding:6rem 4rem}
+.eyebrow{font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--clay);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.7rem}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--clay)}
+.sec-title{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:200;line-height:1.1;margin-bottom:0.8rem}
+.sec-title em{font-style:italic;color:var(--forest)}
+.sec-intro{font-size:0.88rem;line-height:1.8;color:var(--ink2);max-width:540px}
+/* FILTERS */
+.filter-bar{display:flex;gap:0;border-bottom:1px solid var(--border2);margin:2rem 0 3rem;overflow-x:auto}
+.filter-btn{padding:0.85rem 1.6rem;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;color:var(--ink2);white-space:nowrap;transition:all 0.2s;margin-bottom:-1px;font-family:'Epilogue',sans-serif}
+.filter-btn:hover{color:var(--forest)}
+.filter-btn.active{color:var(--forest);border-bottom-color:var(--forest);font-weight:500}
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border)}
+.product-card{background:var(--white);position:relative;overflow:hidden;cursor:pointer;transition:all 0.3s}
+.pc-img-wrap{height:250px;background:var(--bone2);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.5s;position:relative}
+.product-card:hover .pc-img-wrap{transform:scale(1.03)}
+.pc-emoji{font-size:5rem;transition:transform 0.4s}
+.product-card:hover .pc-emoji{transform:scale(1.1) rotate(-3deg)}
+.pc-badge-wrap{position:absolute;top:1rem;left:1rem;display:flex;flex-direction:column;gap:0.35rem}
+.pc-badge{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.22rem 0.6rem;font-weight:600}
+.pc-badge.new{background:var(--forest);color:white}
+.pc-badge.best{background:var(--clay);color:white}
+.pc-badge.digital{background:var(--gold);color:var(--night)}
+.pc-badge.low{background:var(--red-pale);color:var(--red)}
+.pc-actions{position:absolute;bottom:0;left:0;right:0;background:var(--forest);padding:0.8rem;display:flex;gap:0.5rem;transform:translateY(100%);transition:transform 0.3s}
+.product-card:hover .pc-actions{transform:translateY(0)}
+.pc-add{flex:1;background:white;color:var(--forest);border:none;padding:0.55rem;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;font-weight:500;transition:background 0.2s}
+.pc-add:hover{background:var(--bone)}
+.pc-wa{width:36px;height:36px;background:transparent;border:1px solid rgba(255,255,255,0.3);color:white;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s;flex-shrink:0}
+.pc-wa:hover{background:rgba(255,255,255,0.1)}
+.pc-body{padding:1.4rem}
+.pc-cat{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.4rem}
+.pc-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:400;color:var(--night);margin-bottom:0.3rem;line-height:1.3}
+.pc-desc{font-size:0.73rem;line-height:1.6;color:var(--ink2);margin-bottom:0.9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-rating{display:flex;align-items:center;gap:0.3rem;margin-bottom:0.6rem}
+.stars{color:var(--gold);font-size:0.72rem}
+.rating-count{font-size:0.62rem;color:var(--ink3)}
+.pc-footer{display:flex;align-items:center;justify-content:space-between}
+.pc-price{font-family:'DM Mono',monospace;font-size:1rem;color:var(--forest)}
+.pc-price-old{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--ink3);text-decoration:line-through;margin-left:0.4rem}
+.pc-stock{font-size:0.6rem;color:var(--ink3);display:flex;align-items:center;gap:0.3rem}
+.sdot{width:5px;height:5px;border-radius:50%}
+.sdot.ok{background:#5CAD5C}.sdot.low{background:#E0963C}.sdot.out{background:var(--red)}
+/* MODAL */
+.product-modal{position:fixed;inset:0;background:rgba(28,28,25,0.75);backdrop-filter:blur(6px);z-index:500;display:none;align-items:center;justify-content:center;padding:2rem}
+.product-modal.open{display:flex}
+.pm-box{background:var(--white);width:100%;max-width:860px;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr}
+.pm-visual{background:var(--bone2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem;position:relative;min-height:400px}
+.pm-emoji{font-size:8rem;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.pm-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink2);z-index:2}
+.pm-info{padding:2.5rem;display:flex;flex-direction:column}
+.pm-cat{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--clay);margin-bottom:0.5rem}
+.pm-name{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:200;color:var(--night);margin-bottom:0.5rem;line-height:1.2}
+.pm-rating{display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem}
+.pm-price-row{display:flex;align-items:baseline;gap:0.6rem;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
+.pm-price{font-family:'DM Mono',monospace;font-size:1.8rem;color:var(--forest)}
+.pm-price-old{font-family:'DM Mono',monospace;font-size:1rem;color:var(--ink3);text-decoration:line-through}
+.pm-karen-note{background:var(--forest-ghost);border-left:3px solid var(--forest);padding:0.8rem 1rem;margin-bottom:1.2rem;font-size:0.75rem;line-height:1.65;color:var(--ink2);font-style:italic}
+.pm-karen-note strong{color:var(--forest);font-style:normal}
+.pm-desc{font-size:0.82rem;line-height:1.8;color:var(--ink2);margin-bottom:1.2rem}
+.pm-ings-title,.pm-ben-title{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.5rem}
+.ing-list{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1.2rem}
+.ing-tag{font-size:0.65rem;background:var(--forest-pale);color:var(--forest);padding:0.2rem 0.6rem}
+.benefit-item{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.78rem;color:var(--ink2);padding:0.25rem 0;line-height:1.5}
+.benefit-item::before{content:'✓';color:var(--forest);flex-shrink:0}
+.pm-qty-row{display:flex;align-items:center;gap:1rem;margin:1.2rem 0}
+.qty-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink2)}
+.qty-ctrl{display:flex;align-items:center;border:1px solid var(--border2)}
+.qty-btn{width:36px;height:36px;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.2s}
+.qty-btn:hover{background:var(--bone)}
+.qty-num{width:42px;text-align:center;font-family:'DM Mono',monospace;font-size:0.9rem}
+.pm-actions{display:flex;gap:0.8rem}
+.btn-cart{flex:1;background:var(--forest);color:white;border:none;padding:1rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;transition:background 0.3s}
+.btn-cart:hover{background:var(--forest2)}
+.btn-wa{background:transparent;border:1px solid var(--border2);padding:1rem 1.2rem;cursor:pointer;font-size:1.2rem;transition:all 0.2s}
+.btn-wa:hover{background:var(--forest-pale)}
+/* BUNDLES */
+.bundles-section{background:var(--night);padding:6rem 4rem}
+.bundles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(242,237,228,0.08);margin-top:3rem}
+.bc{background:var(--night2);padding:2.5rem;cursor:pointer;transition:background 0.3s;position:relative;overflow:hidden}
+.bc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transition:transform 0.4s}
+.bc.b1::before{background:var(--forest-light)}.bc.b2::before{background:var(--clay)}.bc.b3::before{background:var(--gold)}
+.bc:hover{background:var(--night3)}.bc:hover::before{transform:scaleX(1)}
+.bc-label{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(242,237,228,0.35);margin-bottom:0.8rem}
+.bc-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:200;color:var(--bone);margin-bottom:0.5rem}
+.bc-desc{font-size:0.78rem;line-height:1.7;color:rgba(242,237,228,0.5);margin-bottom:1.5rem}
+.bc-inc-title{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(242,237,228,0.35);margin-bottom:0.6rem}
+.bc-item{display:flex;align-items:center;gap:0.6rem;font-size:0.75rem;color:rgba(242,237,228,0.6);padding:0.25rem 0}
+.bc-item::before{content:'→';color:var(--forest-light)}
+.bc-pricing{display:flex;align-items:baseline;gap:0.8rem;margin:1.2rem 0}
+.bc-price{font-family:'DM Mono',monospace;font-size:1.5rem;color:var(--bone)}
+.bc-original{font-family:'DM Mono',monospace;font-size:0.9rem;color:rgba(242,237,228,0.3);text-decoration:line-through}
+.bc-savings{font-size:0.65rem;color:var(--forest-light)}
+.bc-btn{width:100%;background:rgba(242,237,228,0.08);border:1px solid rgba(242,237,228,0.15);color:var(--bone);padding:0.85rem;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;transition:all 0.3s}
+.bc-btn:hover{background:var(--forest);border-color:var(--forest)}
+/* DIGITALES */
+.digitales-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.dc{background:var(--night);cursor:pointer;overflow:hidden;transition:transform 0.3s}
+.dc:hover{transform:translateY(-5px)}
+.dc-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:4rem}
+.dc-img.p1{background:linear-gradient(135deg,var(--forest),var(--forest2))}.dc-img.p2{background:linear-gradient(135deg,var(--clay),#8B4A2A)}.dc-img.p3{background:linear-gradient(135deg,var(--night2),var(--night3));border:1px solid rgba(242,237,228,0.08)}
+.dc-body{padding:1.5rem}
+.dc-format{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.dc-name{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;color:var(--bone);margin-bottom:0.5rem;line-height:1.3}
+.dc-desc{font-size:0.73rem;line-height:1.6;color:rgba(242,237,228,0.5);margin-bottom:1rem}
+.dc-footer{display:flex;align-items:center;justify-content:space-between}
+.dc-price{font-family:'DM Mono',monospace;font-size:1rem;color:var(--forest-light)}
+.dc-btn{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bone);border:1px solid rgba(242,237,228,0.2);padding:0.35rem 0.8rem;cursor:pointer;background:transparent;font-family:'Epilogue',sans-serif;transition:all 0.2s}
+.dc-btn:hover{background:var(--forest);border-color:var(--forest)}
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(28,28,25,0.4);z-index:399;display:none;backdrop-filter:blur(2px)}
+.cart-overlay.open{display:block}
+.cart-drawer{position:fixed;top:0;right:0;width:420px;height:100vh;background:var(--white);border-left:1px solid var(--border2);z-index:400;transform:translateX(100%);transition:transform 0.4s ease;display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-hdr{padding:1.5rem 1.8rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-hdr h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:200}
+.cart-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink2)}
+.cart-items{flex:1;overflow-y:auto;padding:1.2rem 1.8rem}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--ink2)}
+.cart-empty .ce-icon{font-size:4rem;margin-bottom:1rem;opacity:0.3}
+.cart-empty p{font-size:0.85rem;line-height:1.7}
+.cart-item{display:grid;grid-template-columns:60px 1fr auto;gap:0.8rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:center}
+.ci-img{width:60px;height:60px;background:var(--bone2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.ci-name{font-size:0.82rem;font-weight:500;margin-bottom:0.2rem}
+.ci-price{font-size:0.7rem;color:var(--ink2)}
+.ci-qty{display:flex;align-items:center;gap:0.4rem;margin-top:0.4rem}
+.ci-qty-btn{width:22px;height:22px;border:1px solid var(--border2);background:none;cursor:pointer;font-size:0.8rem;display:flex;align-items:center;justify-content:center}
+.ci-qty-btn:hover{background:var(--bone)}
+.ci-qty-num{font-size:0.75rem;font-family:'DM Mono',monospace;min-width:18px;text-align:center}
+.ci-total{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--forest)}
+.ci-remove{background:none;border:none;color:var(--ink3);cursor:pointer;font-size:0.9rem;transition:color 0.2s;display:block;margin-top:0.3rem}
+.ci-remove:hover{color:var(--red)}
+.cart-footer{padding:1.5rem 1.8rem;border-top:1px solid var(--border)}
+.cart-subtotal{display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.82rem}
+.cart-subtotal strong{font-family:'DM Mono',monospace;color:var(--forest);font-size:1rem}
+.cart-shipping-note{font-size:0.68rem;color:var(--ink3);text-align:center;margin-bottom:1.2rem}
+.cart-shipping-note span{color:var(--forest)}
+.btn-checkout{width:100%;background:var(--forest);color:white;border:none;padding:1.1rem;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;transition:background 0.3s;margin-bottom:0.6rem}
+.btn-checkout:hover{background:var(--forest2)}
+.btn-wa-order{width:100%;background:#25D366;color:white;border:none;padding:0.9rem;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;display:flex;align-items:center;justify-content:center;gap:0.6rem;transition:background 0.3s}
+.btn-wa-order:hover{background:#1da851}
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--night);color:var(--bone);padding:0.9rem 1.8rem;font-size:0.75rem;z-index:600;transition:transform 0.3s;display:flex;align-items:center;gap:0.6rem;box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:2rem;right:2rem;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 6px 24px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.3s;animation:pg 2.5s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.1)}
+@keyframes pg{0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.4)}50%{box-shadow:0 6px 40px rgba(37,211,102,0.7)}}
+.wa-float svg{width:28px;height:28px;fill:white}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:900px){nav{padding:0 1.5rem}.nav-links{display:none}.hero{grid-template-columns:1fr}.hero-right{display:none}.hero-left{padding:7rem 1.5rem 3rem}.section{padding:4rem 1.5rem}.products-grid{grid-template-columns:repeat(2,1fr)}.bundles-grid{grid-template-columns:1fr}.digitales-grid{grid-template-columns:1fr}.garantia{grid-template-columns:repeat(2,1fr)}.pm-box{grid-template-columns:1fr}.pm-visual{min-height:200px}.cart-drawer{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <span>🌿</span>
+  <div>Envío gratis en pedidos mayores a <strong>$150.000 COP</strong></div>
+  <span>·</span>
+  <div>100% ingredientes limpios · <strong>Curados por Karen</strong></div>
+  <span>🌿</span>
+</div>
+
+<nav>
+  <div class="nav-logo">Karen <span>Guarin</span></div>
+  <ul class="nav-links">
+    <li><a class="active" onclick="filterP('all',this)">Todo</a></li>
+    <li><a onclick="filterP('recuperacion',this)">Recuperación</a></li>
+    <li><a onclick="filterP('facial',this)">Facial</a></li>
+    <li><a onclick="filterP('corporal',this)">Corporal</a></li>
+    <li><a onclick="filterP('suplementos',this)">Suplementos</a></li>
+    <li><a onclick="filterP('digital',this)">Guías</a></li>
+    <li><a href="#bundles">Kits</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-icon" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow rev">Tienda Natural Curada por Karen</div>
+    <h1 class="hero-h1 rev">Tu piel merece<br>ingredientes<br><em>limpios.</em></h1>
+    <p class="hero-sub rev">Cada producto lo uso yo con mis pacientes. Sin tóxicos, sin parabenos. Solo lo que realmente funciona.</p>
+    <div class="hero-actions rev">
+      <button class="btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Ver Catálogo</button>
+      <button class="btn-ghost" onclick="document.getElementById('bundles').scrollIntoView({behavior:'smooth'})">Ver Kits</button>
+    </div>
+    <div class="hero-trust rev">
+      <div class="trust-item">Sin aluminio</div>
+      <div class="trust-item">Sin parabenos</div>
+      <div class="trust-item">Sin silicones</div>
+      <div class="trust-item">Sin ftalatos</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg"></div>
+    <div class="hero-showcase">
+      <div class="hsc" onclick="openProduct('kit-post')"><span class="hsc-emoji">📦</span><div class="hsc-name">Kit Postquirúrgico</div><div class="hsc-price">$189.000</div><div class="hsc-badge">Más vendido</div></div>
+      <div class="hsc" onclick="openProduct('vitamina-c')"><span class="hsc-emoji">🧴</span><div class="hsc-name">Sérum Vit C Natural</div><div class="hsc-price">$95.000</div><div class="hsc-badge">Nuevo</div></div>
+      <div class="hsc" onclick="openProduct('desodorante')"><span class="hsc-emoji">🌸</span><div class="hsc-name">Desodorante Natural</div><div class="hsc-price">$48.000</div><div class="hsc-badge">Sin aluminio</div></div>
+      <div class="hsc" onclick="openProduct('guia-pre')"><span class="hsc-emoji">📖</span><div class="hsc-name">Guía Pre-Cirugía</div><div class="hsc-price">$35.000</div><div class="hsc-badge">Digital</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="garantia">
+  <div class="g-item rev"><span class="g-icon">🌿</span><div class="g-title">100% Sin Tóxicos</div><div class="g-desc">Cada ingrediente revisado por Karen. Si no lo usa con sus pacientes, no está aquí.</div></div>
+  <div class="g-item rev"><span class="g-icon">📦</span><div class="g-title">Envío Seguro</div><div class="g-desc">Empaque sostenible. Envío a toda Colombia en 2–5 días hábiles con rastreo.</div></div>
+  <div class="g-item rev"><span class="g-icon">💬</span><div class="g-title">Asesoría Incluida</div><div class="g-desc">Cada compra incluye acceso a Karen por WhatsApp para dudas de uso.</div></div>
+  <div class="g-item rev"><span class="g-icon">↩️</span><div class="g-title">Devolución 15 días</div><div class="g-desc">Si no estás satisfecha, te devolvemos el dinero. Sin preguntas.</div></div>
+</div>
+
+<section class="section" id="catalogo">
+  <div class="eyebrow rev">Catálogo Completo</div>
+  <h2 class="sec-title rev">Productos <em>Curados</em></h2>
+  <p class="sec-intro rev">Seleccionados, probados y usados por Karen con sus pacientes. Sin marketing falso.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterP('all',this)">Todo</button>
+    <button class="filter-btn" onclick="filterP('recuperacion',this)">🏥 Recuperación</button>
+    <button class="filter-btn" onclick="filterP('facial',this)">✨ Facial</button>
+    <button class="filter-btn" onclick="filterP('corporal',this)">🌿 Corporal</button>
+    <button class="filter-btn" onclick="filterP('suplementos',this)">💊 Suplementos</button>
+    <button class="filter-btn" onclick="filterP('digital',this)">📖 Guías Digitales</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section class="bundles-section" id="bundles">
+  <div class="eyebrow" style="color:var(--forest-light)">Ahorra hasta 24%</div>
+  <h2 class="sec-title" style="color:var(--bone)">Kits & <em style="color:var(--forest-light)">Bundles</em></h2>
+  <p class="sec-intro" style="color:rgba(242,237,228,0.5)">Combinaciones diseñadas por Karen para cada etapa del proceso.</p>
+  <div class="bundles-grid">
+    <div class="bc b1 rev" onclick="addBundle('kit-postquirurgico',189000)">
+      <div class="bc-label">Bundle 01 · Más Vendido</div>
+      <div class="bc-name">Kit Recuperación<br>Postquirúrgica</div>
+      <div class="bc-desc">Todo lo que necesitas antes y después de tu cirugía. El protocolo completo de Karen en casa.</div>
+      <div class="bc-inc-title">Incluye</div>
+      <div class="bc-item">Ampollas homeopáticas (10 unidades)</div>
+      <div class="bc-item">Vitamina C natural 1000mg (30 días)</div>
+      <div class="bc-item">Zinc orgánico 30mg (30 días)</div>
+      <div class="bc-item">Colágeno hidrolizado sin azúcar</div>
+      <div class="bc-item">Guía digital "Protocolo en Casa"</div>
+      <div class="bc-pricing"><div class="bc-price">$189.000</div><div class="bc-original">$242.000</div><div class="bc-savings">Ahorras 22%</div></div>
+      <button class="bc-btn">Agregar al carrito</button>
+    </div>
+    <div class="bc b2 rev" onclick="addBundle('kit-facial',165000)">
+      <div class="bc-label">Bundle 02 · Piel Limpia</div>
+      <div class="bc-name">Kit Rutina Facial<br>Sin Tóxicos</div>
+      <div class="bc-desc">La rutina de 4 pasos que Karen recomienda. Sin silicones, sin parabenos, resultados reales.</div>
+      <div class="bc-inc-title">Incluye</div>
+      <div class="bc-item">Sérum Vitamina C natural (30ml)</div>
+      <div class="bc-item">Limpiador facial sin sulfatos</div>
+      <div class="bc-item">Aloe vera puro 100% orgánico</div>
+      <div class="bc-item">Protector solar mineral SPF50</div>
+      <div class="bc-item">Guía "Cómo leer etiquetas"</div>
+      <div class="bc-pricing"><div class="bc-price">$165.000</div><div class="bc-original">$210.000</div><div class="bc-savings">Ahorras 21%</div></div>
+      <button class="bc-btn">Agregar al carrito</button>
+    </div>
+    <div class="bc b3 rev" onclick="addBundle('kit-toxicos',135000)">
+      <div class="bc-label">Bundle 03 · Starter Pack</div>
+      <div class="bc-name">Kit Libre<br>de Tóxicos</div>
+      <div class="bc-desc">Los 3 cambios más fáciles y con mayor impacto para empezar la transición sin tóxicos.</div>
+      <div class="bc-inc-title">Incluye</div>
+      <div class="bc-item">Desodorante natural sin aluminio</div>
+      <div class="bc-item">Fragancia botánica sin ftalatos</div>
+      <div class="bc-item">Jabón corporal natural</div>
+      <div class="bc-item">Guía "Tu vida sin tóxicos"</div>
+      <div class="bc-pricing"><div class="bc-price">$135.000</div><div class="bc-original">$178.000</div><div class="bc-savings">Ahorras 24%</div></div>
+      <button class="bc-btn">Agregar al carrito</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="digitales" style="background:var(--night)">
+  <div class="eyebrow" style="color:var(--gold)">Descarga Inmediata</div>
+  <h2 class="sec-title" style="color:var(--bone)">Guías <em style="color:var(--gold)">Digitales</em></h2>
+  <p class="sec-intro" style="color:rgba(242,237,228,0.45)">El conocimiento de Karen condensado. PDF descargable al instante.</p>
+  <div class="digitales-grid">
+    <div class="dc rev" onclick="openProduct('guia-pre')">
+      <div class="dc-img p1">📋</div>
+      <div class="dc-body"><div class="dc-format">PDF · 28 páginas</div><div class="dc-name">Guía Completa Pre & Post Cirugía</div><div class="dc-desc">Qué hacer antes, durante y después. El protocolo completo para una recuperación óptima.</div><div class="dc-footer"><div class="dc-price">$35.000</div><button class="dc-btn" onclick="event.stopPropagation();addToCart({id:'guia-pre',name:'Guía Pre & Post Cirugía',price:35000,emoji:'📋',cat:'digital'})">Comprar</button></div></div>
+    </div>
+    <div class="dc rev" onclick="openProduct('guia-toxicos')">
+      <div class="dc-img p2">🚫</div>
+      <div class="dc-body"><div class="dc-format">PDF · 18 páginas</div><div class="dc-name">Tu Piel Libre de Tóxicos</div><div class="dc-desc">Los 47 ingredientes a eliminar, sus alternativas y cómo hacer la transición en 30 días.</div><div class="dc-footer"><div class="dc-price">$28.000</div><button class="dc-btn" onclick="event.stopPropagation();addToCart({id:'guia-toxicos',name:'Guía Libre de Tóxicos',price:28000,emoji:'🚫',cat:'digital'})">Comprar</button></div></div>
+    </div>
+    <div class="dc rev" onclick="openProduct('guia-nutricion')">
+      <div class="dc-img p3">🥗</div>
+      <div class="dc-body"><div class="dc-format">PDF · 22 páginas</div><div class="dc-name">Nutrición para Cicatrización</div><div class="dc-desc">El plan nutricional post-cirugía con recetas, suplementos y tiempos específicos.</div><div class="dc-footer"><div class="dc-price">$32.000</div><button class="dc-btn" onclick="event.stopPropagation();addToCart({id:'guia-nutricion',name:'Guía Nutrición Cicatrización',price:32000,emoji:'🥗',cat:'digital'})">Comprar</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-hdr"><h3>Tu Carrito</h3><button class="cart-close" onclick="closeCart()">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter"></div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="product-modal" id="productModal">
+  <div class="pm-box">
+    <div class="pm-visual" id="pmVisual"><button class="pm-close" onclick="closeProduct()">×</button></div>
+    <div class="pm-info" id="pmInfo"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<a class="wa-float" href="https://wa.me/57XXXXXXXXXX?text=Hola%20Karen,%20quiero%20hacer%20un%20pedido" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const products=[
+  {id:'kit-post',name:'Kit Recuperación Postquirúrgica',cat:'recuperacion',price:189000,oldPrice:242000,emoji:'📦',desc:'El protocolo completo de Karen condensado en un kit. Ampollas homeopáticas, suplementos y guía de uso para una recuperación óptima en casa.',badge:'best',stock:12,rating:4.9,reviews:47,karenNote:'Este kit es lo primero que recomiendo a todas mis pacientes antes de salir del quirófano. Marca la diferencia entre 3 y 6 semanas de recuperación.',ingredients:['Ampollas Homeopáticas','Vitamina C Natural','Zinc Orgánico','Colágeno Hidrolizado','Sin Conservantes'],benefits:['Reduce inflamación desde el día 1','Acelera la cicatrización','Sin efectos secundarios','Protocolo incluido en PDF']},
+  {id:'vitamina-c',name:'Sérum Vitamina C Natural 20%',cat:'facial',price:95000,emoji:'🧴',desc:'El sérum de vitamina C más puro. Sin silicones, sin parabenos. Alta concentración real para iluminar y regenerar.',badge:'new',stock:28,rating:4.8,reviews:31,karenNote:'Lo uso en todos mis tratamientos post-PRP y post-limpieza. Es el activo más honesto que he encontrado.',ingredients:['Ácido L-Ascórbico 20%','Agua purificada','Glicerina vegetal','Sin silicones','Sin parabenos'],benefits:['Ilumina y unifica el tono','Estimula colágeno','Antienvejecimiento real','Apto piel sensible']},
+  {id:'desodorante',name:'Desodorante Natural Sin Aluminio',cat:'corporal',price:48000,emoji:'🌸',desc:'Protección real sin cloruro de aluminio. Bicarbonato, aceite de coco y lavanda esencial. 24h de eficacia comprobada.',badge:null,stock:35,rating:4.7,reviews:89,karenNote:'Tardé 2 años en encontrar uno que realmente funcionara. Este pasó todas mis pruebas de campo.',ingredients:['Bicarbonato de sodio','Aceite de coco orgánico','Manteca de karité','Lavanda esencial','Sin aluminio'],benefits:['Protección 24 horas','Sin disrupción hormonal','Apto piel sensible','Guía de transición incluida']},
+  {id:'colageno',name:'Colágeno Hidrolizado Sin Azúcar',cat:'suplementos',price:72000,emoji:'💧',desc:'Colágeno tipo I y III sin edulcorantes artificiales. Para cicatrización, articulaciones y piel desde adentro.',badge:null,stock:20,rating:4.9,reviews:54,karenNote:'Lo prescribo a todas mis pacientes post-cirugía desde el día 3. Parte insustituible del protocolo interno.',ingredients:['Colágeno hidrolizado bovino','Vitamina C natural','Sin azúcar','Sin edulcorantes','Sin colorantes'],benefits:['Acelera cicatrización','Mejora elasticidad','Fortalece articulaciones','Fácil absorción']},
+  {id:'ampollas',name:'Ampollas Homeopáticas (Pack x10)',cat:'recuperacion',price:65000,emoji:'💊',desc:'Las mismas ampollas que Karen usa en sus sesiones. Para uso personal en casa entre sesiones de drenaje.',badge:null,stock:5,rating:4.8,reviews:22,karenNote:'Mis pacientes me pedían llevarlas a casa. Ahora las tienen disponibles con mi guía de aplicación.',ingredients:['Arnica Montana','Traumeel compuesto','Vitaminas B','Sin conservantes','Homeopáticas'],benefits:['Continúa el efecto entre sesiones','Reduce inflamación residual','100% naturales','Guía incluida']},
+  {id:'protector',name:'Protector Solar Mineral SPF50',cat:'facial',price:58000,emoji:'☀️',desc:'Solo filtros minerales. Dióxido de titanio y óxido de zinc. Sin oxibenzona. Seguro post-procedimiento.',badge:null,stock:24,rating:4.6,reviews:38,karenNote:'Indispensable después de cualquier tratamiento facial. Es el único que recomiendo a mis pacientes.',ingredients:['Dióxido de titanio','Óxido de zinc','Sin oxibenzona','Sin octinoxato','Tono universal'],benefits:['Protección UVA/UVB real','Seguro post-PRP','No obstruye poros','Sin residuo blanco']},
+  {id:'fragancia',name:'Fragancia Botánica Natural',cat:'corporal',price:88000,emoji:'🌺',desc:'Perfume de base 100% botánica. Todos los ingredientes declarados. Sin ftalatos, sin sintéticos.',badge:null,stock:15,rating:4.7,reviews:19,karenNote:'El perfume que uso yo. Huele increíble Y tiene ingredientes 100% declarados. Ya no necesito más.',ingredients:['Aceites esenciales puros','Alcohol vegetal','Sin ftalatos','Sin aceites minerales'],benefits:['Duración 6-8 horas','Sin disruptores hormonales','Ingredientes 100% declarados']},
+  {id:'aloe',name:'Aloe Vera Puro 99% Orgánico',cat:'facial',price:38000,emoji:'🌿',desc:'Sin aditivos, sin fragancias, sin conservantes sintéticos. El humectante más honesto para piel y cuerpo.',badge:null,stock:40,rating:4.8,reviews:67,karenNote:'Un ingrediente. Puro. Para todo. Es la base de la hidratación natural que recomiendo.',ingredients:['Aloe barbadensis 99%','Sin parabenos','Sin fragancias','Sin silicones','Orgánico'],benefits:['Hidratación inmediata','Calma irritación','Cicatrizante natural','Multipropósito']},
+  {id:'vitaminas',name:'Vitamina C + Zinc + Omega-3',cat:'suplementos',price:82000,emoji:'🫙',desc:'El trío de suplementos que Karen prescribe post-cirugía. Sin excipientes innecesarios. Cápsulas vegetales.',badge:null,stock:22,rating:4.9,reviews:41,karenNote:'Estos tres juntos son el protocolo mínimo de suplementación que recomiendo a toda paciente post-quirúrgica.',ingredients:['Vitamina C 1000mg natural','Zinc orgánico 30mg','Omega-3 EPA/DHA','Sin excipientes','Cápsulas vegetales'],benefits:['Trío de cicatrización','Antiinflamatorio natural','Sistema inmune activo','30 días de protocolo']},
+  {id:'limpiador',name:'Limpiador Facial Sin Sulfatos',cat:'facial',price:45000,emoji:'🚿',desc:'Sin SLS, sin SLES, sin parabenos. Limpieza suave que respeta la barrera cutánea. Apto post-tratamiento.',badge:null,stock:30,rating:4.7,reviews:28,karenNote:'El primer cambio que hago con mis pacientes. Un buen limpiador sin sulfatos cambia todo.',ingredients:['Glucósidos vegetales','Aloe vera','Sin SLS','Sin parabenos'],benefits:['No altera pH','Apto post-tratamiento','Para piel sensible','Uso diario']},
+  {id:'guia-pre',name:'Guía Completa Pre & Post Cirugía',cat:'digital',price:35000,emoji:'📋',desc:'28 páginas con el protocolo completo. Qué hacer 2 semanas antes, las primeras 72h y los primeros 30 días.',badge:'digital',stock:999,rating:5.0,reviews:88,karenNote:'Es el primer documento que le envío a cualquier paciente que va a operarse. Ahora disponible para todas.',ingredients:['28 páginas PDF','Checklists','Protocolo nutricional','Lista de compras','Video explicativo'],benefits:['Reducir tiempo de recuperación','Saber exactamente qué hacer','Evitar errores comunes','Acceso inmediato']},
+  {id:'guia-toxicos',name:'Tu Piel Libre de Tóxicos',cat:'digital',price:28000,emoji:'🚫',desc:'18 páginas con los 47 ingredientes a eliminar, sus alternativas y cómo hacer la transición en 30 días.',badge:'digital',stock:999,rating:4.9,reviews:62,karenNote:'Tardé meses en investigar y condensar esto. Ahora lo tienes por el precio de un café.',ingredients:['18 páginas PDF','Lista 47 ingredientes','Alternativas','Plan transición 30 días'],benefits:['Eliminar tóxicos cotidianos','Alternativas económicas','Transición sin estrés','Acceso inmediato']},
+  {id:'guia-nutricion',name:'Nutrición para Cicatrización',cat:'digital',price:32000,emoji:'🥗',desc:'El plan nutricional post-cirugía que Karen usa con sus pacientes. Con recetas, suplementos y tiempos.',badge:'digital',stock:999,rating:4.8,reviews:34,karenNote:'Lo que comes después de tu cirugía determina en un 40% la velocidad de tu cicatrización.',ingredients:['22 páginas PDF','Plan 30 días','Recetas incluidas','Lista de suplementos'],benefits:['Acelerar cicatrización','Qué comer y evitar','Suplementos exactos','Acceso inmediato']}
+];
+
+let cart=[];
+let currentQty=1;
+function fmtCOP(n){return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(n)}
+function catLabel(c){return{recuperacion:'Recuperación Post-Cirugía',facial:'Cuidado Facial',corporal:'Corporal',suplementos:'Suplementos',digital:'Guía Digital'}[c]||c}
+
+function buildProducts(filter='all'){
+  const g=document.getElementById('productsGrid');
+  g.innerHTML='';
+  const list=filter==='all'?products:products.filter(p=>p.cat===filter);
+  list.forEach((p,i)=>{
+    const sc=p.stock>15?'ok':p.stock>5?'low':'out';
+    const sl=p.stock>15?'Disponible':p.stock>5?'Últimas unidades':'Agotado';
+    g.innerHTML+=`
+    <div class="product-card rev" style="transition-delay:${i*0.05}s" onclick="openProduct('${p.id}')">
+      <div class="pc-img-wrap">
+        <span class="pc-emoji">${p.emoji}</span>
+        <div class="pc-badge-wrap">
+          ${p.badge==='best'?'<span class="pc-badge best">Más vendido</span>':''}
+          ${p.badge==='new'?'<span class="pc-badge new">Nuevo</span>':''}
+          ${p.badge==='digital'?'<span class="pc-badge digital">Digital</span>':''}
+          ${p.stock<=5&&p.stock>0?'<span class="pc-badge low">Últimas unidades</span>':''}
+        </div>
+        <div class="pc-actions" onclick="event.stopPropagation()">
+          <button class="pc-add" onclick="addToCart(products.find(x=>x.id==='${p.id}'))">Agregar al carrito</button>
+          <button class="pc-wa" onclick="window.open('https://wa.me/57XXXXXXXXXX?text=Hola Karen, me interesa: ${encodeURIComponent(p.name)}','_blank')">💬</button>
+        </div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-cat">${catLabel(p.cat)}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-desc">${p.desc}</div>
+        <div class="pc-rating"><span class="stars">${'★'.repeat(Math.round(p.rating))}</span><span class="rating-count">(${p.reviews})</span></div>
+        <div class="pc-footer">
+          <div><span class="pc-price">${fmtCOP(p.price)}</span>${p.oldPrice?`<span class="pc-price-old">${fmtCOP(p.oldPrice)}</span>`:''}</div>
+          <div class="pc-stock"><span class="sdot ${sc}"></span>${sl}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  setTimeout(()=>document.querySelectorAll('.product-card.rev').forEach(el=>el.classList.add('vis')),80);
+}
+
+function filterP(cat,btn){
+  document.querySelectorAll('.filter-btn,.nav-links a').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  buildProducts(cat);
+}
+
+function openProduct(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  currentQty=1;
+  document.getElementById('pmVisual').innerHTML=`<button class="pm-close" onclick="closeProduct()">×</button><div class="pm-emoji" style="font-size:8rem;animation:float 3s ease-in-out infinite">${p.emoji}</div>`;
+  document.getElementById('pmInfo').innerHTML=`
+    <div class="pm-cat">${catLabel(p.cat)}</div>
+    <div class="pm-name">${p.name}</div>
+    <div class="pm-rating"><span class="stars">${'★'.repeat(Math.round(p.rating))}</span><span style="font-size:0.75rem;color:var(--ink2);margin-left:0.4rem">${p.rating} · ${p.reviews} reseñas</span></div>
+    <div class="pm-price-row">
+      <span class="pm-price">${fmtCOP(p.price)}</span>
+      ${p.oldPrice?`<span class="pm-price-old">${fmtCOP(p.oldPrice)}</span><span style="font-size:0.65rem;color:var(--forest);background:var(--forest-pale);padding:0.18rem 0.5rem">Ahorras ${Math.round((1-p.price/p.oldPrice)*100)}%</span>`:''}
+    </div>
+    <div class="pm-karen-note"><strong>Karen recomienda:</strong> ${p.karenNote}</div>
+    <div class="pm-desc">${p.desc}</div>
+    <div style="margin-bottom:1.2rem"><div class="pm-ings-title">Ingredientes destacados</div><div class="ing-list">${p.ingredients.map(i=>`<span class="ing-tag">${i}</span>`).join('')}</div></div>
+    <div style="margin-bottom:1.2rem"><div class="pm-ben-title">Beneficios</div>${p.benefits.map(b=>`<div class="benefit-item">${b}</div>`).join('')}</div>
+    <div class="pm-qty-row"><span class="qty-label">Cantidad</span><div class="qty-ctrl"><button class="qty-btn" onclick="chQty(-1)">−</button><span class="qty-num" id="qtyNum">1</span><button class="qty-btn" onclick="chQty(1)">+</button></div></div>
+    <div class="pm-actions">
+      <button class="btn-cart" onclick="addToCart(products.find(x=>x.id==='${p.id}'),currentQty);closeProduct()">Agregar al carrito</button>
+      <button class="btn-wa" onclick="window.open('https://wa.me/57XXXXXXXXXX?text=Hola Karen, quiero pedir: ${encodeURIComponent(p.name)}','_blank')" title="Pedir por WhatsApp">💬</button>
+    </div>`;
+  document.getElementById('productModal').classList.add('open');
+}
+function closeProduct(){document.getElementById('productModal').classList.remove('open')}
+function chQty(d){currentQty=Math.max(1,currentQty+d);document.getElementById('qtyNum').textContent=currentQty}
+document.getElementById('productModal').addEventListener('click',function(e){if(e.target===this)closeProduct()});
+
+function addToCart(p,qty=1){
+  if(!p)return;
+  const ex=cart.find(i=>i.id===p.id);
+  if(ex)ex.qty+=qty;else cart.push({...p,qty});
+  updateCart();showToast(`✅ ${p.emoji} ${p.name} agregado`);
+}
+function addBundle(id,price){
+  const map={
+    'kit-postquirurgico':{name:'Kit Recuperación Postquirúrgica Completo',emoji:'📦'},
+    'kit-facial':{name:'Kit Rutina Facial Sin Tóxicos',emoji:'🧴'},
+    'kit-toxicos':{name:'Kit Libre de Tóxicos Starter',emoji:'🌸'}
+  };
+  addToCart({id,name:map[id].name,price,emoji:map[id].emoji,cat:'bundle'});
+}
+function removeFromCart(id){cart=cart.filter(i=>i.id!==id);updateCart()}
+function chCartQty(id,d){const it=cart.find(i=>i.id===id);if(it){it.qty=Math.max(1,it.qty+d);}updateCart()}
+
+function updateCart(){
+  const cnt=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent=cnt;
+  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const itemsEl=document.getElementById('cartItems');
+  const footEl=document.getElementById('cartFooter');
+  if(!cart.length){
+    itemsEl.innerHTML=`<div class="cart-empty"><div class="ce-icon">🛒</div><p>Tu carrito está vacío.<br>Explora los productos y agrega lo que necesitas.</p></div>`;
+    footEl.innerHTML='';return;
+  }
+  itemsEl.innerHTML=cart.map(it=>`
+    <div class="cart-item">
+      <div class="ci-img">${it.emoji}</div>
+      <div>
+        <div class="ci-name">${it.name}</div>
+        <div class="ci-price">${fmtCOP(it.price)}</div>
+        <div class="ci-qty">
+          <button class="ci-qty-btn" onclick="chCartQty('${it.id}',-1)">−</button>
+          <span class="ci-qty-num">${it.qty}</span>
+          <button class="ci-qty-btn" onclick="chCartQty('${it.id}',1)">+</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <span class="ci-total">${fmtCOP(it.price*it.qty)}</span>
+        <button class="ci-remove" onclick="removeFromCart('${it.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+  footEl.innerHTML=`
+    <div class="cart-subtotal"><span>Subtotal</span><strong>${fmtCOP(sub)}</strong></div>
+    <div class="cart-shipping-note">${sub<150000?`Agrega <span>${fmtCOP(150000-sub)}</span> más para envío gratis`:'<span>✓ Envío gratis incluido!</span>'}</div>
+    <button class="btn-checkout" onclick="checkout()">Pagar con MercadoPago →</button>
+    <button class="btn-wa-order" onclick="orderByWA()">💬 Pedir por WhatsApp</button>`;
+}
+
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open')}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')}
+function checkout(){showToast('🔗 Redirigiendo a MercadoPago...');setTimeout(()=>window.open('https://www.mercadopago.com.co','_blank'),1000)}
+function orderByWA(){
+  const items=cart.map(i=>`• ${i.qty}x ${i.name} = ${fmtCOP(i.price*i.qty)}`).join('%0A');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  window.open(`https://wa.me/57XXXXXXXXXX?text=Hola Karen! Quiero hacer este pedido:%0A%0A${items}%0A%0ATotal: ${fmtCOP(total)}`,'_blank');
+}
+function showToast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.07});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+buildProducts();
+updateCart();
+</script>
+</body>
+</html>

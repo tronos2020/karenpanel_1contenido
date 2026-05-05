@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Panel de Administración</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;1,9..144,200&family=Epilogue:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0F1210;--s1:#171B18;--s2:#1E2420;--s3:#252C26;--forest:#3D6147;--forest-l:#5A8A62;--forest-p:#C8DEC9;--clay:#C17B52;--clay-p:#F0D8C5;--gold:#B09240;--gold-p:#E8D99A;--red:#C45252;--red-p:#F5DADA;--bone:rgba(245,240,232,0.85);--bone2:rgba(245,240,232,0.5);--bone3:rgba(245,240,232,0.2);--border:rgba(245,240,232,0.07);--border2:rgba(245,240,232,0.13)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Epilogue',sans-serif;background:var(--bg);color:var(--bone);min-height:100vh;overflow-x:hidden}
+/* LOGIN */
+.login-screen{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center}
+.login-box{background:var(--s1);border:1px solid var(--border2);padding:3rem;width:360px;text-align:center}
+.login-logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:200;font-style:italic;color:var(--forest-l);margin-bottom:0.3rem}
+.login-sub{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone3);margin-bottom:2rem}
+.login-input{width:100%;background:var(--s2);border:1px solid var(--border2);color:var(--bone);padding:0.8rem 1rem;font-size:0.85rem;font-family:'Epilogue',sans-serif;margin-bottom:0.8rem;outline:none;transition:border-color 0.2s}
+.login-input:focus{border-color:var(--forest)}
+.login-btn{width:100%;background:var(--forest);color:white;border:none;padding:0.9rem;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;font-family:'Epilogue',sans-serif;transition:background 0.3s;margin-top:0.5rem}
+.login-btn:hover{background:var(--forest-l)}
+.login-hint{font-size:0.65rem;color:var(--bone3);margin-top:1rem}
+.login-hint span{color:var(--forest-l)}
+/* LAYOUT */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--s1);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;display:flex;flex-direction:column;z-index:100;overflow-y:auto}
+.sb-logo{padding:1.5rem;border-bottom:1px solid var(--border)}
+.sb-logo h2{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:200;font-style:italic;color:var(--forest-l)}
+.sb-logo p{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone3);margin-top:0.2rem}
+.sb-sec{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--forest);padding:1rem 1.3rem 0.3rem}
+.sb-link{display:flex;align-items:center;gap:0.7rem;padding:0.6rem 1.3rem;font-size:0.78rem;color:var(--bone2);cursor:pointer;border-left:2px solid transparent;transition:all 0.2s;text-decoration:none}
+.sb-link:hover{color:var(--bone);background:rgba(245,240,232,0.03)}
+.sb-link.active{color:var(--forest-l);border-left-color:var(--forest-l);background:rgba(90,138,98,0.08)}
+.sb-link .ic{font-size:0.9rem;width:18px;text-align:center}
+.sb-link .badge{margin-left:auto;font-size:0.58rem;background:var(--forest);color:white;padding:0.1rem 0.4rem;border-radius:8px}
+.sb-status{margin-top:auto;padding:1.2rem 1.3rem;border-top:1px solid var(--border)}
+.status-dot{display:flex;align-items:center;gap:0.5rem;font-size:0.68rem;color:var(--bone3)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--forest-l);box-shadow:0 0 6px var(--forest-l);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.main{margin-left:240px;flex:1;min-height:100vh}
+/* TOPBAR */
+.topbar{background:var(--s1);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone2)}
+.topbar-title span{color:var(--forest-l)}
+.topbar-right{display:flex;gap:0.6rem;align-items:center}
+.chip{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--s2);border:1px solid var(--border2);padding:0.35rem 0.8rem;color:var(--bone2);cursor:pointer;transition:all 0.2s}
+.chip:hover{border-color:var(--forest-l);color:var(--forest-l)}
+.chip.on{background:rgba(90,138,98,0.15);border-color:var(--forest);color:var(--forest-l)}
+/* CONTENT */
+.content{padding:2rem}
+/* KPIS */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}
+.kpi{background:var(--s1);border:1px solid var(--border);padding:1.2rem 1.3rem;transition:border-color 0.3s}
+.kpi:hover{border-color:var(--border2)}
+.kpi-label{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--bone3);margin-bottom:0.5rem}
+.kpi-val{font-family:'Fraunces',serif;font-size:2rem;font-weight:200;line-height:1;margin-bottom:0.3rem}
+.kpi-val.g{color:var(--forest-l)}.kpi-val.t{color:var(--clay)}.kpi-val.go{color:var(--gold)}
+.kpi-sub{font-size:0.62rem;color:var(--bone3)}
+.kpi-trend{font-size:0.62rem;color:var(--forest-l);margin-top:0.3rem}
+/* SECTIONS */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.sec-hdr h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:200}
+.sec-hdr h2 em{font-style:italic;color:var(--forest-l)}
+.sec-hdr p{font-size:0.75rem;color:var(--bone3)}
+/* INVENTORY */
+.inv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.inv-card{background:var(--s1);border:1px solid var(--border);padding:1.2rem}
+.inv-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.8rem}
+.inv-name{font-size:0.78rem;font-weight:500;color:var(--bone);line-height:1.3}
+.inv-emoji{font-size:1.4rem}
+.inv-bar{height:3px;background:var(--s3);margin:0.5rem 0;border-radius:2px;overflow:hidden}
+.inv-fill{height:100%;border-radius:2px;transition:width 1.5s ease}
+.inv-fill.ok{background:var(--forest-l)}.inv-fill.mid{background:var(--gold)}.inv-fill.low{background:var(--red)}
+.inv-meta{display:flex;justify-content:space-between;align-items:center}
+.inv-units{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--bone)}
+.inv-status{font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.45rem}
+.inv-status.ok{color:var(--forest-l);background:rgba(90,138,98,0.15)}.inv-status.mid{color:var(--gold);background:rgba(176,146,64,0.15)}.inv-status.low{color:var(--red);background:rgba(196,82,82,0.15)}
+.inv-alert{font-size:0.65rem;color:var(--bone3);margin-top:0.4rem;display:flex;align-items:center;gap:0.3rem}
+.inv-alert.warn{color:var(--red)}.inv-alert.warn::before{content:'⚠ '}.inv-alert.ok::before{content:'✓ ';color:var(--forest-l)}
+/* PEDIDOS */
+.ptable{width:100%;border-collapse:collapse;font-size:0.77rem;margin-bottom:2rem}
+.ptable th{background:var(--s2);border:1px solid var(--border);padding:0.7rem 0.9rem;text-align:left;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--forest-l);font-weight:500}
+.ptable td{border:1px solid var(--border);padding:0.75rem 0.9rem;color:var(--bone2);vertical-align:middle}
+.ptable tr:hover td{background:rgba(245,240,232,0.02)}
+.oid{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--bone)}
+.ostatus{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.18rem 0.55rem;display:inline-block}
+.ostatus.pagado{background:rgba(90,138,98,0.15);color:var(--forest-l)}.ostatus.enviado{background:rgba(176,146,64,0.15);color:var(--gold)}.ostatus.pendiente{background:rgba(196,82,82,0.15);color:var(--red)}.ostatus.entregado{background:rgba(245,240,232,0.08);color:var(--bone3)}
+.ototal{font-family:'DM Mono',monospace;color:var(--forest-l);font-weight:500}
+.abtn{font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;background:none;border:1px solid var(--border2);padding:0.2rem 0.55rem;cursor:pointer;color:var(--bone3);transition:all 0.2s;font-family:'Epilogue',sans-serif}
+.abtn:hover{background:var(--forest);color:white;border-color:var(--forest)}
+/* CROSS SELL MATRIX */
+.cs-panel{background:var(--s1);border:1px solid var(--border);padding:1.5rem;margin-bottom:2rem}
+.cs-hdr{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem}
+.cs-hdr h3{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:200}
+.cs-badge{font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--forest);color:white;padding:0.18rem 0.5rem}
+.cstable{width:100%;border-collapse:collapse;font-size:0.75rem}
+.cstable th{text-align:left;padding:0.5rem 0.8rem;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bone3);border-bottom:1px solid var(--border)}
+.cstable td{padding:0.65rem 0.8rem;border-bottom:1px solid var(--border);color:var(--bone2)}
+.cstable td:first-child{color:var(--bone);font-weight:500}
+.cspill{display:inline-block;font-size:0.58rem;padding:0.12rem 0.45rem;background:rgba(90,138,98,0.15);color:var(--forest-l);margin:0.1rem;border:1px solid rgba(90,138,98,0.2)}
+.cspill.clay{background:rgba(193,123,82,0.15);color:var(--clay);border-color:rgba(193,123,82,0.2)}
+/* INGRESOS */
+.revenue-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.rev-card{background:var(--s1);border:1px solid var(--border);padding:1.5rem}
+.rev-card h3{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--bone3);margin-bottom:1rem}
+.rev-row{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.78rem;color:var(--bone2)}
+.rev-row:last-child{border-bottom:none}
+.rev-row strong{font-family:'DM Mono',monospace;color:var(--forest-l)}
+.rev-row.total{color:var(--bone);font-weight:500;padding-top:0.8rem;margin-top:0.3rem;border-top:1px solid var(--border2)}
+/* ALERTAS */
+.alerts-list{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem}
+.alert-item{display:flex;align-items:flex-start;gap:0.8rem;background:var(--s1);border:1px solid var(--border);padding:1rem 1.2rem}
+.alert-item.warn{border-left:3px solid var(--red)}
+.alert-item.info{border-left:3px solid var(--gold)}
+.alert-item.ok{border-left:3px solid var(--forest-l)}
+.alert-icon{font-size:1rem;flex-shrink:0;margin-top:0.1rem}
+.alert-content h4{font-size:0.78rem;font-weight:500;color:var(--bone);margin-bottom:0.2rem}
+.alert-content p{font-size:0.7rem;color:var(--bone2);line-height:1.5}
+.alert-time{font-size:0.6rem;color:var(--bone3);margin-top:0.2rem;font-family:'DM Mono',monospace}
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem;overflow-x:auto}
+.tab{padding:0.7rem 1.3rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bone3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;font-family:'Epilogue',sans-serif;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--forest-l)}.tab.active{color:var(--forest-l);border-bottom-color:var(--forest-l)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+/* REVEAL */
+.rev{opacity:0;transform:translateY(14px);transition:all 0.5s ease}.rev.vis{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Karen Guarin</div>
+    <div class="login-sub">Panel de Administración</div>
+    <input class="login-input" type="password" id="loginPass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Ingresar al Panel</button>
+    <div class="login-hint">Contraseña demo: <span>karen2025</span></div>
+  </div>
+</div>
+
+<div class="layout" id="mainLayout" style="display:none">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <h2>Karen Guarin</h2>
+    <p>Panel Admin · Tienda</p>
+  </div>
+  <div class="sb-sec">Dashboard</div>
+  <a class="sb-link active" onclick="showTab('dashboard',this)"><span class="ic">📊</span>Resumen General</a>
+  <a class="sb-link" onclick="showTab('alertas',this)"><span class="ic">🔔</span>Alertas <span class="badge" id="alertBadge">3</span></a>
+  <div class="sb-sec">Tienda</div>
+  <a class="sb-link" onclick="showTab('pedidos',this)"><span class="ic">📦</span>Pedidos</a>
+  <a class="sb-link" onclick="showTab('inventario',this)"><span class="ic">📋</span>Inventario</a>
+  <a class="sb-link" onclick="showTab('ingresos',this)"><span class="ic">💰</span>Ingresos</a>
+  <div class="sb-sec">Automatización</div>
+  <a class="sb-link" onclick="showTab('crossell',this)"><span class="ic">🔀</span>Venta Cruzada</a>
+  <a class="sb-link" onclick="showTab('leads',this)"><span class="ic">🎯</span>Leads & CRM</a>
+  <div class="sb-sec">Acceso</div>
+  <a class="sb-link" href="karen_tienda_publica.html" target="_blank"><span class="ic">🛒</span>Ver Tienda Pública ↗</a>
+  <a class="sb-link" onclick="doLogout()"><span class="ic">🚪</span>Cerrar Sesión</a>
+  <div class="sb-status"><div class="status-dot"><div class="dot"></div>Sistema activo · Todo OK</div></div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-title">Panel Admin / <span id="topbarTitle">Resumen General</span></div>
+    <div class="topbar-right">
+      <div class="chip on">⚡ n8n Conectado</div>
+      <div class="chip">📅 Abril 2025</div>
+      <div class="chip" onclick="doLogout()">🚪 Salir</div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="tab-pane active" id="pane-dashboard">
+      <div class="kpis rev">
+        <div class="kpi"><div class="kpi-label">Ventas del Mes</div><div class="kpi-val g">$1.84M</div><div class="kpi-sub">COP</div><div class="kpi-trend">↑ +23% vs mes anterior</div></div>
+        <div class="kpi"><div class="kpi-label">Pedidos Totales</div><div class="kpi-val">47</div><div class="kpi-sub">Este mes</div><div class="kpi-trend">↑ 6 pendientes hoy</div></div>
+        <div class="kpi"><div class="kpi-label">Ticket Promedio</div><div class="kpi-val go">$91K</div><div class="kpi-sub">COP por pedido</div><div class="kpi-trend">↑ +8% vs mes anterior</div></div>
+        <div class="kpi"><div class="kpi-label">Productos Bajo Stock</div><div class="kpi-val t">2</div><div class="kpi-sub">Requieren reposición</div><div class="kpi-trend">⚠ Ampollas · Fragancia</div></div>
+        <div class="kpi"><div class="kpi-label">Tasa Venta Cruzada</div><div class="kpi-val g">34%</div><div class="kpi-sub">Sesión → producto</div><div class="kpi-trend">↑ Meta: 35%</div></div>
+      </div>
+      <!-- Quick Alerts Preview -->
+      <div class="sec-hdr rev"><div><h2>Alertas <em>Activas</em></h2><p>Acciones que requieren atención hoy</p></div></div>
+      <div class="alerts-list rev" id="alertsPreview"></div>
+      <!-- Recent Orders -->
+      <div class="sec-hdr rev"><div><h2>Pedidos <em>Recientes</em></h2></div></div>
+      <table class="ptable rev" id="recentOrders"></table>
+    </div>
+
+    <!-- ALERTAS -->
+    <div class="tab-pane" id="pane-alertas">
+      <div class="sec-hdr rev"><div><h2>Centro de <em>Alertas</em></h2><p>Todas las notificaciones del sistema</p></div></div>
+      <div class="alerts-list rev" id="allAlerts"></div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div class="tab-pane" id="pane-pedidos">
+      <div class="sec-hdr rev"><div><h2>Gestión de <em>Pedidos</em></h2><p>Todos los pedidos — actualiza el estado con un clic</p></div></div>
+      <div class="tabs">
+        <button class="tab active" onclick="filterOrders('all',this)">Todos (6)</button>
+        <button class="tab" onclick="filterOrders('pagado',this)">Pagados (2)</button>
+        <button class="tab" onclick="filterOrders('enviado',this)">Enviados (1)</button>
+        <button class="tab" onclick="filterOrders('pendiente',this)">Pendientes (1)</button>
+        <button class="tab" onclick="filterOrders('entregado',this)">Entregados (2)</button>
+      </div>
+      <table class="ptable rev" id="allOrdersTable"></table>
+    </div>
+
+    <!-- INVENTARIO -->
+    <div class="tab-pane" id="pane-inventario">
+      <div class="sec-hdr rev"><div><h2>Control de <em>Inventario</em></h2><p>Stock en tiempo real · Alertas automáticas de reposición</p></div></div>
+      <div class="inv-grid rev" id="invGrid"></div>
+    </div>
+
+    <!-- INGRESOS -->
+    <div class="tab-pane" id="pane-ingresos">
+      <div class="sec-hdr rev"><div><h2>Análisis de <em>Ingresos</em></h2><p>Desglose por categoría y canal</p></div></div>
+      <div class="revenue-grid rev">
+        <div class="rev-card">
+          <h3>Ingresos por Categoría — Abril 2025</h3>
+          <div class="rev-row"><span>📦 Kits Recuperación</span><strong>$756.000</strong></div>
+          <div class="rev-row"><span>🧴 Cuidado Facial</span><strong>$392.000</strong></div>
+          <div class="rev-row"><span>💊 Suplementos</span><strong>$328.000</strong></div>
+          <div class="rev-row"><span>🌸 Corporal & Desodorante</span><strong>$214.000</strong></div>
+          <div class="rev-row"><span>📖 Guías Digitales</span><strong>$152.000</strong></div>
+          <div class="rev-row total"><span>Total Mes</span><strong>$1.842.000</strong></div>
+        </div>
+        <div class="rev-card">
+          <h3>Ingresos por Canal</h3>
+          <div class="rev-row"><span>🌐 Tienda Web (MercadoPago)</span><strong>$1.104.000</strong></div>
+          <div class="rev-row"><span>💬 WhatsApp Directo</span><strong>$582.000</strong></div>
+          <div class="rev-row"><span>🤖 Bot IA (automático)</span><strong>$156.000</strong></div>
+          <div class="rev-row total"><span>Total Canal Web</span><strong>$1.842.000</strong></div>
+          <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)">
+            <div class="rev-row"><span>Comisión MercadoPago (~3%)</span><strong style="color:var(--clay)">-$33.120</strong></div>
+            <div class="rev-row"><span>Stack automatización/mes</span><strong style="color:var(--clay)">-$240.000</strong></div>
+            <div class="rev-row total"><span>Ingreso Neto Estimado</span><strong>$1.568.880</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CROSS SELL -->
+    <div class="tab-pane" id="pane-crossell">
+      <div class="sec-hdr rev"><div><h2>Matriz de <em>Venta Cruzada</em></h2><p>Conectada al Flujo 03 de n8n — automática post-sesión</p></div></div>
+      <div class="cs-panel rev">
+        <div class="cs-hdr"><h3>Qué enviar automáticamente según el servicio</h3><span class="cs-badge">⚡ n8n Flujo 03 Activo</span></div>
+        <table class="cstable">
+          <thead><tr><th>Servicio tomado</th><th>Productos recomendados automáticos</th><th>Timing</th><th>Tasa conversión</th><th>Acción</th></tr></thead>
+          <tbody>
+            <tr><td>Drenaje Linfático</td><td><span class="cspill">Ampollas Homeopáticas</span><span class="cspill">Kit Recuperación</span><span class="cspill">Vitamina C+Zinc</span></td><td>+24h post-sesión</td><td><strong style="color:var(--forest-l)">38%</strong></td><td><button class="abtn">Editar</button></td></tr>
+            <tr><td>Limpieza Facial / PRP</td><td><span class="cspill">Sérum Vit C</span><span class="cspill">Protector Solar</span><span class="cspill">Aloe Vera</span></td><td>+24h post-sesión</td><td><strong style="color:var(--forest-l)">44%</strong></td><td><button class="abtn">Editar</button></td></tr>
+            <tr><td>Mesoterapia</td><td><span class="cspill">Colágeno</span><span class="cspill clay">Guía Digital</span></td><td>+48h post-sesión</td><td><strong style="color:var(--forest-l)">29%</strong></td><td><button class="abtn">Editar</button></td></tr>
+            <tr><td>Asesoría Corporal</td><td><span class="cspill">Vitaminas C+Zn+Omega</span><span class="cspill clay">Guía Nutrición</span></td><td>+24h post-sesión</td><td><strong style="color:var(--forest-l)">35%</strong></td><td><button class="abtn">Editar</button></td></tr>
+            <tr><td>Primera Compra Tienda</td><td><span class="cspill">Producto complementario</span><span class="cspill clay">Consulta 15% off</span></td><td>+3 días post-compra</td><td><strong style="color:var(--forest-l)">22%</strong></td><td><button class="abtn">Editar</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LEADS -->
+    <div class="tab-pane" id="pane-leads">
+      <div class="sec-hdr rev"><div><h2>Leads & <em>CRM</em></h2><p>Estado actual del pipeline — sincronizado con Notion via n8n</p></div></div>
+      <div class="kpis rev" style="grid-template-columns:repeat(4,1fr)">
+        <div class="kpi"><div class="kpi-label">Leads Nuevos</div><div class="kpi-val g">12</div><div class="kpi-sub">Esta semana</div></div>
+        <div class="kpi"><div class="kpi-label">En Nutrición</div><div class="kpi-val go">28</div><div class="kpi-sub">Secuencia activa</div></div>
+        <div class="kpi"><div class="kpi-label">Inactivos</div><div class="kpi-val t">7</div><div class="kpi-sub">Flujo reactivación</div></div>
+        <div class="kpi"><div class="kpi-label">Convertidos Mes</div><div class="kpi-val g">19</div><div class="kpi-sub">Lead → Cliente</div></div>
+      </div>
+      <div class="cs-panel rev">
+        <div class="cs-hdr"><h3>Pipeline de Conversión</h3><span class="cs-badge">Notion CRM Sincronizado</span></div>
+        <table class="cstable">
+          <thead><tr><th>Etapa</th><th>Cantidad</th><th>Próxima acción automática</th><th>Flujo activo</th></tr></thead>
+          <tbody>
+            <tr><td>Lead nuevo (sin responder)</td><td><strong style="color:var(--bone)">12</strong></td><td>Seguimiento WA en 4h</td><td><span class="cspill">Flujo 01</span></td></tr>
+            <tr><td>Lead respondió, no agendó</td><td><strong style="color:var(--bone)">28</strong></td><td>Contenido educativo D+3</td><td><span class="cspill">Flujo 06</span></td></tr>
+            <tr><td>Cita agendada</td><td><strong style="color:var(--bone)">9</strong></td><td>Recordatorio 24h automático</td><td><span class="cspill">Flujo 02</span></td></tr>
+            <tr><td>Post-sesión (sin follow-up)</td><td><strong style="color:var(--bone)">6</strong></td><td>Venta cruzada en 24h</td><td><span class="cspill">Flujo 03</span></td></tr>
+            <tr><td>Inactivo 30+ días</td><td><strong style="color:var(--bone)">7</strong></td><td>Reactivación 3 mensajes</td><td><span class="cspill">Flujo 04</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<script>
+// ── AUTH ──
+function doLogin(){
+  const pass=document.getElementById('loginPass').value;
+  if(pass==='karen2025'){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('mainLayout').style.display='flex';
+    init();
+  } else {
+    document.getElementById('loginPass').style.borderColor='var(--red)';
+    document.getElementById('loginPass').value='';
+    document.getElementById('loginPass').placeholder='Contraseña incorrecta';
+  }
+}
+function doLogout(){
+  document.getElementById('mainLayout').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('loginPass').value='';
+  document.getElementById('loginPass').placeholder='Contraseña';
+}
+
+// ── TABS ──
+function showTab(id,el){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('pane-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+  const titles={dashboard:'Resumen General',alertas:'Alertas Activas',pedidos:'Gestión de Pedidos',inventario:'Control de Inventario',ingresos:'Análisis de Ingresos',crossell:'Venta Cruzada',leads:'Leads & CRM'};
+  document.getElementById('topbarTitle').textContent=titles[id]||id;
+  setTimeout(()=>document.querySelectorAll('.tab-pane.active .rev').forEach(el=>el.classList.add('vis')),80);
+}
+
+// ── DATA ──
+const inventory=[
+  {name:'Kit Recuperación Postquirúrgica',emoji:'📦',stock:12,max:50,status:'mid'},
+  {name:'Sérum Vitamina C Natural',emoji:'🧴',stock:28,max:50,status:'ok'},
+  {name:'Desodorante Natural',emoji:'🌸',stock:35,max:60,status:'ok'},
+  {name:'Colágeno Hidrolizado',emoji:'💧',stock:20,max:50,status:'ok'},
+  {name:'Ampollas Homeopáticas',emoji:'💊',stock:5,max:40,status:'low'},
+  {name:'Protector Solar Mineral',emoji:'☀️',stock:24,max:40,status:'ok'},
+  {name:'Fragancia Botánica',emoji:'🌺',stock:8,max:30,status:'mid'},
+  {name:'Aloe Vera Puro',emoji:'🌿',stock:40,max:60,status:'ok'},
+  {name:'Vitamina C+Zinc+Omega',emoji:'🫙',stock:22,max:50,status:'ok'},
+  {name:'Limpiador Sin Sulfatos',emoji:'🚿',stock:30,max:40,status:'ok'},
+  {name:'Guía Pre & Post Cirugía',emoji:'📋',stock:999,max:999,status:'ok'},
+  {name:'Guía Libre de Tóxicos',emoji:'🚫',stock:999,max:999,status:'ok'},
+];
+
+const orders=[
+  {id:'#2841',cliente:'María F. Rodríguez',email:'maria@email.com',producto:'Kit Recuperación Postquirúrgica',total:189000,estado:'enviado',fecha:'18 Abr',canal:'Web',tel:'+573001234567'},
+  {id:'#2840',cliente:'Laura Sánchez',email:'laura@email.com',producto:'Guía Libre de Tóxicos + Desodorante',total:76000,estado:'pagado',fecha:'17 Abr',canal:'WhatsApp',tel:'+573009876543'},
+  {id:'#2839',cliente:'Valentina M.',email:'vale@email.com',producto:'Sérum Vitamina C + Aloe Vera',total:133000,estado:'entregado',fecha:'16 Abr',canal:'Web',tel:'+573004567890'},
+  {id:'#2838',cliente:'Carolina P.',email:'caro@email.com',producto:'Kit Facial Natural (Bundle)',total:165000,estado:'pagado',fecha:'16 Abr',canal:'Web',tel:'+573007654321'},
+  {id:'#2837',cliente:'Andrea González',email:'andrea@email.com',producto:'Vitaminas C+Zinc+Omega',total:82000,estado:'pendiente',fecha:'15 Abr',canal:'WhatsApp',tel:'+573002345678'},
+  {id:'#2836',cliente:'Sofía Restrepo',email:'sofia@email.com',producto:'Guía Pre & Post Cirugía',total:35000,estado:'entregado',fecha:'14 Abr',canal:'Web',tel:'+573008765432'},
+];
+
+const alerts=[
+  {type:'warn',icon:'⚠️',title:'Stock crítico: Ampollas Homeopáticas',desc:'Quedan 5 unidades. Umbral mínimo: 10. Reponer antes del 22 Abr para no romper stock.',time:'Hace 2 horas'},
+  {type:'info',icon:'🔔',title:'Pedido #2837 pendiente de pago',desc:'Andrea González tiene un pedido de $82.000 pendiente de confirmación de pago por WhatsApp.',time:'Hace 4 horas'},
+  {type:'info',icon:'📦',title:'Stock bajo: Fragancia Botánica',desc:'Quedan 8 unidades. Considera reponer pronto para mantener disponibilidad.',time:'Hace 6 horas'},
+  {type:'ok',icon:'✅',title:'7 flujos de n8n activos',desc:'Todos los flujos de automatización están corriendo sin errores. Bot WA respondió 12 mensajes hoy.',time:'Actualizado ahora'},
+  {type:'ok',icon:'💰',title:'Meta mensual 61% alcanzada',desc:'$1.842.000 de $3.000.000 meta mensual. Ritmo: llegarías a $2.8M al final del mes.',time:'Ayer'},
+];
+
+function fmtCOP(n){return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0}).format(n)}
+
+function buildInventory(){
+  const g=document.getElementById('invGrid');
+  if(!g)return;
+  g.innerHTML='';
+  inventory.forEach(item=>{
+    const pct=item.stock===999?100:Math.round((item.stock/item.max)*100);
+    g.innerHTML+=`
+      <div class="inv-card">
+        <div class="inv-hdr"><div class="inv-name">${item.name}</div><div class="inv-emoji">${item.emoji}</div></div>
+        <div class="inv-bar"><div class="inv-fill ${item.status}" style="width:${pct}%"></div></div>
+        <div class="inv-meta">
+          <div class="inv-units">${item.stock===999?'∞ Digital':item.stock+' uds'}</div>
+          <span class="inv-status ${item.status}">${item.status==='ok'?'Óptimo':item.status==='mid'?'Revisar':'⚠ Reponer'}</span>
+        </div>
+        <div class="inv-alert ${item.status==='low'?'warn':'ok'}">
+          ${item.status==='low'?'Reponer urgente':item.status==='mid'?'Pedir pronto':'Stock saludable'}
+        </div>
+      </div>`;
+  });
+}
+
+function buildOrders(filter='all'){
+  const list=filter==='all'?orders:orders.filter(o=>o.estado===filter);
+  const tbl=document.getElementById('allOrdersTable');
+  if(!tbl)return;
+  tbl.innerHTML=`<thead><tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Total</th><th>Estado</th><th>Canal</th><th>Fecha</th><th>Acciones</th></tr></thead>
+  <tbody>${list.map(o=>`<tr>
+    <td><span class="oid">${o.id}</span></td>
+    <td>${o.cliente}</td>
+    <td style="max-width:220px;font-size:0.72rem">${o.producto}</td>
+    <td><span class="ototal">${fmtCOP(o.total)}</span></td>
+    <td><span class="ostatus ${o.estado}">${o.estado.charAt(0).toUpperCase()+o.estado.slice(1)}</span></td>
+    <td style="font-size:0.7rem">${o.canal}</td>
+    <td style="font-size:0.7rem">${o.fecha}</td>
+    <td style="display:flex;gap:0.4rem;flex-wrap:wrap">
+      <button class="abtn" onclick="window.open('https://wa.me/${o.tel.replace(/[^0-9]/g,'')}')">💬 WA</button>
+      <button class="abtn">Cambiar estado</button>
+    </td>
+  </tr>`).join('')}</tbody>`;
+}
+
+function filterOrders(filter,btn){
+  document.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  buildOrders(filter);
+}
+
+function buildAlerts(preview=false){
+  const list=preview?alerts.slice(0,3):alerts;
+  const id=preview?'alertsPreview':'allAlerts';
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=list.map(a=>`
+    <div class="alert-item ${a.type}">
+      <span class="alert-icon">${a.icon}</span>
+      <div class="alert-content">
+        <h4>${a.title}</h4>
+        <p>${a.desc}</p>
+        <div class="alert-time">${a.time}</div>
+      </div>
+    </div>`).join('');
+}
+
+function buildRecentOrders(){
+  const tbl=document.getElementById('recentOrders');
+  if(!tbl)return;
+  tbl.innerHTML=`<thead><tr><th>ID</th><th>Cliente</th><th>Producto</th><th>Total</th><th>Estado</th><th>Acción</th></tr></thead>
+  <tbody>${orders.slice(0,4).map(o=>`<tr>
+    <td><span class="oid">${o.id}</span></td>
+    <td>${o.cliente}</td>
+    <td style="font-size:0.72rem">${o.producto.substring(0,35)}...</td>
+    <td><span class="ototal">${fmtCOP(o.total)}</span></td>
+    <td><span class="ostatus ${o.estado}">${o.estado.charAt(0).toUpperCase()+o.estado.slice(1)}</span></td>
+    <td><button class="abtn" onclick="window.open('https://wa.me/${o.tel.replace(/[^0-9]/g,'')}')">💬</button></td>
+  </tr>`).join('')}</tbody>`;
+}
+
+function init(){
+  buildAlerts(true);
+  buildAlerts(false);
+  buildRecentOrders();
+  buildInventory();
+  buildOrders();
+  // Animate inv bars
+  setTimeout(()=>{
+    document.querySelectorAll('.inv-fill').forEach(bar=>{
+      const w=bar.style.width;bar.style.width='0';
+      setTimeout(()=>bar.style.width=w,200);
+    });
+    document.querySelectorAll('.rev').forEach(el=>el.classList.add('vis'));
+  },200);
+}
+
+// Login on Enter
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+</script>
+</body>
+</html>

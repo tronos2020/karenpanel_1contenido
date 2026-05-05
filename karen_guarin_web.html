@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Cosmetóloga & Cosmiatra | Recuperación Postquirúrgica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --warm-white: #FDFAF7;
+    --sage: #8A9E8C;
+    --sage-dark: #5C7A5E;
+    --sage-light: #C4D4C5;
+    --terra: #C4896A;
+    --terra-light: #E8C4AD;
+    --charcoal: #2C2C2C;
+    --charcoal-soft: #4A4A4A;
+    --gold: #B8963E;
+    --gold-light: #D4B483;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(247, 243, 238, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(138,158,140,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage-dark); font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--charcoal-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--sage-dark); }
+  .nav-cta {
+    background: var(--sage-dark);
+    color: white !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--charcoal) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 6rem;
+    position: relative;
+  }
+  .hero-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--sage);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 0.4rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+  .hero-title .terra { color: var(--terra); }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--charcoal-soft);
+    margin-bottom: 2.5rem;
+    max-width: 420px;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--sage-dark);
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--charcoal); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--charcoal);
+    color: var(--charcoal);
+    padding: 1rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+    background: transparent;
+  }
+  .btn-outline:hover { background: var(--charcoal); color: white; }
+
+  .hero-stats {
+    margin-top: 4rem;
+    display: flex;
+    gap: 3rem;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--terra);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal-soft);
+    margin-top: 0.3rem;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--sage-light) 0%, var(--terra-light) 60%, var(--cream) 100%);
+  }
+  .hero-right-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-circle {
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, rgba(255,255,255,0.6), rgba(196,137,106,0.3));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+  }
+  .hero-circle-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+  .hero-circle h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 0.8rem;
+  }
+  .hero-circle p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--charcoal-soft);
+    max-width: 260px;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    background: var(--charcoal);
+    color: white;
+    padding: 1rem 1.4rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .hero-badge strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--terra-light);
+  }
+
+  /* Floating organic shapes */
+  .hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: drift 8s ease-in-out infinite;
+  }
+  .shape-1 {
+    width: 180px; height: 180px;
+    background: var(--terra);
+    top: 10%; left: -5%;
+    animation-delay: 0s;
+  }
+  .shape-2 {
+    width: 100px; height: 100px;
+    background: var(--sage);
+    bottom: 20%; right: 10%;
+    animation-delay: -3s;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(12px, -18px) scale(1.05); }
+  }
+
+  /* ── SECTION GENERAL ── */
+  section { padding: 7rem 6rem; }
+  .section-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--sage); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--terra); }
+
+  /* ── FILOSOFIA ── */
+  .filosofia {
+    background: var(--charcoal);
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .filosofia .section-tag { color: var(--sage-light); }
+  .filosofia .section-tag::before { background: var(--sage-light); }
+  .filosofia .section-title { color: white; }
+  .filosofia-text {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.72);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .filosofia-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .pillar {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s;
+  }
+  .pillar:hover { border-color: var(--sage); }
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(138,158,140,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .pillar-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+  .pillar-content p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+
+  /* ── SERVICIOS ── */
+  .servicios { background: var(--warm-white); }
+  .servicios-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+  .servicios-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--charcoal-soft);
+    max-width: 480px;
+  }
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--sage-light);
+  }
+  .servicio-card {
+    background: var(--warm-white);
+    padding: 2.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .servicio-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--terra);
+    transition: width 0.4s;
+  }
+  .servicio-card:hover { background: var(--cream); }
+  .servicio-card:hover::after { width: 100%; }
+  .servicio-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--sage-light);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+  .servicio-card:hover .servicio-num { color: var(--terra-light); }
+  .servicio-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.8rem;
+  }
+  .servicio-desc {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--charcoal-soft);
+  }
+  .servicio-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    border-bottom: 1px solid var(--sage-light);
+    padding-bottom: 2px;
+  }
+
+  /* ── PRODUCTOS NATURALES ── */
+  .productos {
+    background: linear-gradient(160deg, var(--sage-light) 0%, var(--cream) 50%, var(--terra-light) 100%);
+  }
+  .productos-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+  .productos-header .section-title { margin-bottom: 1rem; }
+  .productos-header p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--charcoal-soft);
+  }
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .producto-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.35s;
+  }
+  .producto-card:hover {
+    background: white;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  }
+  .producto-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .producto-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.6rem;
+  }
+  .producto-desc {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--charcoal-soft);
+    margin-bottom: 1rem;
+  }
+  .producto-badge {
+    display: inline-block;
+    background: var(--sage-dark);
+    color: white;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ── PROCESO ── */
+  .proceso { background: var(--cream); }
+  .proceso-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .proceso-intro p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--charcoal-soft);
+    margin-bottom: 2rem;
+  }
+  .proceso-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(138,158,140,0.2);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--terra-light);
+    line-height: 1;
+  }
+  .step-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+  .step-content p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--charcoal-soft);
+  }
+
+  /* ── TESTIMONIOS ── */
+  .testimonios {
+    background: var(--warm-white);
+    text-align: center;
+  }
+  .testimonios .section-title { margin-bottom: 0.5rem; }
+  .testimonios-sub {
+    font-size: 0.9rem;
+    color: var(--charcoal-soft);
+    margin-bottom: 4rem;
+  }
+  .testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: left;
+  }
+  .testimonio-card {
+    background: var(--cream);
+    padding: 2.5rem;
+    border-left: 3px solid var(--sage-light);
+    transition: border-color 0.3s;
+  }
+  .testimonio-card:hover { border-left-color: var(--terra); }
+  .testimonio-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .testimonio-quote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--sage-light);
+    line-height: 0;
+    vertical-align: -0.6rem;
+    margin-right: 0.2rem;
+  }
+  .testimonio-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .author-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage-light), var(--terra-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+  }
+  .author-info h5 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .author-info span {
+    font-size: 0.72rem;
+    color: var(--charcoal-soft);
+    letter-spacing: 0.05em;
+  }
+  .testimonio-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; }
+
+  /* ── AGENDA / CTA ── */
+  .agenda {
+    background: var(--sage-dark);
+    color: white;
+    text-align: center;
+    padding: 7rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .agenda::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .agenda::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(196,137,106,0.15);
+  }
+  .agenda-content { position: relative; z-index: 2; }
+  .agenda .section-tag { color: var(--sage-light); justify-content: center; }
+  .agenda .section-tag::before { background: var(--sage-light); }
+  .agenda .section-title { color: white; text-align: center; }
+  .agenda-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.72);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    margin-bottom: 3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .agenda-options {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .agenda-option {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .agenda-option:hover, .agenda-option.featured {
+    background: var(--terra);
+    border-color: var(--terra);
+  }
+  .agenda-contact {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 3rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+  }
+  .agenda-contact a { color: rgba(255,255,255,0.8); text-decoration: none; }
+  .agenda-contact a:hover { color: white; }
+
+  /* ── BLOG / CONTENIDO ── */
+  .contenido { background: var(--cream); }
+  .contenido-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .post-card {
+    background: var(--warm-white);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .post-card:hover { transform: translateY(-4px); }
+  .post-img {
+    height: 200px;
+    background: linear-gradient(135deg, var(--sage-light), var(--terra-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .post-card:first-child .post-img { height: 280px; }
+  .post-body { padding: 1.8rem; }
+  .post-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    margin-bottom: 0.7rem;
+  }
+  .post-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+  .post-excerpt {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--charcoal-soft);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.65);
+    padding: 5rem 6rem 3rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  .footer-brand .nav-logo { color: white; display: block; margin-bottom: 1rem; font-size: 1.6rem; }
+  .footer-brand p {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    max-width: 260px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  .social-btn:hover {
+    border-color: var(--sage);
+    color: var(--sage-light);
+  }
+  .footer-col h5 {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.7rem; }
+  .footer-col ul a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--sage-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 58px;
+    height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: transform 0.3s;
+    animation: pulse-wa 2.5s ease-in-out infinite;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 6px 40px rgba(37,211,102,0.7); }
+  }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.5rem 2rem; }
+    .hero-right { height: 300px; }
+    .hero-circle { width: 260px; height: 260px; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    section { padding: 4rem 1.5rem; }
+    .filosofia { grid-template-columns: 1fr; gap: 3rem; }
+    .servicios-header { grid-template-columns: 1fr; gap: 2rem; }
+    .servicios-grid { grid-template-columns: 1fr; }
+    .productos-grid { grid-template-columns: repeat(2, 1fr); }
+    .proceso-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonios-grid { grid-template-columns: 1fr; }
+    .contenido-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Karen <span>Guarin</span></a>
+  <ul class="nav-links">
+    <li><a href="#filosofia">Filosofía</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#productos">Tienda Natural</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#agenda" class="nav-cta">Agendar Cita</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-shape shape-1"></div>
+  <div class="hero-left">
+    <div class="hero-tag reveal">Cosmetóloga & Cosmiatra Certificada</div>
+    <h1 class="hero-title reveal reveal-delay-1">
+      Tu piel,<br>
+      tu <em>historia</em><br>
+      <span class="terra">transformada.</span>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Especialista en recuperación postquirúrgica y salud integral de la piel. 
+      13 años devolviendo confianza, una sesión a la vez.
+    </p>
+    <div class="hero-actions reveal reveal-delay-3">
+      <a href="#agenda" class="btn-primary">Agendar Consulta</a>
+      <a href="#servicios" class="btn-outline">Ver Servicios</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat-item">
+        <div class="stat-num">13</div>
+        <div class="stat-label">Años de Experiencia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Pacientes Recuperados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Enfoque Natural</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-circle">
+        <svg class="hero-circle-icon" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="38" stroke="#8A9E8C" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <path d="M40 20 C30 20 22 28 22 38 C22 52 40 62 40 62 C40 62 58 52 58 38 C58 28 50 20 40 20Z" fill="#C4896A" opacity="0.5"/>
+          <circle cx="40" cy="36" r="8" fill="#8A9E8C" opacity="0.7"/>
+          <path d="M28 50 Q40 58 52 50" stroke="#5C7A5E" stroke-width="1.5" fill="none"/>
+        </svg>
+        <h3>Recuperación<br>con Propósito</h3>
+        <p>Drenaje linfático · Mesoterapia · Sueroterapia · Tratamientos Faciales</p>
+      </div>
+    </div>
+    <div class="hero-badge">
+      Disponible<br>
+      <strong>Online & Presencial</strong>
+    </div>
+    <div class="hero-shape shape-2"></div>
+  </div>
+</section>
+
+<!-- FILOSOFIA -->
+<section class="filosofia" id="filosofia">
+  <div>
+    <div class="section-tag reveal">Mi Filosofía</div>
+    <h2 class="section-title reveal">
+      La verdadera<br>
+      <em>recuperación</em><br>
+      va de adentro<br>
+      hacia afuera.
+    </h2>
+    <p class="filosofia-text reveal">
+      "Mi trabajo no solo transforma piel, sino también emociones, 
+      seguridad y calidad de vida. Cada paciente que llega a mis manos 
+      lleva consigo una historia, y entender esa historia es parte 
+      esencial de mi tratamiento."
+    </p>
+    <br>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);letter-spacing:0.06em;">— Karen Guarin, Cosmetóloga & Cosmiatra</p>
+  </div>
+
+  <div class="filosofia-pillars">
+    <div class="pillar reveal">
+      <div class="pillar-icon">🫀</div>
+      <div class="pillar-content">
+        <h4>Acompañamiento Físico</h4>
+        <p>Técnicas manuales especializadas, drenaje linfático y tratamientos clínicos para una recuperación progresiva y segura.</p>
+      </div>
+    </div>
+    <div class="pillar reveal reveal-delay-1">
+      <div class="pillar-icon">🧠</div>
+      <div class="pillar-content">
+        <h4>Acompañamiento Emocional</h4>
+        <p>Los primeros días post-cirugía son críticos. Escuchar, dar calma y seguridad hace parte del protocolo de recuperación.</p>
+      </div>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <div class="pillar-icon">🌿</div>
+      <div class="pillar-content">
+        <h4>Nutrición & Salud Natural</h4>
+        <p>Sueroterapia, suplementación consciente y eliminación de ultraprocesados como base de la recuperación real.</p>
+      </div>
+    </div>
+    <div class="pillar reveal reveal-delay-3">
+      <div class="pillar-icon">🚫</div>
+      <div class="pillar-content">
+        <h4>Sin Tóxicos · Sin Químicos</h4>
+        <p>Productos 100% naturales. Sin parabenos, sin aluminio, sin ingredientes nocivos en tu piel ni en tu hogar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="servicios-header">
+    <div>
+      <div class="section-tag reveal">Servicios Especializados</div>
+      <h2 class="section-title reveal">Lo que<br><em>transformamos</em><br>juntas.</h2>
+    </div>
+    <p class="servicios-intro reveal">
+      Cada servicio está diseñado desde el enfoque integral: técnica clínica, 
+      cuidado nutricional y acompañamiento humano. Presencial u online, 
+      el resultado es siempre la mejor versión de ti.
+    </p>
+  </div>
+
+  <div class="servicios-grid">
+    <div class="servicio-card reveal">
+      <div class="servicio-num">01</div>
+      <h3 class="servicio-name">Drenaje Linfático Manual</h3>
+      <p class="servicio-desc">Técnica especializada para reducir inflamación progresiva en pacientes postquirúrgicos. Desinflamación visible desde las primeras sesiones.</p>
+      <span class="servicio-tag">Postquirúrgico</span>
+    </div>
+    <div class="servicio-card reveal reveal-delay-1">
+      <div class="servicio-num">02</div>
+      <h3 class="servicio-name">Mesoterapia Homeopática</h3>
+      <p class="servicio-desc">Ampollas homeopáticas aplicadas en mesoterapia para la reparación profunda de tejidos y regeneración celular acelerada.</p>
+      <span class="servicio-tag">Facial & Corporal</span>
+    </div>
+    <div class="servicio-card reveal reveal-delay-2">
+      <div class="servicio-num">03</div>
+      <h3 class="servicio-name">Sueroterapia</h3>
+      <p class="servicio-desc">Nutrición intravenosa y suplementación personalizada para optimizar el proceso de cicatrización desde adentro.</p>
+      <span class="servicio-tag">Nutrición Clínica</span>
+    </div>
+    <div class="servicio-card reveal">
+      <div class="servicio-num">04</div>
+      <h3 class="servicio-name">Plasma Rico en Plaquetas</h3>
+      <p class="servicio-desc">Tratamiento regenerativo facial para acné, envejecimiento y manchas. Resultados naturales con el poder biológico del propio cuerpo.</p>
+      <span class="servicio-tag">Anti-edad</span>
+    </div>
+    <div class="servicio-card reveal reveal-delay-1">
+      <div class="servicio-num">05</div>
+      <h3 class="servicio-name">Limpieza Profunda Facial</h3>
+      <p class="servicio-desc">Protocolo completo de limpieza, hidratación y tratamiento especializado para piel con acné, puntos negros y poros dilatados.</p>
+      <span class="servicio-tag">Facial</span>
+    </div>
+    <div class="servicio-card reveal reveal-delay-2">
+      <div class="servicio-num">06</div>
+      <h3 class="servicio-name">Asesoría Corporal & Sobrepeso</h3>
+      <p class="servicio-desc">Acompañamiento integral para mejora física y autoestima. Tratamientos corporales combinados con nutrición funcional y seguimiento.</p>
+      <span class="servicio-tag">Bienestar Integral</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="#agenda" class="btn-primary reveal">Reservar Mi Sesión</a>
+  </div>
+</section>
+
+<!-- PRODUCTOS NATURALES -->
+<section class="productos" id="productos">
+  <div class="productos-header">
+    <div class="section-tag reveal" style="justify-content:center;">Tienda Natural</div>
+    <h2 class="section-title reveal">Tu piel merece<br><em>ingredientes limpios.</em></h2>
+    <p class="reveal">Productos sin tóxicos, sin aluminio, sin parabenos. Curated por Karen para complementar tus tratamientos y transformar tus hábitos desde casa.</p>
+  </div>
+
+  <div class="productos-grid">
+    <div class="producto-card reveal">
+      <span class="producto-emoji">🌿</span>
+      <h3 class="producto-name">Suplementos Naturales</h3>
+      <p class="producto-desc">Vitaminas, colágeno y antioxidantes seleccionados para potenciar la recuperación de tu piel desde adentro.</p>
+      <span class="producto-badge">Sin Aditivos</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-1">
+      <span class="producto-emoji">🚿</span>
+      <h3 class="producto-name">Desodorante Natural</h3>
+      <p class="producto-desc">Sin aluminio, sin alcohol. Protección efectiva sin comprometer tu salud hormonal ni tu piel delicada.</p>
+      <span class="producto-badge">Sin Aluminio</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-2">
+      <span class="producto-emoji">🌸</span>
+      <h3 class="producto-name">Fragancias Botánicas</h3>
+      <p class="producto-desc">Perfumes de base natural, sin ftalatos ni ingredientes sintéticos nocivos. Huele bien. Sin riesgos.</p>
+      <span class="producto-badge">Sin Ftalatos</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-3">
+      <span class="producto-emoji">💊</span>
+      <h3 class="producto-name">Kits de Recuperación</h3>
+      <p class="producto-desc">Todo lo que necesitas en casa post-cirugía: ampollas, suplementos y guía personalizada de Karen.</p>
+      <span class="producto-badge">Kit Completo</span>
+    </div>
+    <div class="producto-card reveal">
+      <span class="producto-emoji">🫙</span>
+      <h3 class="producto-name">Cuidado Facial Limpio</h3>
+      <p class="producto-desc">Sérums, hidratantes y tratamientos sin parabenos ni silicones. Para pieles sensibles y post-tratamiento.</p>
+      <span class="producto-badge">Dermatológico</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-1">
+      <span class="producto-emoji">🥑</span>
+      <h3 class="producto-name">Nutrición Funcional</h3>
+      <p class="producto-desc">Proteínas, adaptagénicos y superfoods para apoyar el metabolismo, la cicatrización y el bienestar general.</p>
+      <span class="producto-badge">Funcional</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-2">
+      <span class="producto-emoji">📖</span>
+      <h3 class="producto-name">Guías Digitales</h3>
+      <p class="producto-desc">Protocolos descargables: "Qué hacer antes de tu cirugía", "Tu piel tóxica-free", "Rutina de recuperación en casa".</p>
+      <span class="producto-badge">Digital</span>
+    </div>
+    <div class="producto-card reveal reveal-delay-3">
+      <span class="producto-emoji">💧</span>
+      <h3 class="producto-name">Ampollas Homeopáticas</h3>
+      <p class="producto-desc">Para uso personal en casa. Las mismas que Karen usa en consulta, disponibles para tu rutina diaria.</p>
+      <span class="producto-badge">Homeopático</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a href="#agenda" class="btn-primary reveal">Ver Tienda Completa</a>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="proceso-grid">
+    <div class="proceso-intro">
+      <div class="section-tag reveal">¿Cómo Trabajo?</div>
+      <h2 class="section-title reveal">Tu proceso,<br><em>paso a paso.</em></h2>
+      <p class="reveal">Cada etapa está diseñada para que tu recuperación sea segura, humana y efectiva. Sin presiones, sin protocolos genéricos.</p>
+      <a href="#agenda" class="btn-primary reveal" style="margin-top:1rem;">Comenzar Mi Proceso</a>
+    </div>
+
+    <div class="proceso-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Consulta Diagnóstica</h4>
+          <p>Evaluación completa de tu estado físico, emocional y nutricional. Entendemos tu cirugía, tu historial y tus metas.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Plan de Tratamiento Personalizado</h4>
+          <p>Diseñamos un protocolo único para ti: sesiones, productos complementarios y guía nutricional integrada.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Tratamientos & Seguimiento</h4>
+          <p>Sesiones presenciales u online. Cada sesión monitoreada, con ajustes según tu evolución real.</p>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Mantenimiento & Estilo de Vida</h4>
+          <p>Productos recomendados, hábitos saludables y plan de mantenimiento para que los resultados sean duraderos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+  <div class="section-tag reveal" style="justify-content:center;">Experiencias Reales</div>
+  <h2 class="section-title reveal">Lo que dicen<br>mis <em>pacientes.</em></h2>
+  <p class="testimonios-sub reveal">Historias de transformación real — física, emocional y de bienestar integral.</p>
+
+  <div class="testimonios-grid">
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-quote">Después de mi liposucción no sabía qué esperar. Karen no solo redujo mi inflamación en tiempo récord, sino que me acompañó en los momentos más difíciles con paciencia y mucha profesionalidad.</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">M</div>
+        <div class="author-info">
+          <h5>María Fernanda R.</h5>
+          <span>Paciente postquirúrgica · Bogotá</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonio-card reveal reveal-delay-1">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-quote">Llevaba años usando desodorantes con aluminio sin saber el daño que causaban. Gracias a los consejos y productos de Karen hice el cambio y mi piel nunca estuvo mejor.</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">L</div>
+        <div class="author-info">
+          <h5>Laura S.</h5>
+          <span>Cliente tienda natural · Online</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonio-card reveal reveal-delay-2">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-quote">El tratamiento de plasma rico en plaquetas cambió mi piel completamente. Las manchas del acné que tenía hace años prácticamente desaparecieron en 4 sesiones.</p>
+      <div class="testimonio-author">
+        <div class="author-avatar">V</div>
+        <div class="author-info">
+          <h5>Valentina M.</h5>
+          <span>Tratamiento facial · Medellín</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / CONTENIDO -->
+<section class="contenido" id="blog">
+  <div class="section-tag reveal">Educación & Consciencia</div>
+  <h2 class="section-title reveal">Lo que tu piel<br><em>necesita saber.</em></h2>
+
+  <div class="contenido-grid">
+    <div class="post-card reveal">
+      <div class="post-img">🧴</div>
+      <div class="post-body">
+        <div class="post-category">Tóxicos & Piel</div>
+        <h3 class="post-title">Los 7 ingredientes que debes eliminar de tu rutina de cuidado hoy mismo</h3>
+        <p class="post-excerpt">Parabenos, aluminio, ftalatos, silicones... están en productos que usas cada día. Aquí te explico cuáles son, qué hacen y cómo reemplazarlos sin gastar más.</p>
+      </div>
+    </div>
+    <div class="post-card reveal reveal-delay-1">
+      <div class="post-img">💉</div>
+      <div class="post-body">
+        <div class="post-category">Postquirúrgico</div>
+        <h3 class="post-title">¿Qué hacer las primeras 72 horas después de tu cirugía?</h3>
+        <p class="post-excerpt">Guía práctica con los pasos que marca la diferencia en tu recuperación.</p>
+      </div>
+    </div>
+    <div class="post-card reveal reveal-delay-2">
+      <div class="post-img">🥗</div>
+      <div class="post-body">
+        <div class="post-category">Nutrición & Piel</div>
+        <h3 class="post-title">Qué comer (y qué evitar) para que tu piel se cure más rápido</h3>
+        <p class="post-excerpt">La nutrición que acelera la cicatrización desde adentro hacia afuera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA / CTA FINAL -->
+<section class="agenda" id="agenda">
+  <div class="agenda-content">
+    <div class="section-tag">Comienza Hoy</div>
+    <h2 class="section-title">Agenda tu<br><em>primera consulta.</em></h2>
+    <p class="agenda-sub">Presencial o en línea. Sin lista de espera larga. Con Karen directamente.</p>
+
+    <div class="agenda-options">
+      <a href="https://wa.me/57XXXXXXXXXX?text=Hola%20Karen,%20quiero%20agendar%20una%20cita" class="agenda-option featured" target="_blank">
+        📱 WhatsApp Directo
+      </a>
+      <a href="#" class="agenda-option">
+        📅 Agendar Online
+      </a>
+      <a href="#" class="agenda-option">
+        🎥 Consulta Virtual
+      </a>
+    </div>
+
+    <div class="agenda-contact">
+      <span>📧 <a href="mailto:karen@karenguarin.com">karen@karenguarin.com</a></span>
+      <span>📍 Disponible Presencial & Online</span>
+      <span>⏰ Lun–Sáb 8am–6pm</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Karen <span>Guarin</span></a>
+      <p>Cosmetóloga & Cosmiatra especialista en recuperación postquirúrgica y salud integral de la piel. 13 años transformando vidas con ciencia, naturaleza y vocación.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="Instagram">IG</a>
+        <a href="#" class="social-btn" title="TikTok">TK</a>
+        <a href="#" class="social-btn" title="Facebook">FB</a>
+        <a href="#" class="social-btn" title="WhatsApp">WA</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Servicios</h5>
+      <ul>
+        <li><a href="#">Drenaje Linfático</a></li>
+        <li><a href="#">Mesoterapia</a></li>
+        <li><a href="#">Sueroterapia</a></li>
+        <li><a href="#">Plasma PRP</a></li>
+        <li><a href="#">Limpieza Facial</a></li>
+        <li><a href="#">Asesoría Corporal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Tienda Natural</h5>
+      <ul>
+        <li><a href="#">Suplementos</a></li>
+        <li><a href="#">Desodorante Natural</a></li>
+        <li><a href="#">Fragancias Limpias</a></li>
+        <li><a href="#">Kits Postquirúrgicos</a></li>
+        <li><a href="#">Guías Digitales</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Información</h5>
+      <ul>
+        <li><a href="#">Sobre Karen</a></li>
+        <li><a href="#">Blog & Educación</a></li>
+        <li><a href="#">Testimonios</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#agenda">Agendar Cita</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Karen Guarin · Todos los derechos reservados</span>
+    <span style="color:rgba(255,255,255,0.3);">Hecho con ❤️ y sin tóxicos</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/57XXXXXXXXXX?text=Hola%20Karen,%20quiero%20información" target="_blank" title="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
