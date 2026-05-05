@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Ecosistema de Automatización | Fase 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0E0F0E;
+  --surface: #161917;
+  --surface2: #1E211E;
+  --surface3: #252925;
+  --border: rgba(138,174,140,0.12);
+  --border-bright: rgba(138,174,140,0.3);
+  --sage: #8AAE8C;
+  --sage-bright: #A8CCA9;
+  --sage-dim: #4A6B4C;
+  --terra: #C4896A;
+  --terra-light: #E8B49A;
+  --gold: #C9A84C;
+  --white: #F0F4F0;
+  --white-dim: rgba(240,244,240,0.55);
+  --white-faint: rgba(240,244,240,0.2);
+  --green-glow: rgba(138,174,140,0.08);
+  --red: #E05C5C;
+  --blue: #6A9EC4;
+  --purple: #9A7EC4;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 1.8rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--white);
+}
+.sidebar-logo h2 em { color: var(--sage); font-style: italic; }
+.sidebar-logo p {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-top: 0.3rem;
+}
+
+.sidebar-section {
+  padding: 1.2rem 1rem 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage-dim);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+  color: var(--white-dim);
+  font-size: 0.82rem;
+}
+.nav-item:hover { background: var(--green-glow); color: var(--sage-bright); }
+.nav-item.active {
+  background: var(--green-glow);
+  border-left-color: var(--sage);
+  color: var(--sage-bright);
+}
+.nav-item .icon { font-size: 1rem; width: 20px; text-align: center; }
+.nav-badge {
+  margin-left: auto;
+  background: var(--sage-dim);
+  color: var(--bg);
+  font-size: 0.58rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.sidebar-status {
+  margin-top: auto;
+  padding: 1.2rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.status-dot {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--white-dim);
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--sage);
+  box-shadow: 0 0 8px var(--sage);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.3; }
+}
+
+/* ── MAIN ── */
+.main {
+  margin-left: 260px;
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
+.topbar-title span { color: var(--sage-bright); }
+.topbar-actions { display: flex; gap: 0.75rem; align-items: center; }
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.7rem;
+  color: var(--white-dim);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chip:hover { border-color: var(--sage); color: var(--sage-bright); }
+.chip.active { background: var(--sage-dim); border-color: var(--sage); color: white; }
+
+/* ── CONTENT AREA ── */
+.content { padding: 2.5rem; }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.3rem 1.5rem;
+  transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: var(--border-bright); }
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 0.6rem;
+}
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-value.green { color: var(--sage-bright); }
+.stat-value.terra { color: var(--terra-light); }
+.stat-sub {
+  font-size: 0.65rem;
+  color: var(--white-faint);
+  margin-top: 0.4rem;
+}
+.stat-trend {
+  font-size: 0.65rem;
+  color: var(--sage);
+  margin-top: 0.3rem;
+}
+
+/* ── SECTION HEADER ── */
+.section-hdr {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.section-hdr h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--white);
+}
+.section-hdr h2 em { font-style: italic; color: var(--sage); }
+.section-hdr p { font-size: 0.78rem; color: var(--white-dim); }
+
+/* ── FLOWS GRID ── */
+.flows-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.flow-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.flow-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+
+.flow-header {
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.flow-title-group { }
+.flow-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage-dim);
+  margin-bottom: 0.3rem;
+}
+.flow-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--white);
+}
+.flow-status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.flow-status.active { color: var(--sage); }
+.flow-status.pending { color: var(--gold); }
+.flow-status.inactive { color: var(--white-dim); }
+.flow-status .sdot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.flow-status.active .sdot { box-shadow: 0 0 6px currentColor; animation: blink 2s infinite; }
+
+.flow-body { padding: 1.4rem 1.5rem; }
+.flow-desc {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--white-dim);
+  margin-bottom: 1.2rem;
+}
+
+/* Flow diagram */
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 70px;
+}
+.node-icon {
+  width: 38px; height: 38px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  flex-shrink: 0;
+}
+.node-icon.trigger { border-color: var(--terra); background: rgba(196,137,106,0.1); }
+.node-icon.process { border-color: var(--sage); background: rgba(138,174,140,0.1); }
+.node-icon.output { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+.node-icon.decision { border-color: var(--purple); background: rgba(154,126,196,0.1); }
+.node-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: var(--white-dim);
+  text-align: center;
+  max-width: 70px;
+  line-height: 1.3;
+}
+.flow-arrow {
+  color: var(--border-bright);
+  font-size: 0.8rem;
+  margin: 0 2px;
+  padding-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.flow-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.meta-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-dim);
+  border: 1px solid var(--sage-dim);
+  padding: 0.2rem 0.6rem;
+}
+
+/* ── SCRIPTS PANEL (full width) ── */
+.scripts-panel {
+  margin-bottom: 2.5rem;
+}
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  overflow-x: auto;
+}
+.tab {
+  padding: 0.8rem 1.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab:hover { color: var(--sage-bright); }
+.tab.active {
+  color: var(--sage-bright);
+  border-bottom-color: var(--sage);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.script-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+}
+.script-block-header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.script-block-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--white);
+}
+.copy-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--white-dim);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.copy-btn:hover { border-color: var(--sage); color: var(--sage-bright); }
+
+.script-body { padding: 1.5rem; }
+.msg-sequence { display: flex; flex-direction: column; gap: 1rem; }
+
+.msg-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.msg-step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--sage);
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+}
+.msg-content { }
+.msg-trigger {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra-light);
+  margin-bottom: 0.4rem;
+}
+.msg-timing {
+  font-size: 0.62rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.msg-text {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--white);
+  white-space: pre-line;
+  font-family: 'DM Sans', sans-serif;
+  border-left: 3px solid var(--sage-dim);
+}
+.msg-text strong { color: var(--sage-bright); }
+.msg-note {
+  font-size: 0.68rem;
+  color: var(--white-faint);
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* ── N8N FLOW CODE ── */
+.code-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 1.2rem 1.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--sage-bright);
+  overflow-x: auto;
+  white-space: pre;
+}
+.code-comment { color: var(--white-faint); }
+.code-key { color: var(--terra-light); }
+.code-val { color: var(--gold); }
+.code-str { color: var(--sage-bright); }
+
+/* ── TOOLS GRID ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.tool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.3rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+.tool-card:hover { border-color: var(--border-bright); }
+.tool-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+.tool-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+.tool-role {
+  font-size: 0.65rem;
+  color: var(--white-dim);
+  line-height: 1.5;
+  margin-bottom: 0.7rem;
+}
+.tool-link {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sage-dim);
+  transition: color 0.2s;
+}
+.tool-link:hover { color: var(--sage-bright); }
+
+/* ── CROSS-SELL MATRIX ── */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin-bottom: 2.5rem;
+}
+.matrix-table th {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 0.8rem 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage-bright);
+  font-weight: 500;
+  text-align: left;
+}
+.matrix-table td {
+  border: 1px solid var(--border);
+  padding: 0.8rem 1rem;
+  color: var(--white-dim);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.matrix-table tr:hover td { background: var(--green-glow); }
+.matrix-table td:first-child { color: var(--white); font-weight: 500; }
+.pill {
+  display: inline-block;
+  font-size: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  margin: 0.1rem;
+  background: rgba(138,174,140,0.12);
+  border: 1px solid var(--sage-dim);
+  color: var(--sage-bright);
+}
+.pill.terra { background: rgba(196,137,106,0.12); border-color: var(--terra); color: var(--terra-light); }
+.pill.gold { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold); }
+
+/* ── CALENDAR SYSTEM ── */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.cal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+.cal-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-time {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--sage);
+  min-width: 55px;
+  padding-top: 0.1rem;
+}
+.tl-body { }
+.tl-title {
+  font-size: 0.8rem;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+.tl-sub {
+  font-size: 0.68rem;
+  color: var(--white-dim);
+}
+.tl-auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.58rem;
+  color: var(--sage-dim);
+  background: rgba(138,174,140,0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  margin-top: 0.3rem;
+}
+
+/* ── CHATBOT PREVIEW ── */
+.chat-preview {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+.chat-header {
+  background: var(--surface2);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.chat-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sage-dim), var(--terra));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+.chat-info h4 { font-size: 0.85rem; color: var(--white); }
+.chat-info span { font-size: 0.65rem; color: var(--sage); }
+.chat-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.chat-msg {
+  max-width: 75%;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  border-radius: 2px;
+}
+.chat-msg.bot {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  border-left: 3px solid var(--sage);
+  color: var(--white);
+}
+.chat-msg.user {
+  background: rgba(196,137,106,0.12);
+  border: 1px solid rgba(196,137,106,0.2);
+  align-self: flex-end;
+  color: var(--white-dim);
+}
+.chat-msg .bot-name {
+  font-size: 0.6rem;
+  color: var(--sage-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.chat-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  max-width: 85%;
+}
+.chat-opt {
+  background: var(--surface3);
+  border: 1px solid var(--sage-dim);
+  color: var(--sage-bright);
+  font-size: 0.72rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 20px;
+}
+.chat-opt:hover { background: var(--sage-dim); color: white; }
+
+/* ── KPI DASHBOARD ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.3rem 1.5rem;
+}
+.kpi-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 0.5rem;
+}
+.kpi-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.kpi-bar {
+  height: 3px;
+  background: var(--surface3);
+  margin: 0.8rem 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.kpi-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sage-dim), var(--sage-bright));
+  transition: width 1.5s ease;
+}
+.kpi-sub { font-size: 0.65rem; color: var(--white-faint); }
+.kpi-alert {
+  font-size: 0.65rem;
+  color: var(--gold);
+  margin-top: 0.3rem;
+}
+
+/* ── IMPLEMENTATION ROADMAP ── */
+.roadmap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.roadmap h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+.roadmap-phases {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.phase {
+  border: 1px solid var(--border);
+  padding: 1.2rem;
+  position: relative;
+}
+.phase.done { border-color: var(--sage-dim); }
+.phase.active { border-color: var(--sage); background: var(--green-glow); }
+.phase.next { border-color: var(--gold); }
+.phase-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.phase.done .phase-label { color: var(--sage-dim); }
+.phase.active .phase-label { color: var(--sage-bright); }
+.phase.next .phase-label { color: var(--gold); }
+.phase-name {
+  font-size: 0.85rem;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.phase-items { }
+.phase-item {
+  font-size: 0.7rem;
+  color: var(--white-dim);
+  padding: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.phase-item::before {
+  content: '·';
+  color: var(--sage-dim);
+}
+.phase.done .phase-item { text-decoration: line-through; opacity: 0.5; }
+.phase-week {
+  font-size: 0.6rem;
+  color: var(--white-faint);
+  margin-top: 0.7rem;
+}
+
+/* scroll-reveal */
+.fade-in { opacity: 0; transform: translateY(16px); transition: all 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* responsive */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .flows-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+  .calendar-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .roadmap-phases { grid-template-columns: repeat(2, 1fr); }
+  .content { padding: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h2>Karen <em>Guarin</em></h2>
+    <p>Panel de Automatización</p>
+  </div>
+
+  <div class="sidebar-section">Flujos</div>
+  <a class="nav-item active" href="#flujos"><span class="icon">⚡</span>Flujos n8n <span class="nav-badge">7</span></a>
+  <a class="nav-item" href="#scripts"><span class="icon">💬</span>Scripts WhatsApp</a>
+  <a class="nav-item" href="#calendario"><span class="icon">📅</span>Calendario Auto</a>
+  <a class="nav-item" href="#chatbot"><span class="icon">🤖</span>Chatbot IA</a>
+
+  <div class="sidebar-section">Estrategia</div>
+  <a class="nav-item" href="#crossell"><span class="icon">🔀</span>Venta Cruzada</a>
+  <a class="nav-item" href="#herramientas"><span class="icon">🛠️</span>Herramientas</a>
+  <a class="nav-item" href="#kpis"><span class="icon">📊</span>KPIs & Alertas</a>
+  <a class="nav-item" href="#roadmap"><span class="icon">🗺️</span>Hoja de Ruta</a>
+
+  <div class="sidebar-status">
+    <div class="status-dot">
+      <div class="dot"></div>
+      Sistema configurado · Listo para activar
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-title">
+      Ecosistema / <span>Fase 2 — Automatizaciones</span>
+    </div>
+    <div class="topbar-actions">
+      <div class="chip active">⚡ 7 Flujos Listos</div>
+      <div class="chip">📱 WhatsApp Scripts</div>
+      <div class="chip">🤖 Bot IA Incluido</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- STATS -->
+    <div class="stats-row fade-in">
+      <div class="stat-card">
+        <div class="stat-label">Flujos Totales</div>
+        <div class="stat-value green">7</div>
+        <div class="stat-sub">100% automatizados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Mensajes/Secuencia</div>
+        <div class="stat-value">42</div>
+        <div class="stat-sub">Scripts listos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Horas Ahorradas</div>
+        <div class="stat-value terra">30+</div>
+        <div class="stat-sub">Por semana estimado</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tasa Conversión</div>
+        <div class="stat-value green">68%</div>
+        <div class="stat-sub">Meta sistema embudo</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Herramientas Stack</div>
+        <div class="stat-value">8</div>
+        <div class="stat-sub">Integradas entre sí</div>
+      </div>
+    </div>
+
+    <!-- FLOWS -->
+    <div id="flujos" class="section-hdr fade-in">
+      <div>
+        <h2>Flujos de <em>Automatización</em></h2>
+        <p>Arquitectura n8n completa — cada flujo opera sin intervención humana</p>
+      </div>
+    </div>
+
+    <div class="flows-grid">
+
+      <!-- FLUJO 1 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 01</div>
+            <div class="flow-name">Captación Lead → CRM → Bienvenida</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">Cuando alguien llena el formulario web o envía un DM en Instagram, el sistema captura el lead, lo clasifica por tipo (postquirúrgico / facial / producto natural), lo agrega al CRM y dispara una secuencia de bienvenida personalizada por WhatsApp en menos de 60 segundos.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">📋</div>
+              <div class="node-label">Formulario Web</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">🧠</div>
+              <div class="node-label">Clasificar Nicho</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">📊</div>
+              <div class="node-label">Agregar CRM</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">💬</div>
+              <div class="node-label">WA Bienvenida</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">📧</div>
+              <div class="node-label">Email Seguimiento</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">n8n + Typeform</span>
+            <span class="meta-tag">Notion CRM</span>
+            <span class="meta-tag">WhatsApp API</span>
+            <span class="meta-tag">Gmail</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 2 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 02</div>
+            <div class="flow-name">Agendamiento Automático Completo</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">El cliente elige su cita en Cal.com. El sistema confirma, agenda en Google Calendar, envía confirmación por WhatsApp y email, y programa recordatorios automáticos a 48h, 24h y 2h antes de la cita. Post-cita: encuesta automática.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">📅</div>
+              <div class="node-label">Cal.com Booking</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">✅</div>
+              <div class="node-label">Confirmar Cita</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">💬</div>
+              <div class="node-label">WA + Email</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon decision">⏰</div>
+              <div class="node-label">48h / 24h / 2h</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">⭐</div>
+              <div class="node-label">Post-cita Survey</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">Cal.com</span>
+            <span class="meta-tag">Google Calendar</span>
+            <span class="meta-tag">n8n Scheduler</span>
+            <span class="meta-tag">Typeform</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 3 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 03</div>
+            <div class="flow-name">Venta Cruzada Post-Servicio</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">24 horas después de cada sesión, el sistema identifica el servicio tomado y envía automáticamente recomendaciones de productos complementarios por WhatsApp. Personalizado según el tipo de tratamiento recibido.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">🏁</div>
+              <div class="node-label">Cita Completada</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">🔍</div>
+              <div class="node-label">Leer Servicio</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon decision">🔀</div>
+              <div class="node-label">Seleccionar Prod.</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">💬</div>
+              <div class="node-label">WA + Link Tienda</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">n8n + Notion</span>
+            <span class="meta-tag">WhatsApp API</span>
+            <span class="meta-tag">Tienda Web</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 4 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 04</div>
+            <div class="flow-name">Recuperación Clientes Inactivos</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">Si un cliente no ha agendado en 30 días, el sistema lo detecta, lo marca como "inactivo" y dispara una secuencia de reactivación con oferta especial, contenido de valor y llamado a la acción personalizado.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">📆</div>
+              <div class="node-label">+30 días sin cita</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">🏷️</div>
+              <div class="node-label">Tag: Inactivo</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">💌</div>
+              <div class="node-label">Secuencia 3 msgs</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon decision">🎁</div>
+              <div class="node-label">Oferta Especial</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">n8n Cron</span>
+            <span class="meta-tag">Notion CRM</span>
+            <span class="meta-tag">WhatsApp API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 5 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 05</div>
+            <div class="flow-name">Testimonios Automáticos</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">48 horas post-sesión, el cliente recibe un mensaje pidiendo su opinión. Si la calificación es 4-5 estrellas, el sistema solicita testimonio público y lo redirige a Google Reviews o Instagram. Si es 1-3, alerta a Karen para atención directa.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">⏱️</div>
+              <div class="node-label">48h Post-Sesión</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">📝</div>
+              <div class="node-label">Encuesta 1-5</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon decision">🔀</div>
+              <div class="node-label">≥4 / ≤3</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">⭐</div>
+              <div class="node-label">Google Review / Alerta</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">Typeform</span>
+            <span class="meta-tag">Google Reviews</span>
+            <span class="meta-tag">n8n Condicional</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 6 -->
+      <div class="flow-card fade-in">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 06</div>
+            <div class="flow-name">Nutrición de Leads Fríos</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>Activo</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">Los leads que no agendan reciben una secuencia de 5 contenidos educativos (uno cada 3 días) sobre tóxicos en cosméticos, recuperación postquirúrgica y salud natural. Al final: oferta con descuento por primera sesión.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">❄️</div>
+              <div class="node-label">Lead sin agendar</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">📚</div>
+              <div class="node-label">Contenido D+3</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">📚</div>
+              <div class="node-label">D+6 D+9 D+12</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">🎁</div>
+              <div class="node-label">Oferta D+15</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">n8n + Gmail</span>
+            <span class="meta-tag">WhatsApp API</span>
+            <span class="meta-tag">Notion CRM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLUJO 7 -->
+      <div class="flow-card fade-in" style="grid-column: span 2;">
+        <div class="flow-header">
+          <div class="flow-title-group">
+            <div class="flow-num">Flujo 07 — FLAGSHIP</div>
+            <div class="flow-name">Bot WhatsApp con IA — Atención 24/7</div>
+          </div>
+          <div class="flow-status active"><div class="sdot"></div>IA Activa</div>
+        </div>
+        <div class="flow-body">
+          <p class="flow-desc">Bot inteligente en WhatsApp Business que atiende consultas, califica el tipo de cliente, muestra servicios y precios, agenda citas directamente en Cal.com, recomienda productos y escala a Karen solo cuando es necesario. Operando 24/7 sin intervención humana.</p>
+          <div class="flow-diagram">
+            <div class="flow-node">
+              <div class="node-icon trigger">📱</div>
+              <div class="node-label">Mensaje WA</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon process">🧠</div>
+              <div class="node-label">IA Clasifica intención</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon decision">🔀</div>
+              <div class="node-label">Info / Agenda / Producto / Humano</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">📅</div>
+              <div class="node-label">Agendar directo</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">🛒</div>
+              <div class="node-label">Recomendar producto</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">
+              <div class="node-icon output">👩‍⚕️</div>
+              <div class="node-label">Escalar a Karen</div>
+            </div>
+          </div>
+          <div class="flow-meta">
+            <span class="meta-tag">WhatsApp Business API</span>
+            <span class="meta-tag">OpenAI GPT-4</span>
+            <span class="meta-tag">n8n Webhook</span>
+            <span class="meta-tag">Cal.com API</span>
+            <span class="meta-tag">Notion CRM</span>
+            <span class="meta-tag">ManyChat (backup)</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /flows-grid -->
+
+    <!-- SCRIPTS WHATSAPP -->
+    <div id="scripts" class="section-hdr fade-in" style="margin-top:1rem;">
+      <div>
+        <h2>Scripts de <em>WhatsApp</em></h2>
+        <p>Mensajes listos para usar — personalizados, cálidos y convertidores</p>
+      </div>
+    </div>
+
+    <div class="scripts-panel fade-in">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('bienvenida', this)">Bienvenida</div>
+        <div class="tab" onclick="showTab('confirmacion', this)">Confirmación Cita</div>
+        <div class="tab" onclick="showTab('recordatorio', this)">Recordatorios</div>
+        <div class="tab" onclick="showTab('postcita', this)">Post-Cita</div>
+        <div class="tab" onclick="showTab('crossell', this)">Venta Cruzada</div>
+        <div class="tab" onclick="showTab('reactivacion', this)">Reactivación</div>
+        <div class="tab" onclick="showTab('nutricion', this)">Nutrición Leads</div>
+      </div>
+
+      <!-- BIENVENIDA -->
+      <div id="tab-bienvenida" class="tab-content active">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Secuencia de Bienvenida — 3 mensajes</h3>
+            <button class="copy-btn" onclick="copySection('bienvenida-content')">Copiar Todo</button>
+          </div>
+          <div class="script-body" id="bienvenida-content">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">01</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Formulario enviado / DM recibido</div>
+                  <div class="msg-timing">⏰ Inmediato — máx 60 segundos</div>
+                  <div class="msg-text">¡Hola {{nombre}}! 🌿
+
+Soy Karen Guarin, cosmetóloga y cosmiatra especialista en recuperación postquirúrgica y salud integral de la piel.
+
+Recibí tu mensaje y me alegra mucho que hayas dado este paso. Cuéntame, ¿en qué puedo ayudarte?
+
+🔹 Recuperación post-cirugía
+🔹 Tratamiento facial (acné, manchas, antiedad)
+🔹 Asesoría corporal
+🔹 Productos naturales sin tóxicos
+
+Responde con el número que más te interese ✨</div>
+                  <div class="msg-note">→ Clasificación automática según respuesta. Actualiza etiqueta en CRM.</div>
+                </div>
+              </div>
+
+              <div class="msg-item">
+                <div class="msg-step-num">02</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Si no responde en 4 horas</div>
+                  <div class="msg-timing">⏰ +4 horas del primer mensaje</div>
+                  <div class="msg-text">{{nombre}}, quería asegurarme de que recibiste mi mensaje 💚
+
+Entiendo que estás en un momento importante, ya sea recuperándote de una cirugía o buscando transformar tu piel de forma natural.
+
+Tengo disponibilidad esta semana tanto <strong>presencial como virtual</strong>. ¿Te gustaría ver los horarios disponibles?
+
+👉 Puedes agendar aquí directamente: [LINK CAL.COM]</div>
+                  <div class="msg-note">→ Si hace clic → Flujo 2 (Agendamiento). Si no → Continúa nutrición.</div>
+                </div>
+              </div>
+
+              <div class="msg-item">
+                <div class="msg-step-num">03</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Si no agenda en 24 horas</div>
+                  <div class="msg-timing">⏰ +24 horas del primer contacto</div>
+                  <div class="msg-text">{{nombre}}, te comparto algo que quizás no sabías 👇
+
+El 70% de mis pacientes postquirúrgicos llegan con inflamación que pudo haberse reducido mucho antes con el protocolo correcto.
+
+La diferencia entre una recuperación de 3 semanas y una de 6 semanas muchas veces está en las primeras sesiones de drenaje linfático manual.
+
+Si tienes dudas de si lo que hago es para ti, te ofrezco una <strong>consulta diagnóstica gratuita de 15 minutos</strong> por videollamada.
+
+¿La tomamos? 🌿</div>
+                  <div class="msg-note">→ Si acepta → Agendar videollamada. Si no → Entra a Flujo 6 (Nutrición).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIRMACIÓN -->
+      <div id="tab-confirmacion" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Confirmación de Cita — Automática</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">01</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Cita agendada en Cal.com</div>
+                  <div class="msg-timing">⏰ Inmediato al agendar</div>
+                  <div class="msg-text">✅ ¡Tu cita está confirmada, {{nombre}}!
+
+📅 <strong>Fecha:</strong> {{fecha}}
+⏰ <strong>Hora:</strong> {{hora}}
+📍 <strong>Modalidad:</strong> {{presencial/virtual}}
+💆 <strong>Servicio:</strong> {{servicio}}
+
+Recibirás un recordatorio 24h y 2h antes.
+
+📋 <strong>Antes de tu cita:</strong>
+• Ven con ropa cómoda y holgada
+• Evita cremas o maquillaje en la zona a tratar
+• Si es post-cirugía, trae tu historia clínica
+
+¿Tienes alguna pregunta? Responde aquí mismo 💚</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECORDATORIOS -->
+      <div id="tab-recordatorio" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Recordatorios Automáticos — 48h / 24h / 2h</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">48h</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ 48 horas antes de la cita</div>
+                  <div class="msg-text">{{nombre}}, en 2 días nos vemos 🌿
+
+Solo quería recordarte tu cita:
+📅 {{fecha}} a las {{hora}}
+
+Tip de Karen: <strong>Hidratarte bien los días previos</strong> hace una diferencia significativa en cómo responde tu piel al tratamiento.
+
+¿Necesitas cambiar algo? Escríbeme aquí o usa: [LINK REAGENDAR]</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">24h</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ 24 horas antes de la cita</div>
+                  <div class="msg-text">¡Mañana es tu día, {{nombre}}! ✨
+
+Tu cita es a las <strong>{{hora}}</strong>.
+
+Recuerda:
+✅ Ropa cómoda
+✅ Sin cremas ni maquillaje en zona a tratar  
+✅ Trae agua para hidratarte después
+
+¡Nos vemos mañana! 💚 Karen</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">2h</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ 2 horas antes de la cita</div>
+                  <div class="msg-text">{{nombre}}, ¡en 2 horas nos vemos! 🕐
+
+📍 {{dirección o link videollamada}}
+
+Si necesitas algo de último momento, escríbeme aquí mismo. ¡Te espero! 🌿</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POST-CITA -->
+      <div id="tab-postcita" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Secuencia Post-Cita — Satisfacción & Upsell</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">2h</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ 2 horas después de la sesión</div>
+                  <div class="msg-text">{{nombre}}, ¿cómo te sientes después de tu sesión? 💚
+
+Espero que notes la diferencia desde ya. Tu cuerpo va a seguir trabajando las próximas horas.
+
+Recuerda:
+💧 Toma mínimo 2L de agua hoy
+🚿 No te duches con agua muy caliente hoy
+😴 Descansa bien esta noche
+
+Cualquier duda que tengas, aquí estoy ✨</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">48h</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ 48 horas post-sesión</div>
+                  <div class="msg-text">{{nombre}}, han pasado 48 horas 🌿
+
+¿Cómo está tu piel / tu zona tratada?
+
+Me gustaría saber cómo fue tu experiencia. ¿Podrías calificar tu sesión?
+⭐⭐⭐⭐⭐ → [LINK ENCUESTA]
+
+Solo toma 1 minuto y me ayuda muchísimo 🙏
+
+Pd: También puedes compartir tu experiencia en Google si quieres ayudar a otras personas a encontrarme → [LINK GOOGLE]</div>
+                  <div class="msg-note">→ Si califica ≥4 → Solicitar Google Review. Si ≤3 → Alerta urgente a Karen.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CROSS-SELL SCRIPTS -->
+      <div id="tab-crossell" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Venta Cruzada — Por Tipo de Servicio</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">DL</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Servicio = Drenaje Linfático</div>
+                  <div class="msg-timing">⏰ +24h post-sesión de drenaje</div>
+                  <div class="msg-text">{{nombre}}, para potenciar los resultados de tu drenaje linfático quiero recomendarte algo especial 🌿
+
+Muchos de mis pacientes no saben que el <strong>drenaje funciona hasta un 40% mejor</strong> cuando se complementa con:
+
+🫁 <strong>Ampollas homeopáticas para casa</strong> — Las mismas que uso en sesión. Ayudan a continuar la desinflamación entre citas.
+💊 <strong>Vitamina C + Zinc</strong> — Aceleran la regeneración del tejido conectivo post-cirugía.
+
+¿Te cuento cómo usarlas y los precios? 👆</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">FC</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Servicio = Facial / PRP</div>
+                  <div class="msg-timing">⏰ +24h post-sesión facial</div>
+                  <div class="msg-text">{{nombre}}, tu piel quedó increíble hoy 💚
+
+Para mantener y potenciar los resultados en casa, quiero recomendarte solo productos que <strong>yo misma uso y confío</strong> — sin parabenos, sin ingredientes tóxicos:
+
+🧴 <strong>Sérum de vitamina C natural</strong> — Para las noches. Ilumina y regenera mientras duermes.
+🌸 <strong>Protector solar mineral</strong> — Indispensable post-PRP. Sin químicos nocivos.
+🚿 <strong>Limpiador facial sin sulfatos</strong> — Para no irritar la piel sensibilizada.
+
+Te envío los links de cada uno directamente aquí 🛒</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">PT</div>
+                <div class="msg-content">
+                  <div class="msg-trigger">⚡ Trigger: Compra Producto Natural (tienda)</div>
+                  <div class="msg-timing">⏰ +3 días de recibir el producto</div>
+                  <div class="msg-text">¿Llegó tu pedido, {{nombre}}? 📦
+
+Espero que lo estés disfrutando. Recuerda que estos productos funcionan mucho mejor cuando forman parte de un protocolo completo.
+
+Si alguna vez quieres dar el siguiente paso y trabajar tu piel desde adentro y afuera, aquí estoy para una consulta personalizada 🌿
+
+Como clienta de nuestra tienda tienes un <strong>descuento especial del 15%</strong> en tu primera sesión.
+
+¿Lo agendamos? 💚</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REACTIVACIÓN -->
+      <div id="tab-reactivacion" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Reactivación Clientes Inactivos — 3 mensajes</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">D30</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 30 sin actividad</div>
+                  <div class="msg-text">{{nombre}}, hace un tiempo que no nos vemos y pensé en ti 💚
+
+¿Cómo está tu piel / tu recuperación?
+
+El mantenimiento es clave para que los resultados duren. Si quieres, podemos hacer una sesión de seguimiento esta semana.
+
+¿Cómo has estado? 🌿</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">D35</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 35 (si no respondió)</div>
+                  <div class="msg-text">{{nombre}}, tengo algo especial para ti 🎁
+
+Como parte de mi grupo de clientas, quiero ofrecerte una <strong>sesión de mantenimiento con 20% de descuento</strong> — solo esta semana.
+
+Los cupos son limitados.
+
+👉 Agenda aquí: [LINK CAL.COM]
+
+¡Me encantaría verte pronto! Karen 💚</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">D42</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 42 — Último mensaje</div>
+                  <div class="msg-text">{{nombre}}, este es mi último mensaje para no ser molesta 😊
+
+Solo quería que supieras que aquí estoy cuando lo necesites. Tu bienestar y tu piel son mi prioridad, y cuando estés lista, el cupo es tuyo.
+
+Un abrazo,
+Karen 🌿</div>
+                  <div class="msg-note">→ Si no responde: Cambiar tag a "Inactivo Confirmado". Salir de flujo.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUTRICIÓN LEADS -->
+      <div id="tab-nutricion" class="tab-content">
+        <div class="script-block">
+          <div class="script-block-header">
+            <h3>Nutrición de Leads Fríos — Secuencia Educativa 15 días</h3>
+            <button class="copy-btn">Copiar</button>
+          </div>
+          <div class="script-body">
+            <div class="msg-sequence">
+              <div class="msg-item">
+                <div class="msg-step-num">D3</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 3 post-primer contacto sin agendar</div>
+                  <div class="msg-text">{{nombre}}, ¿sabías que el desodorante que usas puede estar afectando tus hormonas? 😮
+
+El aluminio presente en la mayoría de antitranspirantes ha sido asociado con disrupción hormonal y problemas de piel a largo plazo.
+
+Yo lo eliminé hace 7 años de mi vida y la de mis pacientes. Hoy existen alternativas que protegen igual de bien, sin el riesgo.
+
+¿Quieres que te recomiende cuáles uso yo? Es gratis 💚</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">D6</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 6</div>
+                  <div class="msg-text">{{nombre}}, mini-dato que puede cambiar tu rutina 🌿
+
+Los <strong>parabenos</strong> (metilparabeno, propilparabeno) están en cremas, shampoos y maquillajes cotidianos. Son conservantes que imitan al estrógeno en el cuerpo.
+
+¿Qué hacer? Lee las etiquetas. Si terminan en "-parabeno", cámbialo.
+
+La semana que viene te cuento cuáles son los 3 productos más fáciles de reemplazar primero 💚</div>
+                </div>
+              </div>
+              <div class="msg-item">
+                <div class="msg-step-num">D15</div>
+                <div class="msg-content">
+                  <div class="msg-timing">⏰ Día 15 — Cierre con oferta</div>
+                  <div class="msg-text">{{nombre}}, llevamos 2 semanas hablando de salud real y piel sin tóxicos 🌿
+
+Si llegaste hasta aquí es porque esto importa. Y me parece que mereces dar el siguiente paso.
+
+Por eso quiero ofrecerte tu <strong>primera consulta con 25% de descuento</strong>, solo para personas que han estado atentas a estos mensajes.
+
+👉 Agenda aquí antes del viernes: [LINK CAL.COM]
+
+Con cariño,
+Karen 💚</div>
+                  <div class="msg-note">→ Si agenda: Entra a Flujo 2. Si no: Tag "Lead Frío Largo". Pausa 30 días.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHATBOT -->
+    <div id="chatbot" class="section-hdr fade-in" style="margin-top:2.5rem;">
+      <div>
+        <h2>Bot WhatsApp <em>con IA</em></h2>
+        <p>Preview de conversación — atiende, califica y agenda sin intervención humana</p>
+      </div>
+    </div>
+
+    <div class="chat-preview fade-in">
+      <div class="chat-header">
+        <div class="chat-avatar">🌿</div>
+        <div class="chat-info">
+          <h4>Karen Guarin · Asistente</h4>
+          <span>🟢 En línea · Responde al instante</span>
+        </div>
+      </div>
+      <div class="chat-body">
+        <div class="chat-msg user">Hola, me operé hace 3 días y tengo mucha inflamación, ¿puedes ayudarme?</div>
+        <div class="chat-msg bot">
+          <div class="bot-name">Asistente Karen Guarin</div>
+          ¡Hola! Claro que sí, estás en el lugar correcto 💚 Karen es especialista en recuperación postquirúrgica y la inflamación en estos primeros días es totalmente normal — lo importante es manejarla bien desde el inicio.
+
+¿Qué tipo de cirugía te realizaste?
+        </div>
+        <div class="chat-options">
+          <div class="chat-opt">💉 Liposucción / Lipo</div>
+          <div class="chat-opt">🫁 Abdominoplastia</div>
+          <div class="chat-opt">🌸 Mamoplastia</div>
+          <div class="chat-opt">👃 Facial / Rinoplastia</div>
+          <div class="chat-opt">Otra cirugía</div>
+        </div>
+        <div class="chat-msg user">Liposucción abdominal y flancos</div>
+        <div class="chat-msg bot">
+          <div class="bot-name">Asistente Karen Guarin</div>
+          Entendido 🙏 Para liposucción abdominal y flancos, el drenaje linfático manual desde los primeros días es clave para reducir la inflamación correctamente y evitar fibrosis.
+
+Karen tiene disponibilidad <strong>esta semana</strong>. ¿Prefieres sesión presencial o puede ser virtual (guía y protocolo personalizado)?
+        </div>
+        <div class="chat-options">
+          <div class="chat-opt">📍 Presencial</div>
+          <div class="chat-opt">🎥 Virtual</div>
+        </div>
+        <div class="chat-msg user">Presencial, ¿cuánto cuesta?</div>
+        <div class="chat-msg bot">
+          <div class="bot-name">Asistente Karen Guarin</div>
+          Perfecto. Una sesión de drenaje linfático postquirúrgico con Karen tiene un costo de <strong>[PRECIO]</strong> e incluye:
+
+✅ Evaluación del estado de la cicatriz
+✅ Drenaje manual especializado (60 min)
+✅ Recomendaciones nutricionales personalizadas
+✅ Protocolo para casa
+
+¿Te agendo una cita? Solo necesito tu nombre completo y elegir el horario 📅
+        </div>
+      </div>
+    </div>
+
+    <!-- CROSS-SELL MATRIX -->
+    <div id="crossell" class="section-hdr fade-in">
+      <div>
+        <h2>Matriz de <em>Venta Cruzada</em></h2>
+        <p>Qué recomendar según el servicio — automatizado en el Flujo 3</p>
+      </div>
+    </div>
+
+    <table class="matrix-table fade-in">
+      <thead>
+        <tr>
+          <th>Servicio Principal</th>
+          <th>Productos Complementarios</th>
+          <th>Servicio Complementario</th>
+          <th>Timing Recomendación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Drenaje Linfático Postquirúrgico</td>
+          <td>
+            <span class="pill">Ampollas Homeopáticas</span>
+            <span class="pill">Vitamina C + Zinc</span>
+            <span class="pill">Kit Recuperación Casa</span>
+          </td>
+          <td><span class="pill terra">Mesoterapia</span><span class="pill terra">Sueroterapia</span></td>
+          <td><span class="pill gold">+24h post-sesión</span></td>
+        </tr>
+        <tr>
+          <td>Limpieza Profunda Facial</td>
+          <td>
+            <span class="pill">Sérum Vit C Natural</span>
+            <span class="pill">Limpiador sin Sulfatos</span>
+            <span class="pill">Protector Solar Mineral</span>
+          </td>
+          <td><span class="pill terra">PRP</span><span class="pill terra">Mesoterapia Facial</span></td>
+          <td><span class="pill gold">+24h post-sesión</span></td>
+        </tr>
+        <tr>
+          <td>Plasma Rico en Plaquetas (PRP)</td>
+          <td>
+            <span class="pill">Suplemento Colágeno</span>
+            <span class="pill">Sérum Regenerador</span>
+            <span class="pill">Guía Post-PRP Digital</span>
+          </td>
+          <td><span class="pill terra">Mesoterapia</span><span class="pill terra">Limpieza Profunda</span></td>
+          <td><span class="pill gold">+48h post-sesión</span></td>
+        </tr>
+        <tr>
+          <td>Asesoría Corporal / Sobrepeso</td>
+          <td>
+            <span class="pill">Proteína Natural</span>
+            <span class="pill">Adaptógenos</span>
+            <span class="pill">Guía Nutrición Digital</span>
+          </td>
+          <td><span class="pill terra">Drenaje Linfático</span><span class="pill terra">Sueroterapia</span></td>
+          <td><span class="pill gold">+24h post-sesión</span></td>
+        </tr>
+        <tr>
+          <td>Compra Producto Natural (Tienda)</td>
+          <td>
+            <span class="pill">Producto Complementario</span>
+            <span class="pill">Bundle 3x2</span>
+          </td>
+          <td><span class="pill terra">Primera Consulta 15% Off</span></td>
+          <td><span class="pill gold">+3 días post-compra</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CALENDARIO AUTOMATIZADO -->
+    <div id="calendario" class="section-hdr fade-in">
+      <div>
+        <h2>Calendario <em>Automatizado</em></h2>
+        <p>Operación diaria sin intervención — todo el ciclo de atención cubierto</p>
+      </div>
+    </div>
+
+    <div class="calendar-grid fade-in">
+      <div class="cal-card">
+        <h3>Ciclo de Atención — Día Tipo</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-time">08:00</div>
+            <div class="tl-body">
+              <div class="tl-title">Leads de la noche — Procesados</div>
+              <div class="tl-sub">Bot clasificó y respondió. CRM actualizado.</div>
+              <div class="tl-auto">⚡ Automático — n8n Cron</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">08:30</div>
+            <div class="tl-body">
+              <div class="tl-title">Recordatorio 24h enviado</div>
+              <div class="tl-sub">Clientes con cita mañana notificados.</div>
+              <div class="tl-auto">⚡ Automático — WhatsApp API</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">09:00</div>
+            <div class="tl-body">
+              <div class="tl-title">Primera sesión del día</div>
+              <div class="tl-sub">Karen atiende. Registro automático post-sesión.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">11:00</div>
+            <div class="tl-body">
+              <div class="tl-title">Venta cruzada: sesiones de ayer</div>
+              <div class="tl-sub">Recomendaciones enviadas a pacientes de ayer.</div>
+              <div class="tl-auto">⚡ Automático — Flujo 3</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">18:00</div>
+            <div class="tl-body">
+              <div class="tl-title">Encuestas post-sesión 48h</div>
+              <div class="tl-sub">Solicitud de testimonios automática.</div>
+              <div class="tl-auto">⚡ Automático — Flujo 5</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">20:00</div>
+            <div class="tl-body">
+              <div class="tl-title">Revisión inactivos — Semanal (lunes)</div>
+              <div class="tl-sub">Flujo reactivación para clientes sin cita 30+ días.</div>
+              <div class="tl-auto">⚡ Automático — Flujo 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-card">
+        <h3>Configuración Cal.com Recomendada</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-time">TIPOS</div>
+            <div class="tl-body">
+              <div class="tl-title">Tipos de cita configurados</div>
+              <div class="tl-sub">Consulta diagnóstica gratuita (15min) · Sesión drenaje (60min) · Sesión facial (75min) · Consulta virtual (30min) · Asesoría corporal (45min)</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">BUFFER</div>
+            <div class="tl-body">
+              <div class="tl-title">Tiempo entre citas: 15 min</div>
+              <div class="tl-sub">Para notas, preparar espacio y descanso entre pacientes.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">HORARIO</div>
+            <div class="tl-body">
+              <div class="tl-title">Lunes – Sábado 8am – 6pm</div>
+              <div class="tl-sub">Domingos bloqueados. Festivos configurables manualmente.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">PAGO</div>
+            <div class="tl-body">
+              <div class="tl-title">Pago anticipado (opcional)</div>
+              <div class="tl-sub">Stripe o MercadoPago conectado. Reduce cancelaciones last-minute.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-time">ZOOM</div>
+            <div class="tl-body">
+              <div class="tl-title">Link virtual automático</div>
+              <div class="tl-sub">Citas virtuales generan link de Zoom/Meet automáticamente al agendar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERRAMIENTAS -->
+    <div id="herramientas" class="section-hdr fade-in">
+      <div>
+        <h2>Stack de <em>Herramientas</em></h2>
+        <p>El ecosistema técnico completo — todas integradas entre sí vía n8n</p>
+      </div>
+    </div>
+
+    <div class="tools-grid fade-in">
+      <div class="tool-card">
+        <div class="tool-icon">⚡</div>
+        <div class="tool-name">n8n</div>
+        <div class="tool-role">Motor de automatización. Conecta todas las herramientas. Orquesta cada flujo.</div>
+        <a href="https://n8n.io" class="tool-link" target="_blank">n8n.io →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📅</div>
+        <div class="tool-name">Cal.com</div>
+        <div class="tool-role">Agendamiento sin fricción. Tipos de cita, buffers, pagos, recordatorios.</div>
+        <a href="https://cal.com" class="tool-link" target="_blank">cal.com →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">Notion CRM</div>
+        <div class="tool-role">Base de datos de clientes, historial, etiquetas, seguimiento y pipeline.</div>
+        <a href="https://notion.so" class="tool-link" target="_blank">notion.so →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">💬</div>
+        <div class="tool-name">WhatsApp Business API</div>
+        <div class="tool-role">Mensajería automatizada, bot IA, secuencias y broadcasting a leads.</div>
+        <a href="https://business.whatsapp.com" class="tool-link" target="_blank">business.whatsapp.com →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <div class="tool-name">Typeform</div>
+        <div class="tool-role">Formularios de captación, encuestas post-sesión y calificación de testimonios.</div>
+        <a href="https://typeform.com" class="tool-link" target="_blank">typeform.com →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🤖</div>
+        <div class="tool-name">OpenAI GPT-4</div>
+        <div class="tool-role">Inteligencia del bot de WhatsApp. Clasifica intenciones y responde con contexto.</div>
+        <a href="https://openai.com" class="tool-link" target="_blank">openai.com →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📧</div>
+        <div class="tool-name">Gmail + Make</div>
+        <div class="tool-role">Secuencias de email para nutrición de leads y confirmaciones formales.</div>
+        <a href="https://make.com" class="tool-link" target="_blank">make.com →</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">💳</div>
+        <div class="tool-name">MercadoPago / Stripe</div>
+        <div class="tool-role">Cobro de citas, productos de tienda y guías digitales. Sin efectivo.</div>
+        <a href="https://mercadopago.com" class="tool-link" target="_blank">mercadopago.com →</a>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div id="kpis" class="section-hdr fade-in">
+      <div>
+        <h2>KPIs & <em>Dashboard Semanal</em></h2>
+        <p>Lo que Karen revisa cada lunes en 15 minutos — el sistema alerta automáticamente</p>
+      </div>
+    </div>
+
+    <div class="kpi-grid fade-in">
+      <div class="kpi-card">
+        <div class="kpi-label">Tasa Conversión Lead → Cita</div>
+        <div class="kpi-value" style="color:var(--sage-bright)">Meta: 35%</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:68%"></div></div>
+        <div class="kpi-sub">Leads que agendan vs. total capturados</div>
+        <div class="kpi-alert">⚡ Alerta si cae por debajo de 20%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tasa Retención (Citas Recurrentes)</div>
+        <div class="kpi-value" style="color:var(--terra-light)">Meta: 60%</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:55%;background:linear-gradient(90deg,var(--terra),var(--terra-light))"></div></div>
+        <div class="kpi-sub">% clientes que agendan segunda cita</div>
+        <div class="kpi-alert">⚡ Alerta si cae por debajo de 40%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Venta Cruzada (Producto/Sesión)</div>
+        <div class="kpi-value" style="color:var(--gold)">Meta: 25%</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:40%;background:linear-gradient(90deg,var(--gold),#E8D89A)"></div></div>
+        <div class="kpi-sub">Sesiones que generan venta de producto</div>
+        <div class="kpi-alert">⚡ Alerta si cae por debajo de 15%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Testimonios Generados / Mes</div>
+        <div class="kpi-value" style="color:var(--sage-bright)">Meta: 8</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:50%"></div></div>
+        <div class="kpi-sub">Google Reviews + testimonios Instagram</div>
+        <div class="kpi-alert">⚡ Alerta si baja de 4/mes</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tasa Cancelación de Citas</div>
+        <div class="kpi-value" style="color:var(--red)">Meta: &lt;10%</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:25%;background:linear-gradient(90deg,var(--red),#FF9A9A)"></div></div>
+        <div class="kpi-sub">% citas canceladas vs. agendadas</div>
+        <div class="kpi-alert">⚡ Alerta si supera 15%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ingreso Promedio / Cliente / Mes</div>
+        <div class="kpi-value" style="color:var(--terra-light)">Meta: $X</div>
+        <div class="kpi-bar"><div class="kpi-fill" style="width:60%;background:linear-gradient(90deg,var(--terra),var(--terra-light))"></div></div>
+        <div class="kpi-sub">Servicios + productos por cliente activo</div>
+        <div class="kpi-alert">⚡ Reporte automático cada lunes 8am</div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div id="roadmap" class="section-hdr fade-in">
+      <div>
+        <h2>Hoja de <em>Ruta</em></h2>
+        <p>Plan de implementación semana a semana — del cero al ecosistema completo</p>
+      </div>
+    </div>
+
+    <div class="roadmap fade-in">
+      <div class="roadmap-phases">
+        <div class="phase done">
+          <div class="phase-label">✅ Semana 1</div>
+          <div class="phase-name">Fundación Digital</div>
+          <div class="phase-items">
+            <div class="phase-item">Sitio web HTML publicado</div>
+            <div class="phase-item">Dominio karenguarin.com</div>
+            <div class="phase-item">WhatsApp Business activado</div>
+            <div class="phase-item">Cal.com configurado</div>
+            <div class="phase-item">Notion CRM creado</div>
+          </div>
+          <div class="phase-week">Fase 1 — COMPLETADA</div>
+        </div>
+
+        <div class="phase active">
+          <div class="phase-label">🔄 Semana 2</div>
+          <div class="phase-name">Automatizaciones Core</div>
+          <div class="phase-items">
+            <div class="phase-item">n8n instalado y configurado</div>
+            <div class="phase-item">Flujos 1-4 activos</div>
+            <div class="phase-item">Scripts WhatsApp cargados</div>
+            <div class="phase-item">Typeform formularios live</div>
+            <div class="phase-item">MercadoPago conectado</div>
+          </div>
+          <div class="phase-week">Fase 2 — EN CURSO</div>
+        </div>
+
+        <div class="phase next">
+          <div class="phase-label">⏳ Semana 3</div>
+          <div class="phase-name">IA & Contenido</div>
+          <div class="phase-items">
+            <div class="phase-item">Bot WhatsApp IA activo</div>
+            <div class="phase-item">Flujos 5-7 activos</div>
+            <div class="phase-item">Calendario 30 días contenido</div>
+            <div class="phase-item">Instagram + TikTok optimizados</div>
+            <div class="phase-item">Tienda productos live</div>
+          </div>
+          <div class="phase-week">Fase 3 — PRÓXIMA</div>
+        </div>
+
+        <div class="phase">
+          <div class="phase-label">🚀 Semana 4</div>
+          <div class="phase-name">Escala & Optimización</div>
+          <div class="phase-items">
+            <div class="phase-item">Dashboard KPIs activo</div>
+            <div class="phase-item">Primer reporte semanal</div>
+            <div class="phase-item">Ajuste de conversiones</div>
+            <div class="phase-item">Guías digitales publicadas</div>
+            <div class="phase-item">Programa referidos live</div>
+          </div>
+          <div class="phase-week">Fase 4 — LANZAMIENTO TOTAL</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /layout -->
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+function copySection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copiado';
+      setTimeout(() => btn.textContent = orig, 2000);
+    });
+  }
+}
+
+// Sidebar active state
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Fade-in on scroll
+const fades = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+fades.forEach(el => observer.observe(el));
+
+// Animate KPI bars on load
+setTimeout(() => {
+  document.querySelectorAll('.kpi-fill').forEach(bar => {
+    const w = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => bar.style.width = w, 200);
+  });
+}, 500);
+</script>
+</body>
+</html>
