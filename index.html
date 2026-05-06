@@ -1,40 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Sistema Karen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      font-family: Arial;
-      text-align: center;
-      background: #111;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
-      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-    a {
-      display: block;
-      margin: 15px auto;
-      padding: 15px;
-      width: 250px;
-      background: #00c896;
-      color: black;
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
       text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
+      color: white;
     }
-    a:hover {
-      background: #00a67d;
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.1);
     }
+
+    .icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
   </style>
 </head>
+
 <body>
 
 <h1>🚀 Sistema Karen</h1>
 
-<a href="cronograma.html">📅 Cronograma</a>
-<a href="karen_panel_admin.html">🔐 Panel</a>
-<a href="karen_guarin_web.html">🌐 Web</a>
-<a href="karen_tienda_publica.html">🛒 Tienda</a>
-<a href="karen_automatizaciones.html">🤖 Automatizaciones</a>
+<div class="container">
+
+  <a class="card" href="cronograma.html">
+    <div class="icon">📅</div>
+    <div class="title">Cronograma</div>
+  </a>
+
+  <a class="card" href="karen_panel_admin.html">
+    <div class="icon">🔐</div>
+    <div class="title">Panel Admin</div>
+  </a>
+
+  <a class="card" href="karen_guarin_web.html">
+    <div class="icon">🌐</div>
+    <div class="title">Página Web</div>
+  </a>
+
+  <a class="card" href="karen_tienda_publica.html">
+    <div class="icon">🛒</div>
+    <div class="title">Tienda</div>
+  </a>
+
+  <a class="card" href="karen_automatizaciones.html">
+    <div class="icon">🛒</div>
+    <div class="title">Tienda</div>
+  </a>
+
+</div>
+
+</body>
+</html>
 
 </body>
 </html>
