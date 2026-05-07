@@ -520,7 +520,7 @@ function updateCart(){
 
 function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open')}
 function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')}
-function checkout(){showToast('🔗 Redirigiendo a MercadoPago...');setTimeout(()=>window.open('https://www.mercadopago.com.co','_blank'),1000)}
+function checkout(){showToast('🔗 Redirigiendo a MercadoPago...');setTimeout(()=>window.open('http://link.mercadopago.com.co/kaguacosmiatra','_blank'),1000)}
 function orderByWA(){
   const items=cart.map(i=>`• ${i.qty}x ${i.name} = ${fmtCOP(i.price*i.qty)}`).join('%0A');
   const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
