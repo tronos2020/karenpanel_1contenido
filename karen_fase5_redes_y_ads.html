@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karen Guarin — Redes Sociales & Campañas Meta</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void:#08090A; --void2:#0F1012; --void3:#161719;
+  --void4:#1E2022; --void5:#262829;
+  --sage:#7BAE82; --sage2:#A8CFA5; --sage3:#D4EDD1;
+  --sage-dim:#3D6642; --sage-glow:rgba(123,174,130,0.15);
+  --terra:#D4845A; --terra2:#E8A882; --terra3:#F5CEBA;
+  --gold:#C9A84C; --gold2:#E8CC88; --gold-dim:#7A6020;
+  --plum:#8B5E8B; --plum2:#B888B8;
+  --white:rgba(255,255,255,0.9); --white2:rgba(255,255,255,0.55);
+  --white3:rgba(255,255,255,0.2); --white4:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--void);color:var(--white);overflow-x:hidden;min-height:100vh}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.6;mix-blend-mode:overlay}
+
+/* SIDEBAR */
+.app{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--void2);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;display:flex;flex-direction:column;z-index:100}
+.sb-brand{padding:1.5rem 1.2rem;border-bottom:1px solid var(--border)}
+.sb-brand h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--sage2);line-height:1}
+.sb-brand p{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white3);margin-top:0.3rem}
+.sb-sec{font-size:0.52rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--sage-dim);padding:1rem 1.2rem 0.3rem}
+.sl{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 1.2rem;font-size:0.75rem;color:var(--white2);cursor:pointer;border-left:2px solid transparent;transition:all 0.2s}
+.sl:hover{color:var(--white);background:var(--white4)}
+.sl.active{color:var(--sage2);border-left-color:var(--sage);background:var(--sage-glow)}
+.sl .ic{font-size:0.85rem;width:16px;text-align:center}
+.sb-foot{margin-top:auto;padding:1rem 1.2rem;border-top:1px solid var(--border);font-size:0.62rem;color:var(--white3)}
+.live-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--sage);box-shadow:0 0 6px var(--sage);margin-right:0.4rem;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* MAIN */
+.main{margin-left:220px;flex:1}
+.topbar{background:var(--void2);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-title{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--white2)}
+.tb-title span{color:var(--sage2)}
+.tb-chips{display:flex;gap:0.5rem}
+.chip{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;background:var(--void4);border:1px solid var(--border2);padding:0.3rem 0.7rem;color:var(--white2);border-radius:2px}
+.chip.on{background:var(--sage-glow);border-color:var(--sage-dim);color:var(--sage2)}
+
+/* CONTENT */
+.content{padding:2rem}
+.pane{display:none}.pane.active{display:block}
+
+/* SECTION HEADERS */
+.sec-label{font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--terra);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--terra)}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:0.04em;line-height:1;margin-bottom:0.5rem}
+.sec-h em{color:var(--sage2);font-style:normal}
+.sec-sub{font-size:0.82rem;color:var(--white2);line-height:1.7;max-width:560px;margin-bottom:2.5rem}
+
+/* PROFILE CARDS */
+.profiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border2);margin-bottom:2rem}
+.profile-card{background:var(--void2);padding:2rem;position:relative;overflow:hidden}
+.profile-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.profile-card.ig::before{background:linear-gradient(90deg,#E1306C,#F77737,#FCAF45)}
+.profile-card.tt::before{background:linear-gradient(90deg,#010101,#69C9D0,#EE1D52)}
+.profile-card.fb::before{background:linear-gradient(90deg,#1877F2,#42B72A)}
+.pc-platform{display:flex;align-items:center;gap:0.6rem;margin-bottom:1.5rem}
+.pc-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.pc-icon.ig{background:linear-gradient(135deg,#E1306C,#F77737)}
+.pc-icon.tt{background:#010101;border:1px solid var(--border2)}
+.pc-icon.fb{background:#1877F2}
+.pc-pname{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white2)}
+.pc-handle{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.3rem}
+.pc-name-full{font-size:0.72rem;color:var(--white2);margin-bottom:1.2rem}
+.pc-bio{font-size:0.78rem;line-height:1.7;color:var(--white);background:var(--void4);padding:1rem;border-left:2px solid var(--sage);margin-bottom:1.2rem;white-space:pre-line}
+.pc-section-title{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--white3);margin-bottom:0.6rem;margin-top:1rem}
+.pc-item{font-size:0.75rem;color:var(--white2);padding:0.3rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5}
+.pc-item::before{content:'→';color:var(--sage);flex-shrink:0}
+.pc-tag{display:inline-block;font-size:0.6rem;padding:0.15rem 0.5rem;background:var(--void4);border:1px solid var(--border2);color:var(--white2);margin:0.15rem}
+.pc-tag.sage{border-color:var(--sage-dim);color:var(--sage2)}
+.pc-tag.terra{border-color:var(--terra);color:var(--terra2)}
+.pc-highlight{background:var(--void4);border:1px solid var(--border);padding:0.6rem 0.8rem;margin:0.3rem 0;display:flex;justify-content:space-between;align-items:center}
+.pc-highlight-name{font-size:0.72rem;color:var(--white)}
+.pc-highlight-icon{font-size:1rem}
+
+/* EXECUTION PLAN */
+.exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.exec-card{background:var(--void2);border:1px solid var(--border);padding:1.5rem}
+.ec-day{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);margin-bottom:0.5rem}
+.ec-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.8rem}
+.ec-steps{display:flex;flex-direction:column;gap:0.5rem}
+.ec-step{display:flex;gap:0.8rem;align-items:flex-start;font-size:0.75rem;color:var(--white2);line-height:1.6}
+.ec-num{width:20px;height:20px;border-radius:50%;background:var(--void4);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--sage2);flex-shrink:0;margin-top:0.1rem}
+.ec-time{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--gold);margin-top:0.5rem}
+
+/* HOOKS */
+.hooks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.hook-card{background:var(--void2);border:1px solid var(--border);padding:1.3rem;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden}
+.hook-card::after{content:'COPIAR';position:absolute;inset:0;background:rgba(123,174,130,0.9);display:flex;align-items:center;justify-content:center;font-size:0.65rem;letter-spacing:0.2em;font-weight:700;color:var(--void);opacity:0;transition:opacity 0.2s}
+.hook-card:hover::after{opacity:1}
+.hook-type{font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0.5rem}
+.hook-type.p1{color:var(--sage2)}.hook-type.p2{color:var(--terra2)}.hook-type.p3{color:var(--gold2)}.hook-type.p4{color:var(--plum2)}
+.hook-text{font-family:'Instrument Serif',serif;font-size:0.95rem;font-style:italic;color:var(--white);line-height:1.55}
+.hook-platform{font-size:0.6rem;color:var(--white3);margin-top:0.6rem}
+
+/* COPYWRITING */
+.copy-tabs{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:0}
+.ctab{padding:0.7rem 1.2rem;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Syne',sans-serif}
+.ctab:hover{color:var(--sage2)}.ctab.active{color:var(--sage2);border-bottom-color:var(--sage)}
+.copy-pane{display:none;background:var(--void2);border:1px solid var(--border);border-top:none;padding:1.5rem}
+.copy-pane.active{display:block}
+.copy-block{margin-bottom:1.5rem}
+.copy-label{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--white3);margin-bottom:0.5rem;padding-bottom:0.4rem;border-bottom:1px solid var(--border)}
+.copy-text{font-size:0.8rem;line-height:1.8;color:var(--white);background:var(--void4);padding:1rem 1.2rem;white-space:pre-line;border-left:2px solid var(--sage-dim)}
+.copy-note{font-size:0.68rem;color:var(--white3);margin-top:0.4rem;font-style:italic}
+
+/* META ADS */
+.ads-structure{display:grid;grid-template-columns:1fr 2fr;gap:1.5rem;margin-bottom:2rem}
+.camp-tree{background:var(--void2);border:1px solid var(--border);padding:1.5rem}
+.camp-tree h3{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;color:var(--white);margin-bottom:1.2rem}
+.tree-item{padding:0.6rem 0.8rem;margin-bottom:0.4rem;font-size:0.75rem;cursor:pointer;transition:all 0.2s;border-left:2px solid transparent}
+.tree-item.campaign{background:rgba(123,174,130,0.1);border-left-color:var(--sage);color:var(--sage2);font-weight:600}
+.tree-item.adset{background:rgba(212,132,90,0.08);border-left-color:var(--terra);color:var(--terra2);padding-left:1.4rem}
+.tree-item.ad{background:var(--void4);border-left-color:var(--gold-dim);color:var(--white2);padding-left:2.2rem;font-size:0.7rem}
+.tree-item:hover{background:var(--white4)}
+.tree-item.active{background:var(--void3);opacity:1}
+.ad-detail{background:var(--void2);border:1px solid var(--border);padding:1.5rem}
+.ad-detail h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.04em;color:var(--white);margin-bottom:1.2rem}
+.detail-row{display:flex;justify-content:space-between;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:0.75rem}
+.detail-row:last-child{border:none}
+.detail-label{color:var(--white3);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase}
+.detail-val{color:var(--white);font-weight:500;text-align:right;max-width:60%}
+.detail-val.sage{color:var(--sage2)}.detail-val.terra{color:var(--terra2)}.detail-val.gold{color:var(--gold2)}
+.budget-bar{height:4px;background:var(--void4);margin-top:0.3rem;border-radius:2px}
+.budget-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--sage-dim),var(--sage2))}
+
+/* AUDIENCE CARDS */
+.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.aud-card{background:var(--void2);border:1px solid var(--border);padding:1.4rem;transition:border-color 0.3s}
+.aud-card:hover{border-color:var(--border2)}
+.aud-type{font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--white3);margin-bottom:0.6rem}
+.aud-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.8rem}
+.aud-items{display:flex;flex-direction:column;gap:0.3rem}
+.aud-item{font-size:0.72rem;color:var(--white2);display:flex;align-items:flex-start;gap:0.4rem;line-height:1.5}
+.aud-item::before{content:'·';color:var(--sage);flex-shrink:0}
+.aud-size{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--gold);margin-top:0.8rem}
+.aud-temp{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;display:inline-block;margin-top:0.3rem}
+.aud-temp.frio{color:var(--plum2);background:rgba(139,94,139,0.15);border:1px solid rgba(139,94,139,0.3)}
+.aud-temp.tibio{color:var(--gold2);background:rgba(201,168,76,0.12);border:1px solid var(--gold-dim)}
+.aud-temp.caliente{color:var(--terra2);background:rgba(212,132,90,0.12);border:1px solid var(--terra)}
+
+/* CREATIVES TABLE */
+.creatives-table{width:100%;border-collapse:collapse;margin-bottom:2rem;font-size:0.75rem}
+.creatives-table th{background:var(--void3);border:1px solid var(--border);padding:0.7rem 0.9rem;text-align:left;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage2);font-weight:600}
+.creatives-table td{border:1px solid var(--border);padding:0.7rem 0.9rem;color:var(--white2);vertical-align:top;line-height:1.6}
+.creatives-table tr:hover td{background:var(--white4)}
+.creatives-table td:first-child{color:var(--white);font-weight:500}
+.format-tag{font-size:0.58rem;padding:0.12rem 0.45rem;border-radius:2px;margin:0.1rem;display:inline-block}
+.format-tag.video{background:rgba(212,132,90,0.15);color:var(--terra2);border:1px solid var(--terra)}
+.format-tag.image{background:rgba(123,174,130,0.12);color:var(--sage2);border:1px solid var(--sage-dim)}
+.format-tag.carousel{background:rgba(201,168,76,0.12);color:var(--gold2);border:1px solid var(--gold-dim)}
+
+/* PRESUPUESTO */
+.budget-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border2);margin-bottom:2rem}
+.budget-card{background:var(--void2);padding:1.4rem}
+.bc-label{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white3);margin-bottom:0.5rem}
+.bc-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.04em;line-height:1;margin-bottom:0.3rem}
+.bc-val.sage{color:var(--sage2)}.bc-val.terra{color:var(--terra2)}.bc-val.gold{color:var(--gold2)}
+.bc-sub{font-size:0.65rem;color:var(--white3)}
+.bc-bar{height:2px;background:var(--void4);margin-top:0.8rem}
+.bc-fill{height:100%}
+
+/* CONFIG STEPS */
+.config-steps{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-bottom:2rem}
+.cs-item{background:var(--void2);padding:1.3rem 1.5rem;display:grid;grid-template-columns:40px 1fr auto;gap:1rem;align-items:center}
+.cs-num{width:40px;height:40px;border-radius:50%;background:var(--void4);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--sage2);flex-shrink:0}
+.cs-num.done{background:rgba(123,174,130,0.2);border-color:var(--sage)}
+.cs-body h4{font-size:0.82rem;font-weight:600;color:var(--white);margin-bottom:0.2rem}
+.cs-body p{font-size:0.72rem;color:var(--white2);line-height:1.55}
+.cs-status{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:2px;white-space:nowrap}
+.cs-status.done{background:rgba(123,174,130,0.15);color:var(--sage2);border:1px solid var(--sage-dim)}
+.cs-status.pending{background:rgba(201,168,76,0.1);color:var(--gold2);border:1px solid var(--gold-dim)}
+.cs-status.next{background:rgba(212,132,90,0.1);color:var(--terra2);border:1px solid var(--terra)}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border2);margin-bottom:2rem}
+.kpi{background:var(--void2);padding:1.2rem}
+.kpi-l{font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white3);margin-bottom:0.4rem}
+.kpi-v{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;line-height:1}
+.kpi-v.g{color:var(--sage2)}.kpi-v.t{color:var(--terra2)}.kpi-v.go{color:var(--gold2)}
+.kpi-s{font-size:0.62rem;color:var(--white3);margin-top:0.2rem}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(16px);transition:all 0.55s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .sidebar{display:none}.main{margin-left:0}
+  .profiles-grid,.exec-grid,.hooks-grid,.audience-grid{grid-template-columns:1fr}
+  .ads-structure{grid-template-columns:1fr}.budget-grid{grid-template-columns:repeat(2,1fr)}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}.content{padding:1rem}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-brand">
+    <h2>Karen Guarin</h2>
+    <p>Redes & Campañas</p>
+  </div>
+  <div class="sb-sec">Perfiles</div>
+  <div class="sl active" onclick="showPane('perfiles',this)"><span class="ic">📱</span>Perfiles Pro</div>
+  <div class="sl" onclick="showPane('ejecucion',this)"><span class="ic">🎬</span>Plan de Ejecución</div>
+  <div class="sb-sec">Contenido</div>
+  <div class="sl" onclick="showPane('hooks',this)"><span class="ic">🪝</span>Ganchos Psicológicos</div>
+  <div class="sl" onclick="showPane('copywriting',this)"><span class="ic">✍️</span>Copywriting</div>
+  <div class="sb-sec">Meta Ads</div>
+  <div class="sl" onclick="showPane('estructura',this)"><span class="ic">🏗️</span>Estructura Campañas</div>
+  <div class="sl" onclick="showPane('audiencias',this)"><span class="ic">🎯</span>Públicos & Audiencias</div>
+  <div class="sl" onclick="showPane('creativos',this)"><span class="ic">🖼️</span>Creativos & Formatos</div>
+  <div class="sl" onclick="showPane('presupuesto',this)"><span class="ic">💰</span>Presupuesto</div>
+  <div class="sb-sec">Config</div>
+  <div class="sl" onclick="showPane('config',this)"><span class="ic">⚙️</span>Configuración Meta</div>
+  <div class="sl" onclick="showPane('kpis',this)"><span class="ic">📊</span>KPIs & Métricas</div>
+  <div class="sb-foot"><span class="live-dot"></span>Sistema activo</div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+<div class="topbar">
+  <div class="tb-title">Karen Guarin / <span id="tbTitle">Perfiles Profesionales</span></div>
+  <div class="tb-chips">
+    <div class="chip on">📸 Instagram</div>
+    <div class="chip on">🎵 TikTok</div>
+    <div class="chip on">👥 Facebook</div>
+    <div class="chip">Meta Ads</div>
+  </div>
+</div>
+<div class="content">
+
+<!-- PERFILES -->
+<div class="pane active" id="pane-perfiles">
+  <div class="sec-label rev">Identidad Digital</div>
+  <h2 class="sec-h rev">PERFILES <em>PRO</em></h2>
+  <p class="sec-sub rev">Cada perfil diseñado para el algoritmo y para la persona. Bio optimizada, highlights estratégicos y configuración profesional lista para activar.</p>
+
+  <div class="profiles-grid">
+    <!-- INSTAGRAM -->
+    <div class="profile-card ig rev">
+      <div class="pc-platform">
+        <div class="pc-icon ig">📸</div>
+        <div class="pc-pname">Instagram</div>
+      </div>
+      <div class="pc-handle">@karenguarin.cosmiatra</div>
+      <div class="pc-name-full">Karen Guarin · Cosmetóloga & Cosmiatra</div>
+      <div class="pc-bio">🌿 Cosmetóloga & Cosmiatra · 13 años
+💉 Especialista recuperación postquirúrgica
+🚫 Piel sin tóxicos · Sin aluminio · Sin parabenos
+📍 Colombia · Presencial & Virtual
+👇 Agenda tu consulta gratuita</div>
+      <div class="pc-section-title">Link en Bio</div>
+      <div class="pc-item">Linktree o página web con: Agendar cita · Tienda · WhatsApp</div>
+      <div class="pc-section-title">Highlights Estratégicos</div>
+      <div class="pc-highlight"><span class="pc-highlight-name">🌿 Mis Servicios</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-highlight"><span class="pc-highlight-name">📦 Tienda Natural</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-highlight"><span class="pc-highlight-name">⭐ Resultados</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-highlight"><span class="pc-highlight-name">🚫 Sin Tóxicos</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-highlight"><span class="pc-highlight-name">💉 Post-Cirugía</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-highlight"><span class="pc-highlight-name">👩‍⚕️ Sobre Karen</span><span class="pc-highlight-icon">→</span></div>
+      <div class="pc-section-title">Configuración</div>
+      <div class="pc-item">Tipo de cuenta: Creador de contenido → Salud/Belleza</div>
+      <div class="pc-item">Información de contacto: activar email + WhatsApp + dirección</div>
+      <div class="pc-item">Botón de acción: "Reservar" → conectar con Cal.com</div>
+      <div class="pc-item">Instagram Shopping: activar para la tienda de productos</div>
+      <div class="pc-section-title">Hashtags Fijos en Bio (no visibles)</div>
+      <div style="margin-top:0.5rem">
+        <span class="pc-tag sage">#cosmetologa</span>
+        <span class="pc-tag sage">#drenajelinfatico</span>
+        <span class="pc-tag sage">#postquirurgico</span>
+        <span class="pc-tag terra">#sinparabenos</span>
+        <span class="pc-tag terra">#sinAluminio</span>
+        <span class="pc-tag">#colombia</span>
+      </div>
+    </div>
+
+    <!-- TIKTOK -->
+    <div class="profile-card tt rev">
+      <div class="pc-platform">
+        <div class="pc-icon tt">🎵</div>
+        <div class="pc-pname">TikTok</div>
+      </div>
+      <div class="pc-handle">@karenguarin.skin</div>
+      <div class="pc-name-full">Karen Guarin · La Cosmiatra</div>
+      <div class="pc-bio">Lo que nadie te dice sobre tu piel 🌿
+13 años · Postquirúrgica · Sin tóxicos
+¿Tu desodorante tiene aluminio? 👇
+Consulta gratis → link en bio</div>
+      <div class="pc-section-title">Por qué username diferente</div>
+      <div class="pc-item">TikTok tiene un algoritmo de descubrimiento diferente. El username más corto y el tono más directo genera más clicks en búsqueda.</div>
+      <div class="pc-section-title">Estrategia TikTok</div>
+      <div class="pc-item">Contenido de denuncia de tóxicos — máximo potencial viral</div>
+      <div class="pc-item">Videos de 15-30 segundos con hook en los primeros 2 segundos</div>
+      <div class="pc-item">Usar sonidos trending pero con contenido propio</div>
+      <div class="pc-item">Publicar entre 7-9pm hora Colombia para máximo alcance</div>
+      <div class="pc-item">Responder todos los comentarios las primeras 2 horas — el algoritmo lo premia</div>
+      <div class="pc-section-title">Configuración</div>
+      <div class="pc-item">Cuenta: cambiar a Cuenta de Creador en Settings</div>
+      <div class="pc-item">Activar TikTok Shop cuando tenga 1.000 seguidores</div>
+      <div class="pc-item">Link en bio: mismo link de Instagram (Linktree)</div>
+      <div class="pc-section-title">Hashtags Base TikTok</div>
+      <div style="margin-top:0.5rem">
+        <span class="pc-tag sage">#skincare</span>
+        <span class="pc-tag sage">#pielsintoxico</span>
+        <span class="pc-tag terra">#desodorante</span>
+        <span class="pc-tag terra">#postoperatorio</span>
+        <span class="pc-tag">#cosmetica</span>
+        <span class="pc-tag">#colombia</span>
+      </div>
+    </div>
+
+    <!-- FACEBOOK -->
+    <div class="profile-card fb rev">
+      <div class="pc-platform">
+        <div class="pc-icon fb">👥</div>
+        <div class="pc-pname">Facebook</div>
+      </div>
+      <div class="pc-handle">Karen Guarin Cosmiatra</div>
+      <div class="pc-name-full">Página de Negocio · Salud/Belleza</div>
+      <div class="pc-bio">Cosmetóloga & Cosmiatra con 13 años de experiencia especializada en recuperación postquirúrgica y salud integral de la piel.
+
+Tratamientos presenciales y virtuales en Colombia. Productos naturales sin tóxicos.
+
+📞 +573043889548
+🌐 karenguarin.com</div>
+      <div class="pc-section-title">Por qué Facebook importa</div>
+      <div class="pc-item">Público 35-55 años — el principal cliente de postquirúrgicos</div>
+      <div class="pc-item">Meta Ads requiere página de Facebook activa para correr</div>
+      <div class="pc-item">Grupos de recuperación postquirúrgica — audiencia caliente</div>
+      <div class="pc-section-title">Configuración Crítica</div>
+      <div class="pc-item">Categoría: Cosmetólogo/a · Servicios de salud y belleza</div>
+      <div class="pc-item">Botón de acción: "Contactar" → WhatsApp +573043889548</div>
+      <div class="pc-item">Horario de atención: Lun-Sáb 8am-6pm</div>
+      <div class="pc-item">Conectar con Instagram para publicar simultáneamente</div>
+      <div class="pc-item">Activar Meta Pixel en el sitio web antes de correr ads</div>
+      <div class="pc-section-title">Grupos donde participar</div>
+      <div class="pc-item">Grupos de recuperación post-liposucción Colombia</div>
+      <div class="pc-item">Grupos de vida natural y cosmética consciente</div>
+      <div class="pc-item">Grupos de mamás Colombia (nicho de productos naturales)</div>
+    </div>
+  </div>
+</div>
+
+<!-- EJECUCIÓN -->
+<div class="pane" id="pane-ejecucion">
+  <div class="sec-label rev">Sistema Operativo</div>
+  <h2 class="sec-h rev">PLAN DE <em>EJECUCIÓN</em></h2>
+  <p class="sec-sub rev">Cómo convertir el calendario de 30 días en contenido real. El sistema de grabación, edición y publicación que cabe en el domingo de Karen.</p>
+
+  <div class="exec-grid">
+    <div class="exec-card rev">
+      <div class="ec-day">Domingo · Semana 1</div>
+      <div class="ec-title">SETUP INICIAL</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Crear cuentas Instagram, TikTok y Facebook con los usernames exactos de este plan</div>
+        <div class="ec-step"><div class="ec-num">2</div>Configurar bios, fotos de perfil, highlights vacíos con portadas</div>
+        <div class="ec-step"><div class="ec-num">3</div>Crear cuenta en Later.com y conectar las 3 redes</div>
+        <div class="ec-step"><div class="ec-num">4</div>Instalar CapCut en el teléfono — es gratuito y profesional</div>
+        <div class="ec-step"><div class="ec-num">5</div>Grabar los primeros 3 videos del calendario (Días 1, 2, 3)</div>
+      </div>
+      <div class="ec-time">⏱ 3-4 horas total</div>
+    </div>
+
+    <div class="exec-card rev">
+      <div class="ec-day">Domingo · Semana Típica</div>
+      <div class="ec-title">RUTINA SEMANAL</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Abrir el calendario de contenido — ver los 3-4 posts de la semana</div>
+        <div class="ec-step"><div class="ec-num">2</div>Leer el guión del día — preparar el espacio (consultorio o fondo neutro)</div>
+        <div class="ec-step"><div class="ec-num">3</div>Grabar los videos con el teléfono horizontal para Reels/TikTok (60-90 segundos máximo)</div>
+        <div class="ec-step"><div class="ec-num">4</div>Editar en CapCut: subtítulos automáticos + música + texto en pantalla</div>
+        <div class="ec-step"><div class="ec-num">5</div>Copiar caption del calendario — programar en Later para toda la semana</div>
+      </div>
+      <div class="ec-time">⏱ 2.5-3 horas total · domingo</div>
+    </div>
+
+    <div class="exec-card rev">
+      <div class="ec-day">Configuración CapCut</div>
+      <div class="ec-title">EDICIÓN PROFESIONAL</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Subtítulos automáticos: Texto → Auto subtítulos → Seleccionar fuente Syne o Bold Sans</div>
+        <div class="ec-step"><div class="ec-num">2</div>Color de subtítulos: blanco con sombra negra — visible en cualquier fondo</div>
+        <div class="ec-step"><div class="ec-num">3</div>Música: volumen al 8-12% — que se escuche el audio de Karen claramente</div>
+        <div class="ec-step"><div class="ec-num">4</div>Texto en pantalla primeros 2 segundos: el hook del guión en letra grande</div>
+        <div class="ec-step"><div class="ec-num">5</div>Exportar en 1080p — no comprimir la calidad</div>
+      </div>
+      <div class="ec-time">⏱ 15-20 min por video</div>
+    </div>
+
+    <div class="exec-card rev">
+      <div class="ec-day">Configuración Later</div>
+      <div class="ec-title">PROGRAMACIÓN AUTO</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Subir los videos editados a Later</div>
+        <div class="ec-step"><div class="ec-num">2</div>Pegar el caption del calendario en cada post</div>
+        <div class="ec-step"><div class="ec-num">3</div>Agregar los hashtags según la categoría del post</div>
+        <div class="ec-step"><div class="ec-num">4</div>Programar: Instagram Lun/Mié/Vie 7pm · TikTok Mar/Jue 8pm · Facebook Mié/Sáb 12pm</div>
+        <div class="ec-step"><div class="ec-num">5</div>Activar auto-publicación — Later publica solo, Karen solo responde comentarios</div>
+      </div>
+      <div class="ec-time">⏱ 30 min · domingo noche</div>
+    </div>
+
+    <div class="exec-card rev">
+      <div class="ec-day">Lunes a Sábado</div>
+      <div class="ec-title">ENGAGEMENT DIARIO</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Revisar comentarios nuevos — responder todos con preguntas abiertas</div>
+        <div class="ec-step"><div class="ec-num">2</div>Responder DMs — el bot de n8n ya respondió los automáticos, Karen solo ve los escalados</div>
+        <div class="ec-step"><div class="ec-num">3</div>Publicar 1 Story diaria — detrás de cámara del consultorio, tip rápido o producto</div>
+        <div class="ec-step"><div class="ec-num">4</div>Ver métricas del post más reciente — ¿superó el promedio? Si sí, hacer contenido similar</div>
+      </div>
+      <div class="ec-time">⏱ 15 min · cada día</div>
+    </div>
+
+    <div class="exec-card rev">
+      <div class="ec-day">Viernes · Cada Semana</div>
+      <div class="ec-title">REVISIÓN SEMANAL</div>
+      <div class="ec-steps">
+        <div class="ec-step"><div class="ec-num">1</div>Ver en Later Analytics: ¿qué post tuvo más alcance esta semana?</div>
+        <div class="ec-step"><div class="ec-num">2</div>El post con más alcance → hacer contenido similar la semana siguiente</div>
+        <div class="ec-step"><div class="ec-num">3</div>Revisar cuántos DMs nuevos llegaron → cuántos se convirtieron en citas</div>
+        <div class="ec-step"><div class="ec-num">4</div>Ajustar el calendario si hay tendencia nueva relevante para el nicho</div>
+      </div>
+      <div class="ec-time">⏱ 20 min · viernes</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOOKS -->
+<div class="pane" id="pane-hooks">
+  <div class="sec-label rev">Psicología de la Atención</div>
+  <h2 class="sec-h rev">GANCHOS <em>PSICOLÓGICOS</em></h2>
+  <p class="sec-sub rev">Los primeros 2-3 segundos determinan si alguien sigue viendo. Haz clic en cualquier gancho para copiarlo.</p>
+
+  <div class="hooks-grid" id="hooksGrid"></div>
+</div>
+
+<!-- COPYWRITING -->
+<div class="pane" id="pane-copywriting">
+  <div class="sec-label rev">Escritura Persuasiva</div>
+  <h2 class="sec-h rev">COPY<em>WRITING</em></h2>
+  <p class="sec-sub rev">Scripts completos para cada tipo de contenido. Listos para usar — solo abre la cámara y sigue el texto.</p>
+
+  <div class="copy-tabs">
+    <button class="ctab active" onclick="showCopyTab('ads',this)">Ads Meta</button>
+    <button class="ctab" onclick="showCopyTab('stories',this)">Stories</button>
+    <button class="ctab" onclick="showCopyTab('reels',this)">Reels/TikTok</button>
+    <button class="ctab" onclick="showCopyTab('dm',this)">DMs Ventas</button>
+    <button class="ctab" onclick="showCopyTab('email',this)">Email</button>
+  </div>
+
+  <div class="copy-pane active" id="cpane-ads">
+    <div class="copy-block">
+      <div class="copy-label">Ad 01 — Postquirúrgico · Objetivo: Leads</div>
+      <div class="copy-text">¿Te operaste y nadie te dijo qué hacer después?
+
+La diferencia entre 3 semanas y 6 semanas de recuperación está en lo que haces los primeros días.
+
+Soy Karen Guarin, cosmetóloga especialista en recuperación postquirúrgica con 13 años de experiencia.
+
+Con drenaje linfático manual desde el día 5 post-cirugía, mis pacientes reducen su inflamación hasta un 60% en las primeras sesiones.
+
+Presencial o virtual. Primera consulta diagnóstica: GRATIS.
+
+👇 Agenda aquí</div>
+      <div class="copy-note">→ Usar para campaña de Conversión · Público: mujeres 28-50, intereses en cirugía plástica, recuperación</div>
+    </div>
+    <div class="copy-block">
+      <div class="copy-label">Ad 02 — Tóxicos · Objetivo: Tráfico a tienda</div>
+      <div class="copy-text">Tu desodorante de todos los días puede estar afectando tus hormonas.
+
+El cloruro de aluminio — presente en el 90% de los antitranspirantes — bloquea físicamente los poros y ha sido asociado con disrupción hormonal.
+
+Yo lo eliminé hace 7 años. Mis pacientes también.
+
+Hoy tengo alternativas que protegen igual de bien, sin el riesgo. Revisadas por mí. Sin aluminio, sin parabenos, sin ftalatos.
+
+Ver productos naturales →</div>
+      <div class="copy-note">→ Usar para campaña de Tráfico · Público: mujeres 25-45, intereses en vida natural, cosmética orgánica</div>
+    </div>
+    <div class="copy-block">
+      <div class="copy-label">Ad 03 — Retargeting · Visitantes web que no convirtieron</div>
+      <div class="copy-text">Hola de nuevo 🌿
+
+Notamos que visitaste mi página pero no agendaste. ¿Tienes dudas?
+
+Te ofrezco una consulta diagnóstica GRATUITA de 15 minutos para que hablemos de tu caso específico — sin compromiso.
+
+En 15 minutos te digo exactamente si puedo ayudarte y cómo.
+
+Cupos limitados esta semana. →</div>
+      <div class="copy-note">→ Público personalizado: visitantes web últimos 30 días que NO completaron formulario</div>
+    </div>
+  </div>
+
+  <div class="copy-pane" id="cpane-stories">
+    <div class="copy-block">
+      <div class="copy-label">Story Educativa — Dónde va el texto en pantalla</div>
+      <div class="copy-text">SLIDE 1:
+"¿Sabías que tu crema tiene esto?"
+[foto etiqueta de producto]
+
+SLIDE 2:
+"Methylparaben = imita el estrógeno en tu cuerpo"
+[texto grande, fondo oscuro]
+
+SLIDE 3:
+"Lo que yo uso en vez de eso 👇"
+[foto producto alternativo]
+
+SLIDE 4:
+"Swipe up para ver mi tienda natural"
+[botón de enlace]</div>
+      <div class="copy-note">→ Stories en secuencia funcionan mejor que una sola. Cada slide tiene una revelación.</div>
+    </div>
+    <div class="copy-block">
+      <div class="copy-label">Story de Venta Directa — Producto</div>
+      <div class="copy-text">SLIDE 1:
+"Llevo 7 años sin aluminio y esto es lo que uso"
+[video Karen aplicando desodorante]
+
+SLIDE 2:
+"Ingredientes: bicarbonato · coco · karité · lavanda"
+"Eso es todo. Sin más."
+[foto ingredientes]
+
+SLIDE 3:
+"¿Quieres probarlo? 🌿"
+[foto producto con precio]
+[botón: Ver en tienda]</div>
+    </div>
+  </div>
+
+  <div class="copy-pane" id="cpane-reels">
+    <div class="copy-block">
+      <div class="copy-label">Reel 60 segundos — Hook máximo impacto</div>
+      <div class="copy-text">[0-3s] HOOK EN TEXTO GRANDE en pantalla mientras Karen mira a la cámara:
+"Esto que tienes en tu baño puede estar arruinando tu piel"
+
+[3-8s] Karen habla directo:
+"Voy a mostrarte el ingrediente que está en casi todos los productos de tu baño y que muy poca gente conoce."
+
+[8-25s] Muestra el producto — señala el ingrediente en la etiqueta:
+"¿Ves este ingrediente? Se llama [X]. Lo que hace en tu cuerpo es..."
+
+[25-45s] Explica el problema de forma simple, con emoción:
+"Yo lo descubrí hace 7 años trabajando con mis pacientes y cambió todo."
+
+[45-55s] Solución + autoridad:
+"Hoy uso [alternativa]. Mis pacientes también. Y los resultados hablan solos."
+
+[55-60s] CTA directo:
+"¿Quieres saber exactamente qué tienes en tu baño? Link en bio."</div>
+      <div class="copy-note">→ La clave: hook visual + problema familiar + solución + credibilidad + CTA claro</div>
+    </div>
+  </div>
+
+  <div class="copy-pane" id="cpane-dm">
+    <div class="copy-block">
+      <div class="copy-label">DM cuando alguien comenta "¿cuánto cuesta?"</div>
+      <div class="copy-text">¡Hola [nombre]! 💚
+
+Gracias por tu interés. Los precios varían según el tipo de tratamiento y el número de sesiones que necesites.
+
+Para darte un precio exacto y justo, lo mejor es hacer primero una valoración diagnóstica gratuita de 15 minutos — virtual o presencial — donde evalúo tu caso específico.
+
+¿Te parece bien? Puedo darte disponibilidad ahora mismo 🌿</div>
+      <div class="copy-note">→ Nunca dar precio en DM sin calificar primero. La consulta gratuita es el puente.</div>
+    </div>
+    <div class="copy-block">
+      <div class="copy-label">DM cuando alguien ve la Story de producto</div>
+      <div class="copy-text">¡Hola! Vi que viste mi story sobre [producto] 🌿
+
+¿Tienes alguna pregunta sobre los ingredientes o cómo funciona?
+
+Te cuento todo lo que necesites saber. También tengo un kit especial que combina los productos más pedidos con un 20% de descuento esta semana 💚</div>
+    </div>
+  </div>
+
+  <div class="copy-pane" id="cpane-email">
+    <div class="copy-block">
+      <div class="copy-label">Email de bienvenida — Tono Karen</div>
+      <div class="copy-text">Asunto: Hola [nombre], te escribo yo personalmente 🌿
+
+[nombre],
+
+Gracias por contactarme. Recibí tu mensaje y me alegra mucho que hayas dado este paso.
+
+En 13 años he aprendido algo: la recuperación real — sea de una cirugía, de años de productos tóxicos, o de una piel que lleva tiempo sin cuidado — siempre empieza con la decisión de hacerlo bien.
+
+Y tú ya tomaste esa decisión al escribirme.
+
+También te escribí por WhatsApp para coordinar mejor. Si prefieres seguir por aquí, perfecto.
+
+Un abrazo,
+Karen 🌿
+
+P.D. Si tienes una cirugía próxima o reciente, cuéntame cuándo fue — ese dato cambia todo el protocolo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ESTRUCTURA CAMPAÑAS -->
+<div class="pane" id="pane-estructura">
+  <div class="sec-label rev">Meta Ads Architecture</div>
+  <h2 class="sec-h rev">ESTRUCTURA DE <em>CAMPAÑAS</em></h2>
+  <p class="sec-sub rev">3 campañas simultáneas. Cada una con su objetivo, su audiencia y su creativo específico. Así opera el sistema completo.</p>
+
+  <div class="ads-structure rev">
+    <div class="camp-tree">
+      <h3>Árbol de Campañas</h3>
+      <div class="tree-item campaign" onclick="showAdDetail('c1')">📦 CAMPAÑA 1 — Postquirúrgico</div>
+      <div class="tree-item adset" onclick="showAdDetail('a1')">↳ Ad Set: Mujeres post-cirugía</div>
+      <div class="tree-item ad" onclick="showAdDetail('ad1')">↳ Ad: Video "72 horas"</div>
+      <div class="tree-item ad" onclick="showAdDetail('ad2')">↳ Ad: Testimonio María</div>
+      <div class="tree-item campaign" onclick="showAdDetail('c2')">🚫 CAMPAÑA 2 — Sin Tóxicos</div>
+      <div class="tree-item adset" onclick="showAdDetail('a2')">↳ Ad Set: Vida natural</div>
+      <div class="tree-item adset" onclick="showAdDetail('a3')">↳ Ad Set: Mamás Colombia</div>
+      <div class="tree-item ad" onclick="showAdDetail('ad3')">↳ Ad: Video desodorante</div>
+      <div class="tree-item ad" onclick="showAdDetail('ad4')">↳ Ad: Carrusel ingredientes</div>
+      <div class="tree-item campaign" onclick="showAdDetail('c3')">🔄 CAMPAÑA 3 — Retargeting</div>
+      <div class="tree-item adset" onclick="showAdDetail('a4')">↳ Ad Set: Visitantes web</div>
+      <div class="tree-item adset" onclick="showAdDetail('a5')">↳ Ad Set: Engagement IG</div>
+      <div class="tree-item ad" onclick="showAdDetail('ad5')">↳ Ad: Consulta gratis</div>
+    </div>
+
+    <div class="ad-detail" id="adDetail">
+      <h3>Selecciona una campaña para ver el detalle</h3>
+      <p style="font-size:0.78rem;color:var(--white2)">Haz click en cualquier elemento del árbol de la izquierda para ver la configuración completa.</p>
+    </div>
+  </div>
+
+  <div class="kpi-row rev">
+    <div class="kpi"><div class="kpi-l">Presupuesto total/día</div><div class="kpi-v go">$45K</div><div class="kpi-s">COP · para empezar</div></div>
+    <div class="kpi"><div class="kpi-l">CPL estimado</div><div class="kpi-v g">$8K</div><div class="kpi-s">Costo por lead</div></div>
+    <div class="kpi"><div class="kpi-l">Leads/mes estimados</div><div class="kpi-v t">168</div><div class="kpi-s">Con $45K/día</div></div>
+    <div class="kpi"><div class="kpi-l">Tasa conv. lead→cita</div><div class="kpi-v g">35%</div><div class="kpi-s">Con seguimiento auto</div></div>
+    <div class="kpi"><div class="kpi-l">Citas/mes estimadas</div><div class="kpi-v go">58</div><div class="kpi-s">Del presupuesto base</div></div>
+  </div>
+</div>
+
+<!-- AUDIENCIAS -->
+<div class="pane" id="pane-audiencias">
+  <div class="sec-label rev">Targeting Profesional</div>
+  <h2 class="sec-h rev">PÚBLICOS & <em>AUDIENCIAS</em></h2>
+  <p class="sec-sub rev">6 audiencias construidas para cada etapa del embudo. Desde tráfico frío hasta retargeting caliente.</p>
+
+  <div class="audience-grid rev" id="audienceGrid"></div>
+</div>
+
+<!-- CREATIVOS -->
+<div class="pane" id="pane-creativos">
+  <div class="sec-label rev">Material Publicitario</div>
+  <h2 class="sec-h rev">CREATIVOS & <em>FORMATOS</em></h2>
+  <p class="sec-sub rev">Qué producir, cómo producirlo y en qué formato. Cada creativo optimizado para su plataforma y objetivo.</p>
+
+  <table class="creatives-table rev">
+    <thead>
+      <tr><th>Creativo</th><th>Formato</th><th>Campaña</th><th>Duración/Tamaño</th><th>Hook de apertura</th><th>CTA Final</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Video "72 horas post-cirugía"</td><td><span class="format-tag video">Video</span></td><td>Postquirúrgico</td><td>30-45 seg · 9:16</td><td>"Si te operaste, para todo y ve esto"</td><td>Agenda consulta gratis</td></tr>
+      <tr><td>Testimonio María — lipo a 3 semanas</td><td><span class="format-tag video">Video</span></td><td>Postquirúrgico</td><td>45-60 seg · 9:16</td><td>"Me dijeron 6 semanas. Tardé 3."</td><td>Ver cómo lo logramos</td></tr>
+      <tr><td>Carrusel "7 ingredientes a eliminar"</td><td><span class="format-tag carousel">Carrusel</span></td><td>Sin Tóxicos</td><td>7 slides · 1:1</td><td>"Slide 1: Lee tu desodorante ahora"</td><td>Ver alternativas en tienda</td></tr>
+      <tr><td>Video desodorante natural review</td><td><span class="format-tag video">Video</span></td><td>Sin Tóxicos</td><td>30 seg · 9:16</td><td>"Probé 12 desodorantes naturales. Este ganó."</td><td>Ver en tienda</td></tr>
+      <tr><td>Foto "Antes/Después acné 8 sesiones"</td><td><span class="format-tag image">Imagen</span></td><td>Facial</td><td>1:1 · alta res</td><td>Imagen habla sola + "8 sesiones"</td><td>Quiero resultados así</td></tr>
+      <tr><td>Video "Consulta gratis 15 minutos"</td><td><span class="format-tag video">Video</span></td><td>Retargeting</td><td>20 seg · 9:16</td><td>"Hola de nuevo. Tengo 15 minutos para ti."</td><td>Reservar consulta gratis</td></tr>
+      <tr><td>Carrusel Kit Postquirúrgico</td><td><span class="format-tag carousel">Carrusel</span></td><td>Tienda</td><td>5 slides · 1:1</td><td>"Esto necesitas ANTES de tu cirugía"</td><td>Ver kit completo</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:var(--void2);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.5rem">
+    <div class="sec-label" style="margin-bottom:0.8rem">Especificaciones Técnicas Meta Ads 2025</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.75rem">
+      <div>
+        <div style="color:var(--white3);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem">Video</div>
+        <div style="color:var(--white2);line-height:1.8">Ratio: 9:16 (Reels/Stories) o 1:1 (Feed)<br>Duración: 15-60 segundos<br>Resolución mínima: 1080x1920px<br>Formato: MP4 o MOV<br>Texto en video: máx 20% del frame<br>Subtítulos: recomendados (85% sin sonido)</div>
+      </div>
+      <div>
+        <div style="color:var(--white3);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem">Imagen / Carrusel</div>
+        <div style="color:var(--white2);line-height:1.8">Ratio: 1:1 (Feed) o 9:16 (Stories)<br>Resolución: 1080x1080px mínimo<br>Formato: JPG o PNG<br>Tamaño máx: 30MB<br>Carrusel: 2-10 tarjetas<br>Texto: conciso, máx 125 caracteres primarios</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRESUPUESTO -->
+<div class="pane" id="pane-presupuesto">
+  <div class="sec-label rev">Inversión Publicitaria</div>
+  <h2 class="sec-h rev">PRESUPUESTO <em>META ADS</em></h2>
+  <p class="sec-sub rev">3 fases de inversión según el crecimiento. Empieza pequeño, mide, escala lo que funciona.</p>
+
+  <div class="budget-grid rev">
+    <div class="budget-card">
+      <div class="bc-label">Fase 1 · Mes 1-2</div>
+      <div class="bc-val go">$45K</div>
+      <div class="bc-sub">COP por día</div>
+      <div class="bc-bar"><div class="bc-fill" style="width:30%;background:var(--gold)"></div></div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">Fase 2 · Mes 3-4</div>
+      <div class="bc-val t">$90K</div>
+      <div class="bc-sub">COP por día</div>
+      <div class="bc-bar"><div class="bc-fill" style="width:60%;background:var(--terra)"></div></div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">Fase 3 · Mes 5+</div>
+      <div class="bc-val g">$150K</div>
+      <div class="bc-sub">COP por día</div>
+      <div class="bc-bar"><div class="bc-fill" style="width:100%;background:var(--sage)"></div></div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">ROI Estimado</div>
+      <div class="bc-val g">4-6x</div>
+      <div class="bc-sub">Por peso invertido</div>
+      <div class="bc-bar"><div class="bc-fill" style="width:80%;background:var(--sage2)"></div></div>
+    </div>
+  </div>
+
+  <div style="background:var(--void2);border:1px solid var(--border);padding:1.5rem;margin-bottom:1.5rem">
+    <div class="sec-label" style="margin-bottom:1rem">Distribución del Presupuesto Fase 1 ($45K/día)</div>
+    <table class="creatives-table">
+      <thead><tr><th>Campaña</th><th>Presupuesto/día</th><th>Objetivo</th><th>Resultado esperado</th></tr></thead>
+      <tbody>
+        <tr><td>Postquirúrgico — Leads</td><td style="font-family:'DM Mono',monospace;color:var(--sage2)">$20.000</td><td>Generación de leads</td><td>2-4 leads/día · CPL ~$7K</td></tr>
+        <tr><td>Sin Tóxicos — Tráfico tienda</td><td style="font-family:'DM Mono',monospace;color:var(--terra2)">$15.000</td><td>Tráfico + ventas</td><td>50-80 visitas/día tienda</td></tr>
+        <tr><td>Retargeting — Conversión</td><td style="font-family:'DM Mono',monospace;color:var(--gold2)">$10.000</td><td>Conversión</td><td>Recuperar 15% visitantes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONFIGURACIÓN META -->
+<div class="pane" id="pane-config">
+  <div class="sec-label rev">Setup Técnico</div>
+  <h2 class="sec-h rev">CONFIGURACIÓN <em>META</em></h2>
+  <p class="sec-sub rev">Pasos exactos para activar Meta Business Suite y correr las primeras campañas. En orden estricto.</p>
+
+  <div class="config-steps rev">
+    <div class="cs-item">
+      <div class="cs-num done">1</div>
+      <div class="cs-body"><h4>Crear Página de Facebook</h4><p>Tipo: Negocio → Salud y Belleza → Cosmetólogo/a. Nombre: "Karen Guarin Cosmiatra". Foto de perfil profesional. Bio con número y web.</p></div>
+      <div class="cs-status next">Hacer primero</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">2</div>
+      <div class="cs-body"><h4>Crear Meta Business Suite</h4><p>Ve a business.facebook.com → Crear cuenta → Nombre del negocio: "Karen Guarin" → Conectar la página de Facebook → Conectar cuenta de Instagram.</p></div>
+      <div class="cs-status pending">Paso 2</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">3</div>
+      <div class="cs-body"><h4>Instalar Meta Pixel en el sitio web</h4><p>Meta Business Suite → Events Manager → Crear Pixel → Copiar el código → Pegarlo en el HTML del sitio web de Karen antes del tag &lt;/head&gt;. Verificar que dispara en karenguarin.com.</p></div>
+      <div class="cs-status pending">Paso 3 · Crítico</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">4</div>
+      <div class="cs-body"><h4>Configurar Eventos del Pixel</h4><p>Definir eventos: ViewContent (visita tienda) · Lead (formulario enviado) · Purchase (compra completada). Sin esto Meta no puede optimizar bien las campañas.</p></div>
+      <div class="cs-status pending">Paso 4</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">5</div>
+      <div class="cs-body"><h4>Agregar Método de Pago</h4><p>Meta Ads Manager → Configuración de facturación → Agregar tarjeta de crédito o débito. Meta cobra en USD. Con $15 USD/mes empiezas la Fase 1.</p></div>
+      <div class="cs-status pending">Paso 5</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">6</div>
+      <div class="cs-body"><h4>Crear Audiencias Personalizadas</h4><p>Ads Manager → Audiencias → Crear audiencia personalizada → Visitantes del sitio web (Pixel) + Seguidores de Instagram + Lista de clientes (subir CSV de Notion).</p></div>
+      <div class="cs-status pending">Paso 6</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">7</div>
+      <div class="cs-body"><h4>Crear Primera Campaña — Postquirúrgico</h4><p>Objetivo: Generación de Leads → Formulario instantáneo. Presupuesto: $20.000 COP/día. Público: Mujeres 28-50, Colombia, intereses en cirugía plástica. Creativo: Video "72 horas post-cirugía".</p></div>
+      <div class="cs-status pending">Paso 7 · Lanzar</div>
+    </div>
+    <div class="cs-item">
+      <div class="cs-num">8</div>
+      <div class="cs-body"><h4>Conectar Leads de Meta con n8n</h4><p>Cuando alguien llena el formulario de Meta → n8n lo recibe via webhook → lo registra en Notion → envía WhatsApp de bienvenida automático. El Flujo 01 ya está preparado para esto.</p></div>
+      <div class="cs-status pending">Paso 8 · Automatización</div>
+    </div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="pane" id="pane-kpis">
+  <div class="sec-label rev">Métricas de Éxito</div>
+  <h2 class="sec-h rev">KPIs & <em>MÉTRICAS</em></h2>
+  <p class="sec-sub rev">Lo que Karen revisa cada semana. Solo los números que realmente importan para tomar decisiones.</p>
+
+  <div class="kpi-row rev">
+    <div class="kpi"><div class="kpi-l">CPL Meta Ads</div><div class="kpi-v go">Meta &lt;$10K</div><div class="kpi-s">COP por lead</div></div>
+    <div class="kpi"><div class="kpi-l">CTR Anuncios</div><div class="kpi-v g">&gt;2%</div><div class="kpi-s">Clicks / impresiones</div></div>
+    <div class="kpi"><div class="kpi-l">Tasa conv. lead→cita</div><div class="kpi-v t">&gt;30%</div><div class="kpi-s">Con n8n activo</div></div>
+    <div class="kpi"><div class="kpi-l">Engagement IG</div><div class="kpi-v g">&gt;5%</div><div class="kpi-s">Likes+comentarios/alcance</div></div>
+    <div class="kpi"><div class="kpi-l">ROAS</div><div class="kpi-v go">&gt;4x</div><div class="kpi-s">Retorno sobre inversión</div></div>
+  </div>
+
+  <div style="background:var(--void2);border:1px solid var(--border);padding:1.5rem">
+    <div class="sec-label" style="margin-bottom:1rem">Revisión Semanal — Lo que Karen hace cada lunes</div>
+    <table class="creatives-table">
+      <thead><tr><th>Métrica</th><th>Dónde verla</th><th>Si está bien</th><th>Si está mal → qué hacer</th></tr></thead>
+      <tbody>
+        <tr><td>CPL (costo por lead)</td><td>Meta Ads Manager</td><td>Mantener campaña igual</td><td>&gt;$15K COP → cambiar creativo o audiencia</td></tr>
+        <tr><td>Post con más alcance</td><td>Instagram Insights</td><td>Hacer contenido similar</td><td>Si todos igual → cambiar el hook</td></tr>
+        <tr><td>DMs recibidos</td><td>Instagram / WhatsApp</td><td>Bot maneja, Karen revisa escalados</td><td>Si pocos DMs → el contenido no tiene CTA</td></tr>
+        <tr><td>Leads → Citas convertidas</td><td>Notion CRM</td><td>Meta alcanzada</td><td>&lt;20% → revisar secuencia de WhatsApp</td></tr>
+        <tr><td>Ventas tienda</td><td>Panel Admin</td><td>Escalar ads de tienda</td><td>Pocas ventas → revisar proceso de pago</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+// NAVIGATION
+function showPane(id, el) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sl').forEach(l => l.classList.remove('active'));
+  document.getElementById('pane-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  const titles = {
+    perfiles:'Perfiles Profesionales', ejecucion:'Plan de Ejecución',
+    hooks:'Ganchos Psicológicos', copywriting:'Copywriting Completo',
+    estructura:'Estructura de Campañas', audiencias:'Públicos & Audiencias',
+    creativos:'Creativos & Formatos', presupuesto:'Presupuesto Meta Ads',
+    config:'Configuración Meta Business', kpis:'KPIs & Métricas'
+  };
+  document.getElementById('tbTitle').textContent = titles[id] || id;
+  setTimeout(() => {
+    document.querySelectorAll('.pane.active .rev').forEach(el => el.classList.add('vis'));
+  }, 80);
+}
+
+function showCopyTab(id, btn) {
+  document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.copy-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('cpane-' + id).classList.add('active');
+}
+
+// HOOKS DATA
+const hooks = [
+  { type:'p2', platform:'Reel / TikTok', text:'Lo que nadie te dice sobre el ingrediente más común en tu baño...' },
+  { type:'p1', platform:'Reel / TikTok', text:'Si te vas a operar o ya lo hiciste, para todo y ve esto primero.' },
+  { type:'p2', platform:'TikTok', text:'Lee el ingrediente número 3 de tu crema favorita. Te espero.' },
+  { type:'p3', platform:'Story', text:'Adivina cuánto tardé en encontrar un desodorante que realmente funcione sin aluminio.' },
+  { type:'p1', platform:'Reel', text:'La diferencia entre 3 semanas y 6 semanas de recuperación está en esto.' },
+  { type:'p4', platform:'Todos', text:'13 años haciendo esto y todavía me emociono cuando una paciente camina sola.' },
+  { type:'p2', platform:'TikTok', text:'Tu perfume favorito huele increíble. Pero ¿sabes qué hay dentro?' },
+  { type:'p1', platform:'Reel', text:'El error más común en los primeros días post-cirugía. Lo veo todos los días.' },
+  { type:'p3', platform:'Story / Reel', text:'¿Cuántos ingredientes tiene mi rutina de noche? Solo 3. Te los muestro.' },
+  { type:'p2', platform:'TikTok', text:'Dos tipos de protector solar. Uno te cuida. El otro solo pretende.' },
+  { type:'p4', platform:'Reel', text:'Pasé meses en quirófanos aprendiendo lo que los libros no enseñan.' },
+  { type:'p1', platform:'Carrusel', text:'7 señales de que tu recuperación va bien. Y 3 de alarma que no puedes ignorar.' },
+  { type:'p2', platform:'TikTok', text:'Este ingrediente aparece con 47 nombres diferentes en las etiquetas. Uno está en tu crema.' },
+  { type:'p3', platform:'Story', text:'Hoy muestro lo que hay en mi bolso de trabajo. Nada de lo que esperas.' },
+  { type:'p1', platform:'Reel', text:'¿Sabes la diferencia entre drenaje linfático y masaje? Después de esto, sí.' },
+  { type:'p4', platform:'TikTok', text:'Mi paciente llegó llorando. No de dolor. De alivio. Esto fue lo que pasó.' },
+  { type:'p2', platform:'Reel', text:'Tu crema hidratante probablemente no está hidratando tu piel. Te explico por qué.' },
+  { type:'p1', platform:'Carrusel', text:'Antes de tu cirugía, haz esto. Tu recuperación va a ser completamente diferente.' },
+];
+
+function buildHooks() {
+  const g = document.getElementById('hooksGrid');
+  if (!g) return;
+  const typeLabels = { p1:'Educativo · Clínico', p2:'Denuncia Tóxicos', p3:'Detrás de Cámara', p4:'Emocional' };
+  hooks.forEach(h => {
+    g.innerHTML += `
+      <div class="hook-card" onclick="navigator.clipboard.writeText('${h.text.replace(/'/g,"\\'")}').then(()=>{})">
+        <div class="hook-type ${h.type}">${typeLabels[h.type]}</div>
+        <div class="hook-text">${h.text}</div>
+        <div class="hook-platform">${h.platform}</div>
+      </div>`;
+  });
+}
+
+// AUDIENCES
+const audiences = [
+  { type:'Tráfico Frío', name:'Mujeres Post-Cirugía', temp:'frio', size:'~180K personas', items:['Mujeres 28-50 años · Colombia', 'Intereses: cirugía plástica, liposucción, recuperación', 'Comportamiento: compraron servicios de salud online', 'Excluir: ya clientes de Karen (lista CRM)'] },
+  { type:'Tráfico Frío', name:'Conscientes Sin Tóxicos', temp:'frio', size:'~250K personas', items:['Mujeres 22-45 años · Colombia', 'Intereses: vida natural, cosmética orgánica, bienestar', 'Intereses: maternidad, lactancia, salud hormonal', 'Comportamiento: compran productos naturales online'] },
+  { type:'Tráfico Tibio', name:'Lookalike Clientes', temp:'tibio', size:'~300K personas', items:['Audiencia similar al 1% de clientes actuales de Karen', 'Basada en lista de clientes de Notion (subir CSV)', 'Meta encuentra personas similares a las que ya compran', 'Mejor audiencia fría disponible cuando tienes datos'] },
+  { type:'Retargeting', name:'Visitantes Web', temp:'caliente', size:'Variable según tráfico', items:['Personas que visitaron karenguarin.com en últimos 30 días', 'Excluir quienes ya compraron o agendaron', 'Segmentar: visitaron tienda vs visitaron servicios', 'Pixel de Meta instalado en la web necesario'] },
+  { type:'Retargeting', name:'Engagement Instagram', temp:'caliente', size:'Todos tus seguidores activos', items:['Personas que interactuaron con posts en últimos 60 días', 'Vieron video más del 50% del tiempo', 'Guardaron algún post', 'Enviaron DM o comentaron'] },
+  { type:'Retargeting', name:'Leads Sin Convertir', temp:'caliente', size:'Lista dinámica de Notion', items:['Leads que llenaron formulario pero no agendaron', 'Sincronizar lista de Notion con Meta Custom Audiences', 'Mostrar: "¿Todavía tienes dudas? Consulta gratis"', 'Actualizar lista semanalmente desde Notion'] },
+];
+
+function buildAudiences() {
+  const g = document.getElementById('audienceGrid');
+  if (!g) return;
+  audiences.forEach(a => {
+    g.innerHTML += `
+      <div class="aud-card rev">
+        <div class="aud-type">${a.type}</div>
+        <div class="aud-name">${a.name}</div>
+        <div class="aud-items">${a.items.map(i => `<div class="aud-item">${i}</div>`).join('')}</div>
+        <div class="aud-size">${a.size}</div>
+        <span class="aud-temp ${a.temp}">${a.temp.charAt(0).toUpperCase() + a.temp.slice(1)}</span>
+      </div>`;
+  });
+}
+
+// AD DETAIL
+const adDetails = {
+  c1: { title:'Campaña 1 — Recuperación Postquirúrgica', rows:[
+    ['Objetivo','Generación de Leads'],['Presupuesto',['$20.000 COP/día','gold']],['Público','Mujeres 28-50 · Colombia · Intereses cirugía plástica'],
+    ['Placements','Instagram Reels + Facebook Feed + Stories'],['Optimización','Costo por lead · Meta optimiza automáticamente'],
+    ['Duración','Permanente · pausar si CPL > $15.000 COP'],['Período aprendizaje','7 días · no hacer cambios en este período']
+  ]},
+  c2: { title:'Campaña 2 — Sin Tóxicos', rows:[
+    ['Objetivo','Tráfico a tienda + Conversiones'],['Presupuesto',['$15.000 COP/día','terra']],['Público','Mujeres 22-45 · Intereses vida natural · Mamás Colombia'],
+    ['Placements','Instagram Feed + TikTok (si se activa) + Reels'],['Pixel','Evento: ViewContent en tienda + Purchase'],
+    ['Creativos','Video desodorante · Carrusel ingredientes · Imagen antes/después']
+  ]},
+  c3: { title:'Campaña 3 — Retargeting', rows:[
+    ['Objetivo','Conversión · Agendamiento'],['Presupuesto',['$10.000 COP/día','sage']],['Público','Visitantes web 30d + Engagement IG 60d'],
+    ['Exclusiones','Excluir quienes ya agendaron o compraron'],['Mensaje','Más directo: "¿Todavía tienes dudas? Consulta gratis"'],
+    ['Frecuencia','Máx 3 impresiones por persona por semana · no saturar']
+  ]},
+  a1: { title:'Ad Set — Mujeres Post-Cirugía', rows:[
+    ['Público','Mujeres 28-50 años · Colombia'],['Intereses','Cirugía plástica · Liposucción · Recuperación postoperatoria'],
+    ['Comportamiento','Compraron servicios médicos online · Involucradas con salud'],['Excluir','Lista de clientes actuales de Notion'],
+    ['Placements','Automático → Meta elige el mejor'],['Presupuesto asignado','$20.000 COP · de la campaña 1']
+  ]},
+  ad1: { title:'Ad — Video "72 horas post-cirugía"', rows:[
+    ['Formato','Video vertical · 9:16 · 30-45 segundos'],['Hook','[0-3s] "Si te operaste, para todo y ve esto"'],
+    ['Texto primario','¿Te operaste y nadie te dijo qué hacer después? (copy completo en pestaña Copywriting)'],
+    ['Título','La diferencia entre 3 y 6 semanas de recuperación'],['CTA','Más información → formulario de lead'],
+    ['Objetivo KPI','CPL < $10.000 COP · CTR > 2%']
+  ]},
+};
+
+function showAdDetail(id) {
+  const d = adDetails[id];
+  if (!d) return;
+  document.querySelectorAll('.tree-item').forEach(i => i.classList.remove('active'));
+  event.target.classList.add('active');
+  const el = document.getElementById('adDetail');
+  el.innerHTML = `<h3>${d.title}</h3>${d.rows.map(r => `
+    <div class="detail-row">
+      <span class="detail-label">${r[0]}</span>
+      <span class="detail-val ${Array.isArray(r[1]) ? r[1][1] : ''}">${Array.isArray(r[1]) ? r[1][0] : r[1]}</span>
+    </div>`).join('')}`;
+}
+
+// INIT
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }), { threshold: 0.07 });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+buildHooks();
+buildAudiences();
+setTimeout(() => document.querySelectorAll('.pane.active .rev').forEach(el => el.classList.add('vis')), 100);
+</script>
+</body>
+</html>
