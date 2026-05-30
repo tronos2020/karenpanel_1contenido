@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VÓRTEX — Brand Book Confidencial 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0A0A0A;
+    --obsidian2: #0F0F0F;
+    --obsidian3: #141414;
+    --slate: #1E1E1E;
+    --slate2: #2A2A2A;
+    --bone: #E8E2D9;
+    --champagne: #C9A96E;
+    --champagne2: #B8955A;
+    --ashrose: #C4A8A0;
+    --pearl: #F5F2EE;
+    --mid: #3D3D3D;
+    --dim: #555;
+    --dimmer: #333;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--bone);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--obsidian); }
+  ::-webkit-scrollbar-thumb { background: var(--champagne); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 60px;
+    position: relative;
+    border-bottom: 1px solid var(--slate);
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 120%;
+    background: radial-gradient(ellipse at center, rgba(201,169,110,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-size: 9px;
+    letter-spacing: 7px;
+    color: var(--champagne);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 14vw, 180px);
+    font-weight: 300;
+    letter-spacing: 20px;
+    line-height: 0.9;
+    color: var(--bone);
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero-sub {
+    font-size: 10px;
+    letter-spacing: 9px;
+    color: var(--ashrose);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-tagline {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    text-align: right;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.2s forwards;
+  }
+
+  .hero-tagline-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--champagne);
+    letter-spacing: 2px;
+  }
+
+  .hero-tagline-sub {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--dimmer);
+    margin-top: 6px;
+  }
+
+  .hero-divider {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+  }
+
+  .hero-divider-line {
+    width: 60px;
+    height: 1px;
+    background: var(--champagne);
+  }
+
+  .hero-divider-text {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--dim);
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--slate);
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    overflow-x: auto;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 6px;
+    color: var(--bone);
+    margin-right: 40px;
+    white-space: nowrap;
+    padding: 20px 0;
+    flex-shrink: 0;
+  }
+
+  .nav-logo span { color: var(--champagne); }
+
+  .nav-items {
+    display: flex;
+    gap: 0;
+  }
+
+  .nav-item {
+    padding: 20px 22px;
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+  }
+
+  .nav-item:hover { color: var(--bone); }
+  .nav-item.active { color: var(--champagne); border-bottom-color: var(--champagne); }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    padding: 80px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .section.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    border-bottom: 1px solid var(--slate);
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+  }
+
+  .section-num {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--champagne);
+  }
+
+  .section-heading {
+    font-size: 10px;
+    letter-spacing: 7px;
+    color: var(--bone);
+    font-weight: 400;
+  }
+
+  /* GRID SYSTEMS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; }
+
+  /* CARDS */
+  .card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 28px;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover { border-color: var(--slate2); }
+
+  .card-label {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--champagne);
+    margin-bottom: 14px;
+  }
+
+  .card-text {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--ashrose);
+  }
+
+  /* PRODUCT TABS */
+  .product-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+
+  .product-tab {
+    padding: 12px 22px;
+    font-size: 8px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    border: 1px solid var(--slate);
+    background: none;
+    color: var(--dim);
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+  }
+
+  .product-tab:hover { color: var(--bone); border-color: var(--slate2); }
+  .product-tab.active { background: var(--champagne); color: var(--obsidian); border-color: var(--champagne); }
+
+  /* PRODUCT CARD */
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .product-hero {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+  }
+
+  .product-icon {
+    font-size: 56px;
+    color: var(--champagne);
+    margin-bottom: 24px;
+    line-height: 1;
+  }
+
+  .product-code {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--champagne);
+    margin-bottom: 10px;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    color: var(--bone);
+  }
+
+  .product-subtitle {
+    font-size: 8px;
+    letter-spacing: 6px;
+    color: var(--ashrose);
+    margin-bottom: 24px;
+  }
+
+  .product-concept {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--ashrose);
+    flex: 1;
+  }
+
+  .product-price-block {
+    border-top: 1px solid var(--slate);
+    padding-top: 20px;
+    margin-top: 24px;
+  }
+
+  .product-price-label {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: var(--dim);
+    margin-bottom: 6px;
+  }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--champagne);
+    letter-spacing: 2px;
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .product-detail-card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 18px 22px;
+    flex: 1;
+  }
+
+  /* EFFECTS LIST */
+  .effects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .effect-item {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .effect-dot {
+    color: var(--champagne);
+    font-size: 8px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .effect-text {
+    font-size: 11px;
+    color: var(--ashrose);
+    line-height: 1.6;
+  }
+
+  /* COLOR SWATCHES */
+  .swatch-card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    overflow: hidden;
+  }
+
+  .swatch-color { height: 90px; }
+
+  .swatch-info {
+    padding: 18px 20px;
+  }
+
+  .swatch-name {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--bone);
+    margin-bottom: 4px;
+  }
+
+  .swatch-hex {
+    font-size: 9px;
+    color: var(--champagne);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-family: monospace;
+  }
+
+  .swatch-role {
+    font-size: 10px;
+    color: var(--dim);
+  }
+
+  /* COLORWAY */
+  .colorway { margin-bottom: 24px; }
+
+  .colorway-name {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--bone);
+    margin-bottom: 10px;
+  }
+
+  .colorway-chips { display: flex; gap: 4px; margin-bottom: 6px; }
+
+  .colorway-chip {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--slate2);
+  }
+
+  .colorway-desc { font-size: 11px; color: var(--dim); }
+
+  /* ROADMAP */
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 100px 20px 1fr;
+    gap: 0 20px;
+    margin-bottom: 2px;
+    align-items: stretch;
+  }
+
+  .roadmap-month {
+    text-align: right;
+    padding-top: 22px;
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--champagne);
+  }
+
+  .roadmap-line-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .roadmap-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--champagne);
+    border-radius: 50%;
+    margin-top: 22px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .roadmap-line {
+    flex: 1;
+    width: 1px;
+    background: var(--slate);
+    margin-top: 4px;
+  }
+
+  .roadmap-content {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 22px 28px;
+    margin-left: 8px;
+  }
+
+  .roadmap-phase {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--ashrose);
+    margin-bottom: 16px;
+  }
+
+  .roadmap-tasks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .roadmap-task {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .roadmap-task-dot {
+    color: var(--champagne);
+    font-size: 7px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .roadmap-task-text {
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* FABRIC TABLE */
+  .fabric-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 3fr;
+    gap: 16px;
+    align-items: center;
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 20px 24px;
+    margin-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+
+  .fabric-row:hover { border-color: var(--slate2); }
+
+  .fabric-label {
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: var(--dim);
+    margin-bottom: 6px;
+  }
+
+  .fabric-val {
+    font-size: 12px;
+    color: var(--ashrose);
+  }
+
+  .fabric-name { font-size: 13px; color: var(--bone); }
+
+  /* CONTENT PILLARS */
+  .pillar-card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--champagne), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .pillar-card:hover::before { transform: scaleX(1); }
+
+  .pillar-icon {
+    font-size: 22px;
+    color: var(--champagne);
+    margin-bottom: 16px;
+  }
+
+  .pillar-title {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--bone);
+    margin-bottom: 14px;
+  }
+
+  .pillar-desc {
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.8;
+  }
+
+  /* VALUES GRID */
+  .value-card {
+    border-left: 2px solid var(--champagne);
+    padding-left: 16px;
+    margin-bottom: 20px;
+  }
+
+  .value-title {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--bone);
+    margin-bottom: 6px;
+  }
+
+  .value-desc { font-size: 11px; color: var(--dim); line-height: 1.6; }
+
+  /* POSITIONING MAP */
+  .position-map {
+    position: relative;
+    height: 220px;
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+  }
+
+  .axis-label {
+    position: absolute;
+    font-size: 8px;
+    letter-spacing: 4px;
+  }
+
+  .axis-h { top: 50%; width: calc(100% - 60px); left: 30px; height: 1px; background: var(--slate); transform: translateY(-50%); }
+  .axis-v { left: 50%; height: calc(100% - 40px); top: 20px; width: 1px; background: var(--slate); transform: translateX(-50%); }
+
+  .brand-dot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* LIST ITEMS */
+  .list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #141414;
+  }
+
+  .list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .list-dot { color: var(--champagne); font-size: 8px; flex-shrink: 0; margin-top: 3px; }
+  .list-text { font-size: 12px; color: var(--ashrose); line-height: 1.6; }
+
+  .list-item-neg .list-dot { color: var(--dimmer); }
+  .list-item-neg .list-text { color: var(--dimmer); }
+
+  /* PROFILE TABLE */
+  .profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #141414;
+  }
+
+  .profile-key {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+
+  .profile-val {
+    font-size: 11px;
+    color: var(--ashrose);
+    text-align: right;
+    max-width: 55%;
+    line-height: 1.5;
+  }
+
+  /* VOICE CARD */
+  .voice-example {
+    border-left: 2px solid var(--champagne);
+    padding-left: 16px;
+    margin-bottom: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ashrose);
+    line-height: 1.7;
+  }
+
+  /* VIDEO FORMAT CARD */
+  .video-card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 24px;
+  }
+
+  .video-format {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: var(--bone);
+    margin-bottom: 12px;
+  }
+
+  .video-desc {
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .video-perf {
+    font-size: 9px;
+    color: var(--champagne);
+    letter-spacing: 2px;
+  }
+
+  /* KPI CARDS */
+  .kpi-card {
+    background: var(--obsidian3);
+    border: 1px solid var(--slate);
+    padding: 28px;
+  }
+
+  .kpi-phase {
+    font-size: 8px;
+    letter-spacing: 4px;
+    color: var(--champagne);
+    margin-bottom: 14px;
+  }
+
+  .kpi-metric {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--ashrose);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--slate);
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+  }
+
+  .footer-left {
+    font-size: 8px;
+    letter-spacing: 5px;
+    color: var(--dimmer);
+  }
+
+  .footer-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--champagne);
+    letter-spacing: 2px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* UTIL */
+  .mb-2 { margin-bottom: 2px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .mb-40 { margin-bottom: 40px; }
+  .mt-2 { margin-top: 2px; }
+  .mt-24 { margin-top: 24px; }
+  .gap-2 { gap: 2px; }
+
+  .champagne { color: var(--champagne); }
+  .ashrose { color: var(--ashrose); }
+  .bone { color: var(--bone); }
+  .dim { color: var(--dim); }
+
+  .serif { font-family: 'Cormorant Garamond', serif; }
+  .italic { font-style: italic; }
+
+  .text-xl { font-size: 18px; line-height: 1.7; }
+  .text-sm { font-size: 11px; line-height: 1.7; }
+  .text-xs { font-size: 10px; line-height: 1.7; }
+
+  .border-line { border-top: 1px solid var(--slate); padding-top: 16px; margin-top: 20px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 24px; }
+    .hero-tagline { top: 24px; right: 24px; }
+    .section { padding: 50px 24px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: 1fr; }
+    .fabric-row { grid-template-columns: 1fr 1fr; }
+    .roadmap-item { grid-template-columns: 80px 16px 1fr; }
+    .footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+    .nav { padding: 0 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-brand { letter-spacing: 10px; }
+    .fabric-row { grid-template-columns: 1fr; }
+    .effects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tagline">
+    <div class="hero-tagline-text">"Poder en Movimiento"</div>
+    <div class="hero-tagline-sub">PRIMERA COLECCIÓN — FW 2026</div>
+  </div>
+
+  <div class="hero-label">BRAND BOOK — DOCUMENTO CONFIDENCIAL 2026</div>
+  <div class="hero-brand">VÓRTEX</div>
+  <div class="hero-sub">WOMEN'S PERFORMANCE ATELIER</div>
+
+  <div class="hero-divider">
+    <div class="hero-divider-line"></div>
+    <div class="hero-divider-text">LATINOAMÉRICA PREMIUM FITNESS</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">V<span>Ó</span>RTEX</div>
+  <div class="nav-items">
+    <button class="nav-item active" onclick="showSection('adn', this)">01 ADN</button>
+    <button class="nav-item" onclick="showSection('paleta', this)">02 PALETA</button>
+    <button class="nav-item" onclick="showSection('coleccion', this)">03 COLECCIÓN</button>
+    <button class="nav-item" onclick="showSection('textiles', this)">04 TEXTILES</button>
+    <button class="nav-item" onclick="showSection('contenido', this)">05 CONTENIDO</button>
+    <button class="nav-item" onclick="showSection('roadmap', this)">06 ROADMAP</button>
+  </div>
+</nav>
+
+<!-- ======================== ADN ======================== -->
+<div class="section active" id="adn">
+  <div class="section-title">
+    <span class="section-num">01</span>
+    <span class="section-heading">ADN VISUAL Y EMOCIONAL DE MARCA</span>
+  </div>
+
+  <div class="grid-2 mb-40">
+    <div class="card">
+      <div class="card-label">ESENCIA</div>
+      <div class="card-text">Lujo silencioso en movimiento. La marca que no necesita gritar para ser admirada. Se percibe antes de leer el nombre.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PROMESA</div>
+      <div class="card-text">Cada prenda redefine cómo te ves, cómo te sientes y cómo te perciben. No vendemos ropa — vendemos una versión superior de ti misma.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ARQUETIPO DE MARCA</div>
+      <div class="card-text">La Reina Atlética. Disciplinada, segura, estética, poderosa. No se esfuerza por parecer — simplemente llega y es.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">ANTAGONISTA</div>
+      <div class="card-text">Lo genérico. Lo económico visual. Lo masivo e intercambiable. Cualquier marca que todas usen sin recordarla.</div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="card mb-2">
+    <div class="card-label" style="margin-bottom:24px;">SISTEMA DE VALORES DE MARCA</div>
+    <div class="grid-3">
+      <div class="value-card">
+        <div class="value-title">PODER</div>
+        <div class="value-desc">Presencia que domina sin decirlo. La prenda habla antes que la persona.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">PRECISIÓN</div>
+        <div class="value-desc">Cada costura, cada corte, cada detalle es intencional. Nada es accidental.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">FEMINEIDAD</div>
+        <div class="value-desc">Moderna, no decorativa. Fuerte, no dura. Elegante, no frágil.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">DISCIPLINA</div>
+        <div class="value-desc">La estética premium se gana. Nuestra clienta lo sabe y lo vive.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">ASPIRACIÓN</div>
+        <div class="value-desc">Eleva a quien la usa. Activa el deseo de ser vista, recordada, admirada.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-title">EXCLUSIVIDAD</div>
+        <div class="value-desc">No es para todas — y precisamente eso la hace profundamente deseable.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 mb-40 mt-2">
+    <div class="card">
+      <div class="card-label" style="color:var(--champagne)">LA MARCA ES</div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Minimalista con poder visual</div></div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Premium sin ostentación obvia</div></div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Femenina sin debilidad</div></div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Atlética sin sacrificar estética</div></div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Seria sin ser aburrida</div></div>
+      <div class="list-item"><div class="list-dot">◈</div><div class="list-text">Exclusiva sin ser inalcanzable</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color:var(--dim)">LA MARCA NUNCA ES</div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Colorida sin dirección editorial</div></div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Llamativa sin propósito estratégico</div></div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Genérica o fácilmente reemplazable</div></div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Barata en percepción visual</div></div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Informal o juvenil sin sofisticación</div></div>
+      <div class="list-item list-item-neg"><div class="list-dot">—</div><div class="list-text">Obvia, predecible o sin sorpresa</div></div>
+    </div>
+  </div>
+
+  <!-- POSITIONING MAP -->
+  <div class="card">
+    <div class="card-label" style="margin-bottom:24px;">MAPA DE POSICIONAMIENTO — MERCADO COLOMBIANO</div>
+    <div class="position-map">
+      <div class="axis-label" style="top:8px;left:50%;transform:translateX(-50%);color:var(--champagne)">PREMIUM</div>
+      <div class="axis-label" style="bottom:8px;left:50%;transform:translateX(-50%);color:var(--dim)">ECONÓMICO</div>
+      <div class="axis-label" style="left:8px;top:50%;transform:translateY(-50%);color:var(--dim)">BÁSICO</div>
+      <div class="axis-label" style="right:8px;top:50%;transform:translateY(-50%);color:var(--champagne)">ASPIRACIONAL</div>
+      <div class="axis-h"></div>
+      <div class="axis-v"></div>
+      <div class="brand-dot" style="left:72%;top:14%;color:var(--champagne)">◈ VÓRTEX</div>
+      <div class="brand-dot" style="left:78%;top:20%;color:#444;">· ALO YOGA</div>
+      <div class="brand-dot" style="left:82%;top:24%;color:#3A3A3A;">· LULULEMON</div>
+      <div class="brand-dot" style="left:65%;top:30%;color:#3A3A3A;">· GYMSHARK</div>
+      <div class="brand-dot" style="left:35%;top:65%;color:#2E2E2E;">· MARCA LOCAL A</div>
+      <div class="brand-dot" style="left:22%;top:72%;color:#2A2A2A;">· MARCA LOCAL B</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PALETA ======================== -->
+<div class="section" id="paleta">
+  <div class="section-title">
+    <span class="section-num">02</span>
+    <span class="section-heading">SISTEMA DE COLOR PREMIUM</span>
+  </div>
+
+  <div class="grid-3 mb-40">
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#0A0A0A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">OBSIDIAN</div>
+        <div class="swatch-hex">#0A0A0A</div>
+        <div class="swatch-role">Base principal · Poder absoluto</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#E8E2D9;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">BONE</div>
+        <div class="swatch-hex">#E8E2D9</div>
+        <div class="swatch-role">Neutro premium · Tipografía</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#C9A96E;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">CHAMPAGNE</div>
+        <div class="swatch-hex">#C9A96E</div>
+        <div class="swatch-role">Acento lujo · Precios · CTA</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#C4A8A0;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">ASH ROSE</div>
+        <div class="swatch-hex">#C4A8A0</div>
+        <div class="swatch-role">Femineidad moderna</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#3D3D3D;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">SLATE</div>
+        <div class="swatch-hex">#3D3D3D</div>
+        <div class="swatch-role">Profundidad · Sombras</div>
+      </div>
+    </div>
+    <div class="swatch-card">
+      <div class="swatch-color" style="background:#F5F2EE;border-top:1px solid #E0DDD8;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">PEARL</div>
+        <div class="swatch-hex">#F5F2EE</div>
+        <div class="swatch-role">Fondo aspiracional · Empaque</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label" style="margin-bottom:20px;">APLICACIÓN VISUAL DEL COLOR</div>
+      <div class="profile-row"><div class="profile-key">FONDO DIGITAL / EMPAQUE</div><div class="profile-val" style="color:var(--champagne)">#0A0A0A Obsidian</div></div>
+      <div class="profile-row"><div class="profile-key">TIPOGRAFÍA PRINCIPAL</div><div class="profile-val" style="color:var(--champagne)">#E8E2D9 Bone</div></div>
+      <div class="profile-row"><div class="profile-key">ACENTOS + PRECIOS + CTA</div><div class="profile-val" style="color:var(--champagne)">#C9A96E Champagne</div></div>
+      <div class="profile-row"><div class="profile-key">DETALLES FEMENINOS</div><div class="profile-val" style="color:var(--champagne)">#C4A8A0 Ash Rose</div></div>
+      <div class="profile-row"><div class="profile-key">FONDOS EN FOTOGRAFÍA</div><div class="profile-val" style="color:var(--champagne)">#F5F2EE Pearl</div></div>
+      <div class="profile-row" style="border:none"><div class="profile-key">SOMBRAS + PROFUNDIDAD</div><div class="profile-val" style="color:var(--champagne)">#3D3D3D Slate</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:20px;">COLORWAYS — PRIMERA COLECCIÓN</div>
+      <div class="colorway">
+        <div class="colorway-name">MIDNIGHT</div>
+        <div class="colorway-chips">
+          <div class="colorway-chip" style="background:#0A0A0A;"></div>
+          <div class="colorway-chip" style="background:#1A1A1A;"></div>
+          <div class="colorway-chip" style="background:#2A2A2A;"></div>
+        </div>
+        <div class="colorway-desc">Negro total. Power principal de colección.</div>
+      </div>
+      <div class="colorway">
+        <div class="colorway-name">STONE DUST</div>
+        <div class="colorway-chips">
+          <div class="colorway-chip" style="background:#C4B8B0;"></div>
+          <div class="colorway-chip" style="background:#B8A8A0;"></div>
+          <div class="colorway-chip" style="background:#A09090;"></div>
+        </div>
+        <div class="colorway-desc">Nude premium. Aspiracional y atemporal.</div>
+      </div>
+      <div class="colorway">
+        <div class="colorway-name">CHAMPAGNE EDITION</div>
+        <div class="colorway-chips">
+          <div class="colorway-chip" style="background:#C9A96E;"></div>
+          <div class="colorway-chip" style="background:#BF9A60;"></div>
+          <div class="colorway-chip" style="background:#D4B882;"></div>
+        </div>
+        <div class="colorway-desc">Lujo silencioso. Lanzamiento edición limitada.</div>
+      </div>
+      <div class="colorway">
+        <div class="colorway-name">SLATE GREY</div>
+        <div class="colorway-chips">
+          <div class="colorway-chip" style="background:#5A5A5A;"></div>
+          <div class="colorway-chip" style="background:#4A4A4A;"></div>
+          <div class="colorway-chip" style="background:#6A6A6A;"></div>
+        </div>
+        <div class="colorway-desc">Sofisticado. Versátil. Alta rotación.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== COLECCIÓN ======================== -->
+<div class="section" id="coleccion">
+  <div class="section-title">
+    <span class="section-num">03</span>
+    <span class="section-heading">PRIMERA COLECCIÓN — FICHAS TÉCNICAS</span>
+  </div>
+
+  <div class="product-tabs" id="product-tabs">
+    <button class="product-tab active" onclick="showProduct(0, this)">VX-01 — LEGGING SCULPT</button>
+    <button class="product-tab" onclick="showProduct(1, this)">VX-02 — SHORT SCULPT</button>
+    <button class="product-tab" onclick="showProduct(2, this)">VX-03 — TOP ESPALDA</button>
+    <button class="product-tab" onclick="showProduct(3, this)">VX-04 — JACKET FITTED</button>
+  </div>
+
+  <div id="product-0" class="product-panel">
+    <div class="product-grid">
+      <div class="product-hero">
+        <div class="product-icon">▲</div>
+        <div class="product-code">VX-01</div>
+        <div class="product-name">Legging Sculpt Premium</div>
+        <div class="product-subtitle">SILUETA ARQUITECTÓNICA</div>
+        <div class="product-concept">Ingeniería corporal invisible. La prenda no se ve — se siente como una segunda piel que reconstruye la silueta desde adentro. El mercado no podrá ignorarla.</div>
+        <div class="product-price-block">
+          <div class="product-price-label">PRECIO OBJETIVO</div>
+          <div class="product-price">$180.000 – $240.000 COP</div>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="product-detail-card">
+          <div class="card-label">FUNCIÓN PSICOLÓGICA</div>
+          <div class="card-text" style="font-size:11px;">Activa el "efecto espejo": la usuaria se ve diferente desde el primer uso. Dispara confianza inmediata y el deseo irresistible de mostrarse en redes sociales.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">COMPRESIÓN</div>
+          <div class="card-text" style="font-size:11px;">Graduada: alta en cintura (80D), media en muslos (60D), suave en pantorrilla (40D). Cómoda para uso 4+ horas sin fatiga.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">SILUETA Y CORTE</div>
+          <div class="card-text" style="font-size:11px;">Tiro alto arquitectónico con panel moldeador de cintura doble capa. Costuras en diagonal para efecto óptico elongante de pierna.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">COSTURAS</div>
+          <div class="card-text" style="font-size:11px;">Planas 4 agujas + panel posterior fruncido interno (hidden scrunch). Sin costuras laterales visibles. Pretina de 8–10 cm con refuerzo óseo invisible.</div>
+        </div>
+      </div>
+    </div>
+    <div class="effects-grid mt-2">
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Cintura reducida visualmente -3 a 5 cm</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Glúteo elevado y redondeado</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Piernas estilizadas visualmente</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Abdomen contenido sin presión excesiva</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Efecto reloj de arena completo</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Main character energy en cada uso</div></div>
+    </div>
+    <div class="grid-2 mt-2">
+      <div class="card">
+        <div class="card-label">PROPUESTA TEXTIL</div>
+        <div class="card-text" style="font-size:11px;">Jersey sculpt 78% Poliamida / 22% Elastano, gramaje 280–300 g/m². Acabado mate premium. Cara interna micro-fleece. Forro de compresión independiente en zona abdominal.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">DIFERENCIACIÓN EN MERCADO</div>
+        <div class="card-text" style="font-size:11px;">El mercado colombiano no tiene un legging con compresión graduada real + hidden scrunch + pretina arquitectónica en segmento premium. VÓRTEX lo crea.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product-1" class="product-panel" style="display:none">
+    <div class="product-grid">
+      <div class="product-hero">
+        <div class="product-icon">◆</div>
+        <div class="product-code">VX-02</div>
+        <div class="product-name">Short Sculpt Premium</div>
+        <div class="product-subtitle">EFECTO PIERNA INFINITA</div>
+        <div class="product-concept">Corte que crea la ilusión de piernas más largas y un glúteo más alto. Diseñado para máximo impacto visual en redes sociales. La foto perfecta sin filtros.</div>
+        <div class="product-price-block">
+          <div class="product-price-label">PRECIO OBJETIVO</div>
+          <div class="product-price">$120.000 – $160.000 COP</div>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="product-detail-card">
+          <div class="card-label">FUNCIÓN PSICOLÓGICA</div>
+          <div class="card-text" style="font-size:11px;">El corte alto en la ingle activa percepción de estatura. El scrunch posterior genera la foto perfecta para Instagram y TikTok sin filtros ni edición.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">COMPRESIÓN</div>
+          <div class="card-text" style="font-size:11px;">Alta en glúteo y muslo interior. Panel anti-celulitis en zona posterior. Doble capa en zona glútea para máximo efecto visual.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">SILUETA Y CORTE</div>
+          <div class="card-text" style="font-size:11px;">Corte en V profundo frontal para marcar cadera. Tiro alto 28–30 cm. Largo estratégico de 18–20 cm para máximo efecto pierna larga.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">COSTURAS</div>
+          <div class="card-text" style="font-size:11px;">Fruncido externo visible (scrunch) en posterior + panel moldeador interno. Banda interna anti-deslizamiento en borde inferior. Logotipo tonal bordado.</div>
+        </div>
+      </div>
+    </div>
+    <div class="effects-grid mt-2">
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Pierna visualmente más larga</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Glúteo elevado y pronunciado</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Cadera definida y marcada</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Muslos contenidos y definidos</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Visual "body goals" sin filtros</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">La foto de Instagram perfecta</div></div>
+    </div>
+    <div class="grid-2 mt-2">
+      <div class="card">
+        <div class="card-label">PROPUESTA TEXTIL</div>
+        <div class="card-text" style="font-size:11px;">Jersey compresión 82% Poliamida / 18% Elastano, 260–280 g/m². Cero transparencia certificado bajo tensión. 4-way stretch. Anti-pilling premium.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">DIFERENCIACIÓN EN MERCADO</div>
+        <div class="card-text" style="font-size:11px;">El short premium con scrunch real, sin parecer económico, no existe en Colombia en este segmento de precio y calidad visual simultáneamente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product-2" class="product-panel" style="display:none">
+    <div class="product-grid">
+      <div class="product-hero">
+        <div class="product-icon">●</div>
+        <div class="product-code">VX-03</div>
+        <div class="product-name">Top Espalda Abierta</div>
+        <div class="product-subtitle">ARQUITECTURA DE ESPALDA</div>
+        <div class="product-concept">La espalda como zona de poder visual. Diseño que enmarca la espalda como una obra de arte en movimiento. La prenda que genera el "efecto volteo" en cada espacio.</div>
+        <div class="product-price-block">
+          <div class="product-price-label">PRECIO OBJETIVO</div>
+          <div class="product-price">$90.000 – $130.000 COP</div>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="product-detail-card">
+          <div class="card-label">FUNCIÓN PSICOLÓGICA</div>
+          <div class="card-text" style="font-size:11px;">La espalda expuesta activa el "efecto volteo": genera que otras la miren. Fortalece presencia social y percepción de estatus fitness en cualquier espacio.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">SUJECIÓN Y SOPORTE</div>
+          <div class="card-text" style="font-size:11px;">Copa removible moldeadora. Sin aro. Soporte medio-alto para tallas A/B/C. Aro invisible interno. Acabado micro-suede en zona de contacto.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">SILUETA Y CORTE</div>
+          <div class="card-text" style="font-size:11px;">Escote frontal moderado. Espalda con cruce de tirantes tipo "X" o corte abierto en rombos geométricos. Bajo el top con banda elástica visible premium.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">CONSTRUCCIÓN</div>
+          <div class="card-text" style="font-size:11px;">Sin costuras laterales visibles. Tirantes reforzados con elástico forrado premium. Acabado interior micro-suede en toda zona de contacto piel.</div>
+        </div>
+      </div>
+    </div>
+    <div class="effects-grid mt-2">
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Espalda como foco visual dominante</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Hombros definidos y amplios</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Cintura visualmente reducida</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Postura erguida automática</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Presencia magnética en el espacio</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Efecto volteo garantizado</div></div>
+    </div>
+    <div class="grid-2 mt-2">
+      <div class="card">
+        <div class="card-label">PROPUESTA TEXTIL</div>
+        <div class="card-text" style="font-size:11px;">Jersey liso 80% Poliamida / 20% Elastano, 200–220 g/m². Tacto mantequilla premium. Secado rápido 15 minutos. Drapeo femenino natural.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">DIFERENCIACIÓN EN MERCADO</div>
+        <div class="card-text" style="font-size:11px;">Top con arquitectura de espalda real que combina sujeción deportiva + estética de lujo silencioso en un solo producto. No existe en Colombia.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product-3" class="product-panel" style="display:none">
+    <div class="product-grid">
+      <div class="product-hero">
+        <div class="product-icon">■</div>
+        <div class="product-code">VX-04</div>
+        <div class="product-name">Jacket Fitted Athleisure</div>
+        <div class="product-subtitle">PODER EN TRANSICIÓN</div>
+        <div class="product-concept">La prenda que convierte el gym en pasarela. Transición perfecta entre entrenamiento y calle sin perder identidad premium. Disciplina visible en movimiento.</div>
+        <div class="product-price-block">
+          <div class="product-price-label">PRECIO OBJETIVO</div>
+          <div class="product-price">$220.000 – $300.000 COP</div>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="product-detail-card">
+          <div class="card-label">FUNCIÓN PSICOLÓGICA</div>
+          <div class="card-text" style="font-size:11px;">Activa el "efecto poder social": la usuaria se siente en control fuera del gym. Proyecta disciplina, éxito y estatus silencioso en todo contexto.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">FIT Y ESTRUCTURA</div>
+          <div class="card-text" style="font-size:11px;">Sin compresión. Fit arquitectónico: no ceñido, no holgado. Talle perfectamente definido. Hombros ligeramente estructurados para proyección de poder.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">SILUETA Y CORTE</div>
+          <div class="card-text" style="font-size:11px;">Corte cropped o midi. Cierre frontal oculto (hidden zip). Hombros ligeramente estructurados. Puños elásticos premium. Bolsillos internos invisibles.</div>
+        </div>
+        <div class="product-detail-card">
+          <div class="card-label">DETALLES PREMIUM</div>
+          <div class="card-text" style="font-size:11px;">Forro interior satinado en tono contrastante. Branding tonal en manga. Zipper metálico color champagne. Costura princess en panel frontal y posterior.</div>
+        </div>
+      </div>
+    </div>
+    <div class="effects-grid mt-2">
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Silueta definida con estructura en hombros</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Cintura marcada con costura estructural</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Alargamiento visual del torso</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Proyección de status premium</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Transición gym–calle sin cambiar</div></div>
+      <div class="effect-item"><div class="effect-dot">◈</div><div class="effect-text">Disciplina y éxito en un solo look</div></div>
+    </div>
+    <div class="grid-2 mt-2">
+      <div class="card">
+        <div class="card-label">PROPUESTA TEXTIL</div>
+        <div class="card-text" style="font-size:11px;">Scuba premium 88% Poliéster reciclado / 12% Elastano, 320–350 g/m². Superficie lisa mate. Peso medio para cuerpo estructurado sin rigidez.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">DIFERENCIACIÓN EN MERCADO</div>
+        <div class="card-text" style="font-size:11px;">Jacket athleisure que realmente siluetea. Tiene arquitectura de moda premium con función deportiva. No es holgada ni básica. Es diseño intencional.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TEXTILES ======================== -->
+<div class="section" id="textiles">
+  <div class="section-title">
+    <span class="section-num">04</span>
+    <span class="section-heading">ESTRATEGIA TEXTIL — LAFAYETTE COLOMBIA</span>
+  </div>
+
+  <div class="card mb-40">
+    <div class="card-label" style="margin-bottom:24px;">CRITERIOS DE SELECCIÓN NO NEGOCIABLES</div>
+    <div class="grid-4">
+      <div class="value-card"><div class="value-title">TACTO MANTEQUILLA</div><div class="value-desc">Suavidad extrema al primer contacto. Referencia: Lululemon Nulu.</div></div>
+      <div class="value-card"><div class="value-title">CERO TRANSPARENCIA</div><div class="value-desc">Certificado bajo tensión 100% y en movimiento activo.</div></div>
+      <div class="value-card"><div class="value-title">ALTA RECUPERACIÓN</div><div class="value-desc">Retorno elástico mayor a 95% tras 500 ciclos de estiramiento.</div></div>
+      <div class="value-card"><div class="value-title">ACABADO MATE</div><div class="value-desc">Sin brillo sintético. Mate premium que da aspecto de calidad.</div></div>
+      <div class="value-card"><div class="value-title">4-WAY STRETCH</div><div class="value-desc">Elasticidad multidireccional. Sin restricción de movimiento.</div></div>
+      <div class="value-card"><div class="value-title">SECADO RÁPIDO</div><div class="value-desc">Absorción y evaporación en menos de 20 minutos en uso activo.</div></div>
+      <div class="value-card"><div class="value-title">ANTI-PILLING</div><div class="value-desc">Resistencia a formación de bolitas mayor a 1.000 ciclos.</div></div>
+      <div class="value-card"><div class="value-title">COMPRESIÓN UNIFORME</div><div class="value-desc">Sin deformación ni pérdida de compresión en uso prolongado.</div></div>
+    </div>
+  </div>
+
+  <div class="mb-40">
+    <div class="fabric-row" style="border-bottom:none;">
+      <div><div class="fabric-label">REFERENCIA</div><div class="fabric-name">Jersey Sculpt 280D</div></div>
+      <div><div class="fabric-label">COMPOSICIÓN</div><div class="fabric-val">78% PA / 22% EA</div></div>
+      <div><div class="fabric-label">GRAMAJE</div><div class="fabric-val">280–300 g/m²</div></div>
+      <div><div class="fabric-label">USO</div><div class="fabric-val">Legging premium</div></div>
+      <div><div class="fabric-label">HAND FEEL</div><div class="fabric-val">Tacto mantequilla, cero transparencia, compresión media-alta</div></div>
+    </div>
+    <div class="fabric-row" style="border-bottom:none;">
+      <div><div class="fabric-label">REFERENCIA</div><div class="fabric-name">Jersey Compresión 260D</div></div>
+      <div><div class="fabric-label">COMPOSICIÓN</div><div class="fabric-val">82% PA / 18% EA</div></div>
+      <div><div class="fabric-label">GRAMAJE</div><div class="fabric-val">260–280 g/m²</div></div>
+      <div><div class="fabric-label">USO</div><div class="fabric-val">Short + legging activo</div></div>
+      <div><div class="fabric-label">HAND FEEL</div><div class="fabric-val">Alta recuperación, anti-pilling, secado ultra rápido</div></div>
+    </div>
+    <div class="fabric-row" style="border-bottom:none;">
+      <div><div class="fabric-label">REFERENCIA</div><div class="fabric-name">Jersey Liso 200D</div></div>
+      <div><div class="fabric-label">COMPOSICIÓN</div><div class="fabric-val">80% PA / 20% EA</div></div>
+      <div><div class="fabric-label">GRAMAJE</div><div class="fabric-val">200–220 g/m²</div></div>
+      <div><div class="fabric-label">USO</div><div class="fabric-val">Tops y brassieres</div></div>
+      <div><div class="fabric-label">HAND FEEL</div><div class="fabric-val">Segunda piel, micro-suave, drapeo femenino natural</div></div>
+    </div>
+    <div class="fabric-row">
+      <div><div class="fabric-label">REFERENCIA</div><div class="fabric-name">Scuba Premium 320D</div></div>
+      <div><div class="fabric-label">COMPOSICIÓN</div><div class="fabric-val">88% PES / 12% EA</div></div>
+      <div><div class="fabric-label">GRAMAJE</div><div class="fabric-val">320–350 g/m²</div></div>
+      <div><div class="fabric-label">USO</div><div class="fabric-val">Jackets + outerwear</div></div>
+      <div><div class="fabric-label">HAND FEEL</div><div class="fabric-val">Cuerpo estructurado, mate premium, resistente y duradero</div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label" style="margin-bottom:20px;">PREGUNTAS CLAVE PARA LAFAYETTE</div>
+      <div class="list-item"><div class="list-dot" style="font-size:9px;color:var(--champagne)">01</div><div class="list-text">¿Tienen jersey sculpt con compresión graduada disponible en stock?</div></div>
+      <div class="list-item"><div class="list-dot" style="font-size:9px;color:var(--champagne)">02</div><div class="list-text">¿Cuál es el MOQ por referencia y colorway?</div></div>
+      <div class="list-item"><div class="list-dot" style="font-size:9px;color:var(--champagne)">03</div><div class="list-text">¿Tienen telas certificadas cero transparencia bajo tensión?</div></div>
+      <div class="list-item"><div class="list-dot" style="font-size:9px;color:var(--champagne)">04</div><div class="list-text">¿Ofrecen servicio de teñido personalizado para colores exclusivos?</div></div>
+      <div class="list-item"><div class="list-dot" style="font-size:9px;color:var(--champagne)">05</div><div class="list-text">¿Tienen muestras físicas de gramajes 260D, 280D y 300D para comparar?</div></div>
+      <div class="list-item" style="border:none"><div class="list-dot" style="font-size:9px;color:var(--champagne)">06</div><div class="list-text">¿Cuál es el tiempo de entrega para pedidos de desarrollo inicial?</div></div>
+    </div>
+    <div class="card">
+      <div class="card-label" style="margin-bottom:20px;">PROCESO DE VALIDACIÓN TEXTIL</div>
+      <div class="list-item"><div class="list-dot" style="color:var(--champagne)">01</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Swatches físicos</strong> — Solicitar 5 referencias prioritarias</div></div>
+      <div class="list-item"><div class="list-dot" style="color:var(--champagne)">02</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Test transparencia</strong> — Estirar 100% y fotografiar contra luz</div></div>
+      <div class="list-item"><div class="list-dot" style="color:var(--champagne)">03</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Test tacto</strong> — Comparar con referencia Lululemon</div></div>
+      <div class="list-item"><div class="list-dot" style="color:var(--champagne)">04</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Test recuperación</strong> — Estirar 500x y verificar retorno</div></div>
+      <div class="list-item"><div class="list-dot" style="color:var(--champagne)">05</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Test lavado</strong> — 5 ciclos, verificar color y forma</div></div>
+      <div class="list-item" style="border:none"><div class="list-dot" style="color:var(--champagne)">06</div><div class="list-text"><strong style="color:var(--bone);font-weight:400;">Muestra confección</strong> — Prenda real y evaluación visual</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CONTENIDO ======================== -->
+<div class="section" id="contenido">
+  <div class="section-title">
+    <span class="section-num">05</span>
+    <span class="section-heading">ESTRATEGIA DE CONTENIDO ASPIRACIONAL</span>
+  </div>
+
+  <div class="grid-2 mb-40">
+    <div class="card">
+      <div class="card-label" style="margin-bottom:20px;">PERFIL DE LA MUJER VÓRTEX</div>
+      <div class="profile-row"><div class="profile-key">EDAD</div><div class="profile-val">22–35 años</div></div>
+      <div class="profile-row"><div class="profile-key">MENTALIDAD</div><div class="profile-val">Disciplinada, estética, ambiciosa, moderna</div></div>
+      <div class="profile-row"><div class="profile-key">DOLOR REAL</div><div class="profile-val">Ropa que no la hace sentir esa versión de ella</div></div>
+      <div class="profile-row"><div class="profile-key">DESEO</div><div class="profile-val">Sentirse diferente, poderosa, admirable</div></div>
+      <div class="profile-row"><div class="profile-key">RED SOCIAL</div><div class="profile-val">Instagram + TikTok como espejo social</div></div>
+      <div class="profile-row"><div class="profile-key">COMPRA POR</div><div class="profile-val">Cómo se ve, cómo la hacen sentir, cómo la perciben</div></div>
+      <div class="profile-row"><div class="profile-key">ENEMIGO INTERNO</div><div class="profile-val">Verse igual que todas las demás</div></div>
+      <div class="profile-row" style="border:none"><div class="profile-key">ASPIRACIÓN</div><div class="profile-val">Ser "la de la ropa premium que va al gym"</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px;">
+      <div class="card" style="flex:1">
+        <div class="card-label">ESTÉTICA VISUAL INSTAGRAM</div>
+        <div class="card-text" style="font-size:11px;">Grid oscuro-neutro. Fondos en tonos <span class="champagne">Pearl, Stone o Midnight</span>. Nunca blanco puro ni colorido caótico. Iluminación suave lateral que defina músculos sin forzar. <span class="champagne">Una mujer, una prenda, una emoción.</span> Sin texto encima de foto. Sin emojis en copy premium.</div>
+      </div>
+      <div class="card" style="flex:1">
+        <div class="card-label">VOZ DE MARCA EN COPY</div>
+        <div class="card-text" style="font-size:11px;">Directa. Segura. Sin interrogantes. Frases cortas en presente. Nunca usar: "increíble", "hermosa", "súper". Lenguaje de editorial de lujo.</div>
+        <div style="margin-top:14px;">
+          <div class="voice-example">"No es ropa. Es arquitectura corporal."</div>
+          <div class="voice-example">"Diseñado para ser visto."</div>
+          <div class="voice-example">"Tu silueta, redefinida."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="grid-auto mb-40">
+    <div class="pillar-card">
+      <div class="pillar-icon">◈</div>
+      <div class="pillar-title">TRANSFORMACIÓN VISUAL</div>
+      <div class="pillar-desc">Before/after de silueta con la prenda. Reels de "efecto espejo". Videos de cómo cambia la percepción corporal. Sin filtros, sin edición excesiva.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">◉</div>
+      <div class="pillar-title">LIFESTYLE ASPIRACIONAL</div>
+      <div class="pillar-desc">Mañanas premium. Rutinas de élite. Espacios minimalistas. Mujer en movimiento con presencia y dirección. La vida que todas quieren.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">◊</div>
+      <div class="pillar-title">DETRÁS DEL DISEÑO</div>
+      <div class="pillar-desc">Proceso de creación de prendas. Selección de telas. Detalle de costuras. Obsesión por el detalle premium que otras marcas no muestran.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">▲</div>
+      <div class="pillar-title">COMUNIDAD DE PODER</div>
+      <div class="pillar-desc">Mujeres reales con resultados reales. UGC de calidad. El "Club Vórtex" — pertenecer es un privilegio, no un derecho.</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">■</div>
+      <div class="pillar-title">EDUCACIÓN DE PRODUCTO</div>
+      <div class="pillar-desc">Qué hace diferente cada prenda. Cómo usar los efectos visuales. Tips de styling premium. Por qué el precio se justifica completamente.</div>
+    </div>
+  </div>
+
+  <!-- VIDEO FORMATS -->
+  <div class="card-label" style="margin-bottom:16px;letter-spacing:5px;font-size:9px;color:var(--champagne);">FORMATOS DE VIDEO PRIORITARIOS — TIKTOK + REELS</div>
+  <div class="grid-2">
+    <div class="video-card">
+      <div class="video-format">REEL DE EFECTO ESPEJO</div>
+      <div class="video-desc">POV: te pones el legging VÓRTEX. 15 segundos de transformación de silueta frente al espejo. Sin hablar. Solo música y resultado visual. Sin filtros, sin edición de cuerpo.</div>
+      <div class="video-perf">↗ Alto potencial viral — Conversión directa</div>
+    </div>
+    <div class="video-card">
+      <div class="video-format">UNBOXING PREMIUM</div>
+      <div class="video-desc">Apertura del empaque VÓRTEX. Papelería negra. Cinta champagne. Detalle de prenda sobre fondo oscuro. ASMR de empaque premium que genera deseo de producto inmediato.</div>
+      <div class="video-perf">↗ Genera deseo de producto — Aspiracional</div>
+    </div>
+    <div class="video-card">
+      <div class="video-format">ANTES / DESPUÉS SILUETA</div>
+      <div class="video-desc">Misma mujer, mismo cuerpo, diferente legging. VÓRTEX vs básico de mercado. Resultado visual objetivo sin filtros. La diferencia que se ve sola.</div>
+      <div class="video-perf">↗ Mayor tasa de conversión directa a compra</div>
+    </div>
+    <div class="video-card">
+      <div class="video-format">OUTFIT TRANSITION GYM→CALLE</div>
+      <div class="video-desc">La jacket + legging VÓRTEX en transición gym-calle. Misma prenda, diferente contexto. Athleisure premium en acción. El poder que no se apaga.</div>
+      <div class="video-perf">↗ Alta identificación — Amplifica athleisure</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ROADMAP ======================== -->
+<div class="section" id="roadmap">
+  <div class="section-title">
+    <span class="section-num">06</span>
+    <span class="section-heading">ROADMAP DE LANZAMIENTO — 6 MESES</span>
+  </div>
+
+  <div class="mb-40">
+    <div class="roadmap-item">
+      <div class="roadmap-month">MES 1–2</div>
+      <div class="roadmap-line-col"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+      <div class="roadmap-content">
+        <div class="roadmap-phase">FUNDACIÓN</div>
+        <div class="roadmap-tasks">
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Definir nombre definitivo y registro de marca</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Desarrollo de identidad visual completa</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Seleccionar y visitar Lafayette Colombia</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Confeccionar muestras físicas (fit samples)</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Crear look book digital inicial</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">MES 3</div>
+      <div class="roadmap-line-col"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+      <div class="roadmap-content">
+        <div class="roadmap-phase">MUESTRAS Y AJUSTES</div>
+        <div class="roadmap-tasks">
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Fitting con modelos reales en diferentes tallas</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Ajuste de patrones por feedback visual</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Fotografía de producto premium</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Construcción de perfil Instagram/TikTok</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Estrategia de pre-lanzamiento (waitlist)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">MES 4</div>
+      <div class="roadmap-line-col"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+      <div class="roadmap-content">
+        <div class="roadmap-phase">PRE-LANZAMIENTO</div>
+        <div class="roadmap-tasks">
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Contenido aspiracional semana a semana</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Colaboración con 3–5 microinfluencers clave</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Comunidad privada de "Fundadoras VÓRTEX"</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Preventa exclusiva fundadoras (-15%)</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Press kit digital premium</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">MES 5</div>
+      <div class="roadmap-line-col"><div class="roadmap-dot"></div><div class="roadmap-line"></div></div>
+      <div class="roadmap-content">
+        <div class="roadmap-phase">LANZAMIENTO OFICIAL</div>
+        <div class="roadmap-tasks">
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Drop oficial colección 01</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Campaña visual Instagram + TikTok</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Reels de transformación corporal en vivo</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Stories de behind-the-scenes premium</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">PR digital e influencer seeding</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-month">MES 6+</div>
+      <div class="roadmap-line-col"><div class="roadmap-dot"></div></div>
+      <div class="roadmap-content">
+        <div class="roadmap-phase">ESCALA Y EXPANSIÓN</div>
+        <div class="roadmap-tasks">
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Análisis de héroe products (top sellers)</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Drop colección 02 — capsule premium</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Expansión a Shopify internacional</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Estrategia de recompra y comunidad activa</div></div>
+          <div class="roadmap-task"><div class="roadmap-task-dot">◈</div><div class="roadmap-task-text">Colaboraciones estratégicas de marca</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="kpi-card">
+      <div class="kpi-phase">META MES 1–2</div>
+      <div class="kpi-metric">Identidad visual completa + 3 muestras físicas aprobadas + proveedor textil confirmado</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-phase">META MES 3–4</div>
+      <div class="kpi-metric">500+ seguidores orgánicos en Instagram + waitlist de 100 personas interesadas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-phase">META MES 5</div>
+      <div class="kpi-metric">Lanzamiento oficial. Objetivo: 30 ventas en primera semana. 0 descuentos al lanzar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">VÓRTEX WOMEN'S PERFORMANCE ATELIER — BRAND BOOK V1.0 — DOCUMENTO CONFIDENCIAL 2026</div>
+  <div class="footer-right">"Poder en Movimiento"</div>
+</div>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+  }
+
+  function showProduct(index, btn) {
+    document.querySelectorAll('.product-panel').forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.product-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('product-' + index).style.display = 'block';
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
